@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>AZUL MODERNO</title>
+
+
+
+    
+    
+    
+
+    
+    
+    
+    
+
+
+    <meta property="og:title" content="Luiza Lian - Azul Moderno"/>
+    <meta property="og:description" content="Azul Moderno"/>
+    <meta property="og:image" content="/albums/azulmoderno/images/Album_Cover.jpg"/>
+    <meta property="og:url" content="https://www.luizalian.com.br"/>
+    <meta property="og:site_name" content="Luiza Lian"/>
+    <meta property="og:see_also" content="https://soundcloud.com/luizalian/sets/azul-moderno/"/>
+    
+    <meta name="twitter:card" content="summary"/>  
+    <meta name="twitter:site" content="luizalian.com.br"/>
+    <meta name="twitter:title" content="Azul Moderno">
+    <meta name="twitter:description" content="Azul Moderno"/>
+    <meta name="twitter:image:src" content="/albums/azulmoderno/images/Album_Cover.jpg"/>
+    <meta name="twitter:domain" content="https://www.luizalian.com.br"/> 
+
+    <meta name="youtubeID" content=sH4gJp_Y4_M />
+    <meta name="buy_link" content=https://lianluiza.bandcamp.com/ />
+
+    <style>
+        * { box-sizing: border-box; }
+        :root {
+            --fg: #fff;
+            --bg: #000;
+
+            --black: #3E3E3E;
+            --cashmere: #E8E8E8;
+            --rosa: #dfd1b6;
+            --bege: #DE9A73;
+            --bege2: #C4958A;
+
+            --blue-white: #92B7FF;
+            --blue-light: #305db3;
+            --blue-two: #0014ffd9;
+
+            --blur-start: 30px;
+            --blur-end: 0px;
+            --z-start: 150px;
+            --z-end: 0px;
+            --perspective: 500px;
+
+            --intro-time: 1300ms;
+            --intro-delay: 300ms;
+
+            --logo-time: 150ms;
+
+            --font: Univers;
+        }
+        .hidden { opacity: 0 !important; pointer-events: none; }
+        .visible { opacity: 1 !important; pointer-events: all; }
+        .blurred { filter: blur(5px); }
+
+        @font-face {
+            font-family: 'Univers';
+            font-style: normal;
+            font-weight: 400;
+            src: local('Univers LT Std'), url(/fonts/UniversLTStd-Cn.woff) format('woff'),
+                 url('/fonts/UniversLTStd-Cn.ttf') format('ttf');
+            font-display: swap; 
+        }
+        @font-face {
+            font-family: 'Univers';
+            font-style: normal;
+            font-weight: bold;
+            src: local('Univers LT Std-Bold'), url(/fonts/UniversLTStd-BoldCn.woff) format('woff'),
+                 url('/fonts/UniversLTStd-BoldCn.ttf') format('ttf');
+            font-display: swap; 
+        }
+
+
+        @keyframes focusIn {
+            from { filter: blur(var(--blur-start)); transform: translate3d(0,0,var(--z-start));}
+            to { filter: blur(var(--blur-end)); transform: translate3d(0,0,var(--z-end)); }
+        }
+        @keyframes focusOut {
+            from { filter: blur(var(--blur-end)); transform: translate3d(0,0,var(--z-end)); opacity: 1; }
+            to { filter: blur(var(--blur-start)); transform: translate3d(0,0,calc( -1 * var(--z-start))); opacity: 0; }
+            100% { visibility: hidden; }
+        }
+
+        html {
+            width: 100%;
+            height: 100vh;
+            background: linear-gradient(90deg, #4753a9 30%, #32ab52 70%);
+             
+            background: var(--fg);
+              
+
+            margin: 0; padding: 0;
+        }
+        body { 
+            margin: 0; padding: 0;
+            color: var(--fg);
+            font-size: 14px;
+            font-family: var(--font);
+        }
+        ::selection {
+            background-color: var(--blue-white);
+            color: var(--black);
+        }
+
+         
+         .player-icon {
+            display: block;
+            text-indent: -99999px;
+            background-repeat: no-repeat;
+            background-size: 32px 32px;
+            width: 32px;
+            height: 32px;
+            fill: white;
+            color: white;
+         }
+        .sc-icon {
+            background-image: url('/albums/azulmoderno/images/sc_icon.svg');
+        }
+        .yt-icon {
+            background-image: url('/albums/azulmoderno/images/yt_icon.svg');            
+        }
+        .spot-icon {
+            background-image: url('/albums/azulmoderno/images/spot_icon.svg');            
+        }
+
+
+        .theater {
+            margin: 0 auto;
+            height: 100vh;
+             
+             
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            perspective: var(--perspective);
+            perspective-origin: 50% 50%;
+        }
+
+        #poster {
+            width: 50%;
+            height: 50vh;
+            overflow: hidden;
+            position: absolute;
+            background-color: var(--blue-light);
+            
+             
+
+            transform: translate3d(0,0,0) scale(1.0);
+            transition: transform 400ms cubic-bezier(.10,1.28,.17,1.41);
+        }
+        #poster:hover {
+            transform: translate3d(0,0,0) scale(1.005);
+        }
+        #poster video {
+            pointer-events: none; 
+            width: 100%; 
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+        }
+
+
+        .logo {
+            display: block;
+            color: transparent;
+            width: 100%;
+            height: 100%;
+             
+            background-image: url('/albums/azulmoderno/images/logo_trans_white.png');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+             
+            margin: 0;
+            opacity: 1;
+            transform: translate3d(0,0,0) scale(1.01);
+        }
+        a.logo.interactive::before {
+            content: ' ';
+            opacity: 0;
+            position: absolute;
+            top: 0; left: 0;
+            bottom: 0; right: 0;
+            width: 100%; height: 100%;
+            background: linear-gradient(0deg, var(--blue-light) 30%, #b6fcff 70%);
+            mix-blend-mode: hue;
+            opacity: 0;
+            transition: opacity var(--logo-time) ease-in-out;
+        }
+        a.logo:hover::before { opacity: 0.5; }
+
+
+         
+        #screen {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            top: 0; left: 0;
+            bottom:0; right: 0;
+            transition: opacity var(--intro-time) ease-in;
+        }
+        #screen > #videoclip {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+         
+        #info {
+            width: 100%;
+            height: 100vh;
+            position: absolute;
+            top: 100vh; left: 0;
+            right: 0; bottom: 200vh;
+
+            transform: translate3d(0,0,0);
+            perspective: var(--perspective);
+
+            background-color: #dfd1b6;
+            background-size: cover;
+            background-position-x: center;
+            background-position-y: bottom;
+
+            display: grid;
+            grid-template-columns: repeat(22, 1fr);
+            grid-template-rows: repeat(12, 1fr);
+            grid-template-areas: "head head head head head head head head head head head head head head head head head head head head head head"
+". . aside aside aside aside aside aside aside . main main main main main main main main main main . ."
+". . aside aside aside aside aside aside aside . main main main main main main main main main main . ."
+". . aside aside aside aside aside aside aside . main main main main main main main main main main . ."
+". . aside aside aside aside aside aside aside . main main main main main main main main main main . ."
+". . aside aside aside aside aside aside aside . main main main main main main main main main main . ."
+". . aside aside aside aside aside aside aside . main main main main main main main main main main . ."
+". . aside aside aside aside aside aside aside . main main main main main main main main main main . ."
+". . aside aside aside aside aside aside aside . main main main main main main main main main main . ."
+". . aside aside aside aside aside aside aside . main main main main main main main main main main . ."
+". . aside aside aside aside aside aside aside . main main main main main main main main main main . ."
+"foot foot foot foot foot foot foot foot foot foot foot foot foot foot foot foot foot foot foot foot foot foot";
+            grid-gap: 16px;            
+        }
+
+        #info > #left {
+            grid-area: aside;
+            color: var(--cashmere);
+            width: 80%;
+            margin: 0 auto;
+             
+        }
+
+        #left .cover {
+            display: block;
+            margin: 0 auto;
+            max-height: 342px;
+        }
+        .cover > img {
+            max-width: 100%;
+            width: 100%;
+            box-shadow: 8px 12px 40px rgba(0, 0, 0, 0.3);
+            height: 342px;
+        }
+
+        .players_links {
+            display: flex;
+            justify-content: space-around;
+            width: 50%;
+            margin: 0 auto;
+            margin-top: 4em;
+            transform: scale(1.5);            
+        }
+
+
+        .buy_link {
+            padding: 8px;
+            font-size: 1.25em;
+            font-size: 1.25em;
+            margin: 0 auto;
+            width: 50%;
+            display: block;
+            text-decoration: none;
+            border-radius: 4px;
+            border: 0;
+            background-color: var(--blue-white);
+            color: var(--cashmere);            
+        }
+        .buy_link a { color: inherit; text-decoration: none; }
+
+        #info > #right {
+            grid-area: main;
+             
+        }
+
+        #right .title {
+        }
+
+        #right .title > h1 { 
+            margin: 0; 
+            text-transform: uppercase; 
+            font-size: 2em;
+            font-style: normal;
+            font-weight: 800;
+            line-height: normal;
+            font-size: 36px;
+
+             
+        }
+        #right .title > h3 { margin: 0; font-weight: normal; }
+
+        #right .content {
+            width: 100%;
+            height: 75%;
+            display: flex;
+            flex-direction: column;
+            overflow: auto;
+            border-radius: 4px;
+            background-color: rgba(255,255,255,0.53);
+            backdrop-filter: blur(12px);
+            color: var(--black);
+            font-style: normal;
+            font-size: 1.25em;
+            font-family: var(--font);
+
+            counter-reset: song_number; 
+        }
+
+         
+        .song-item {
+            position: relative;
+            margin-left: 32px;            
+            width: calc( 100% - 32px );
+            color: inherit;
+            text-transform: uppercase;
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            margin-left: 32px;
+            text-decoration: none;
+        }
+        .song-item:first-child { margin-top: 24px; }
+        .song-item:last-child { margin-bottom: 24px; }
+        .song-item {
+            margin-top: 16px;
+            margin-bottom: 16px;
+        } 
+        .song-item::before {
+            counter-increment: song_number;
+            content: counter(song_number);
+            width: 10%;
+            height: 32px;
+        }
+        .song-item .song-name {
+            width: 70%;
+        }
+        .song-item .song-length {
+            margin-right: 0;
+            width: 20%;
+            text-align: center;
+        }
+
+         
+        .song-item.is-playing::before {
+            content: ' ';
+            background-repeat: no-repeat;
+            background-image: url('/albums/azulmoderno/images/seta.svg');
+            background-size: 16px 16px;
+            width: 16px;
+            height: 16px;
+        }
+        
+        .song-item.is-playing > .song-name {
+            margin-left: calc( 10% - 16px );
+        }
+   
+    </style>
+</head>
+<body>
+    <div class="theater">
+    <div id="screen" class="screen hidden">
+        <div id="videoclip"></div>
+    </div>
+    <div id="poster" class="spotlight">
+        <video autoplay playsinline muted loop preload
+        onloadeddata="document.dispatchEvent(new Event('posterPreloaded'))"  poster='
+
+
+
+    /albums/azulmoderno/images/poster7.jpg
+'>
+            <source src='
+
+
+
+    /albums/azulmoderno/images/fundo_cropped.mp4
+'/>
+          </video>
+        <a href="#play" class="logo">AZUL<br/>moderno</a>
+    </div>
+    <div id="info" class="info" style='background-image: url(
+
+
+
+    /albums/azulmoderno/images/AZMO-SINGLE.jpg
+);'>
+      <section id="left">
+        <picture class="cover" data-tilt data-tilt-max="10" data-tilt-speed="800" data-tilt-scale="1.025" data-tilt-glare data-tilt-max-glare="0.5">
+          <source media="(min-width: 768px)" srcset='
+
+
+
+    /albums/azulmoderno/images/Album_Cover.jpg
+' />
+          <img src='
+
+
+
+    /albums/azulmoderno/images/Album_Cover.jpg
+' alt="Azul Moderno Cover"/>
+        </picture>
+        <div class="other">
+          <div class="players_links">
+            <a href="https://soundcloud.com/luizalian" class="player-icon sc-icon" alt="Soundcloud">Soundcloud</a>
+            <a href="https://www.youtube.com/channel/UCYUL2PB2a06Iv_VxN98Ka8Q" class="player-icon yt-icon" alt="Youtube">Youtube</a>
+            <a href="https://open.spotify.com/album/04oq2cO06zbmUSGW6Br7n9" class="player-icon spot-icon" alt="Spotify">Spotify</a>
+          </div>
+          <!--
+            <button class="buy_link"><a href="">COMPRAR</a></button>
+          -->
+        </div>
+      </section>
+      <section id="right">
+        <div class="title">
+          <h1>Azul MODERNO</h1>
+          <h3>Entre as estrelas em volta de andrômeda</h3>
+          <p>
+          Clipe de Azul Moderno, música que da título ao álbum "Azul Moderno" de Luiza Lian.
+          </p>
+        </div>
+        <div class="content">
+          <a href="https://www.youtube.com/watch?v=sH4gJp_Y4_M" class="song-item is-playing">
+            <span class="song-name">Azul Moderno</span>
+            <span class="song-length">3:55</span>
+          </a>
+          <a href="https://soundcloud.com/luizalian/" class="song-item blurred">
+            <span class="song-name">Vem Dizer Tchau</span>
+            <span class="song-length">4:00</span>
+          </a>
+          <a href="#" class="song-item blurred">
+            <span class="song-name">Mil Mulheres</span>
+            <span class="song-length">3:45</span>
+          </a>
+          <a href="#" class="song-item blurred">
+            <span class="song-name">Sou Yaba</span>
+            <span class="song-length">3:00</span>
+          </a>
+          <a href="#" class="song-item blurred">
+            <span class="song-name">Mira</span>
+            <span class="song-length">4:01</span>
+          </a>
+          <a href="#" class="song-item blurred">
+            <span class="song-name">Larinhas</span>
+            <span class="song-length">3:28</span>
+          </a>
+          <a href="#" class="song-item blurred">
+            <span class="song-name">Pomba Gira do Luar</span>
+            <span class="song-length">4:26</span>
+          </a>
+          <a href="#" class="song-item blurred">
+            <span class="song-name">Geladeira</span>
+            <span class="song-length">3:24</span>
+          </a>
+          <a href="#" class="song-item blurred">
+            <span class="song-name">Notícias do Japão</span>
+            <span class="song-length">2:54</span>
+          </a>
+          <a href="#" class="song-item blurred">
+            <span class="song-name">Santa Bárbara</span>
+            <span class="song-length">3:01</span>
+          </a>
+        </div>
+      </section>
+    </div>
+</div>
+
+    <footer>
+        <div class="footer_social_links">
+
+        </div>
+        <div class="selo">
+            <a href="">Selo Risco</a>
+        </div>
+    </footer>
+    <script src="https://www.youtube.com/iframe_api" defer></script>
+    <script type="text/javascript" src="/js/vendor/vanilla-tilt.babel.min.js" defer></script>
+    <script src="/js/azul.js" defer></script>
+    <script defer>
+        console.log(`%c 
+ 🌊 Built by vical.me
+`, "font-size: 1.5em;");
+        document.addEventListener('DOMContentLoaded', () => {
+            window.azul = new window.Azul(document);
+        });
+        function onYouTubeIframeAPIReady( ) {
+            let el = document.querySelector('meta[name="youtubeID"]')
+            window.azul.loadClip( el.getAttribute('content') )
+        }
+    </script>
+</body>
+</html>

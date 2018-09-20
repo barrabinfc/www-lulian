@@ -7,10 +7,11 @@ export default class ClipPlayer {
         this.clip  = clipElement;
         this.player = new YT.Player(clipElement, {
             videoId: youtubeID,
-            origin: 'http://localhost:3000',
+            origin: 'luizalian.com.br',
             events: {
                 'onReady': this.ready,
-            }
+            },
+            playerVars: {rel: 0},
         })
     }
 
