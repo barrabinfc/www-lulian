@@ -4,8 +4,8 @@ Title = "AZUL MODERNO"
 subtitle = "AZUL MODERNO"
 layout = "azul"
 
-video = "https://www.youtube.com/watch?v=ii63fKLTSuU"
-youtubeID = "ii63fKLTSuU"
+video = "https://www.youtube.com/watch?v=sH4gJp_Y4_M"
+youtubeID = "sH4gJp_Y4_M"
 
 buy_link  = "https://lianluiza.bandcamp.com/"
 

@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>http://luizalian.com.br/azul/</loc>
+    <lastmod>2018-09-20T13:03:57-03:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://luizalian.com.br/categories/</loc>
     <priority>0</priority>
   </url>
@@ -10,12 +15,6 @@
   <url>
     <loc>http://luizalian.com.br/</loc>
     <lastmod>2018-09-20T13:03:57-03:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://luizalian.com.br/</loc>
-    <lastmod>2018-09-20T13:03:57-03:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
