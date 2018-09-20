@@ -1,0 +1,9 @@
+{{ $path := .Get "path" }}
+{{ $image := .Page.Resources.GetMatch $path }}
+
+{{ if $image }}
+    {{ $alt := .Get "alt" | default $image.Title }}
+    <img src="{{ $image.Permalink }}" alt="{{ $alt }}" />
+{{ else }}
+    <div class="error">Image {{ $path }} not found</div>
+{{ end }}

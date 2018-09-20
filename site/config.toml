@@ -2,3 +2,16 @@ baseURL = "http://luizalian.com.br/"
 languageCode = "pt-BR"
 title = "Luiza Lian"
 theme = "lulian"
+
+pluralizelisttitles =false
+enableEmoji = true
+enableGitInfo = true
+enableRobotsTXT=true
+googleAnalytis  = ""
+disqusShortname = ""
+SectionPagesMenu="main"
+footnoteReturnLinkContents = "↩"
+pygmentsCodeFences = true
+
+[imaging]  
+  quality = 85

@@ -1,0 +1,6 @@
+{{ $path := .Get "path" }}
+{{ $image := .Page.Resources.GetMatch $path }}
+
+{{ if $image }}
+    {{ safeHTML $image.Permalink }}
+{{ end }}
