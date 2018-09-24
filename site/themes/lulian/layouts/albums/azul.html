@@ -14,11 +14,12 @@
     {{ $logo := .Page.Resources.GetMatch "logo" }}
     {{ $cover := .Page.Resources.GetMatch "album_cover" }}
 
+    {{ $info_enabled := .Params.info_enabled }}
+
     {{ $play := .Page.Resources.GetMatch "seta_icon" }}
     {{ $sc := .Page.Resources.GetMatch "soundcloud_icon" }}
     {{ $yt := .Page.Resources.GetMatch "youtube_icon" }}
     {{ $spot := .Page.Resources.GetMatch "spotify_icon" }}
-
 
     <meta property="og:title" content="Luiza Lian - Azul Moderno"/>
     <meta property="og:description" content="Azul Moderno"/>
@@ -42,6 +43,9 @@
         :root {
             --fg: #fff;
             --bg: #000;
+
+            --viewport_height: 100vh;
+            --info_display: {{ cond $info_enabled "grid" "none" }};
 
             --black: #3E3E3E;
             --cashmere: #E8E8E8;
@@ -100,10 +104,9 @@
 
         html {
             width: 100%;
-            height: 100vh;
-            background: linear-gradient(90deg, #4753a9 30%, #32ab52 70%);
-            /*background: var(--bg);*/
-            background: var(--fg);
+            height: var(--viewport_height);
+            /*background: linear-gradient(90deg, #4753a9 30%, #32ab52 70%);*/
+            background: var(--bg);
             /*
             background-image: url('{{ $fundo.Permalink}}');
             background-size: cover;
@@ -148,7 +151,7 @@
 
         .theater {
             margin: 0 auto;
-            height: 100vh;
+            height: var(--viewport_height);
             /* top: 25%; */
             /* position: relative; */
             display: flex;
@@ -166,7 +169,6 @@
             position: absolute;
             background-color: var(--blue-light);
             
-            /*
             animation-name: focusIn;
             animation-iteration-count: 1;
             animation-fill-mode: both;
@@ -175,14 +177,17 @@
 
             animation-timing-function: cubic-bezier(0.55, 0.06, 0.68, 0.19);
             animation-timing-function: cubic-bezier(0.55, 0.06, 0.59, 0.83);
-            */
 
             transform: translate3d(0,0,0) scale(1.0);
+            /*
             transition: transform 400ms cubic-bezier(.10,1.28,.17,1.41);
+            */
         }
+        /*
         #poster:hover {
             transform: translate3d(0,0,0) scale(1.005);
         }
+        */
         #poster video {
             pointer-events: none; 
             width: 100%; 
@@ -198,12 +203,15 @@
             color: transparent;
             width: 100%;
             height: 100%;
-            /* background-color: #000; */
-            background-image: url('{{ $logo.Permalink}}');
-            background-size: cover;
+             background-color: #000;
+            background-image:  url('{{ $logo.Permalink}}'); /*linear-gradient(black, black), 
+                               url('{{ $logo.Permalink}}');
+            */
+            background-size: contain;
             background-repeat: no-repeat;
             background-position: center;
-            /* mix-blend-mode: overlay; */
+            mix-blend-mode: multiply;
+            
             margin: 0;
             opacity: 1;
             transform: translate3d(0,0,0) scale(1.01);
@@ -216,7 +224,7 @@
             bottom: 0; right: 0;
             width: 100%; height: 100%;
             background: linear-gradient(0deg, var(--blue-light) 30%, #b6fcff 70%);
-            mix-blend-mode: hue;
+            mix-blend-mode: darken;
             opacity: 0;
             transition: opacity var(--logo-time) ease-in-out;
         }
@@ -244,10 +252,10 @@
          */
         #info {
             width: 100%;
-            height: 100vh;
+            height: var(--viewport_height);
             position: absolute;
-            top: 100vh; left: 0;
-            right: 0; bottom: 200vh;
+            top: var(--viewport_height); left: 0;
+            right: 0; bottom: calc( var(--viewport_height) * 2);
 
             transform: translate3d(0,0,0);
             perspective: var(--perspective);
@@ -272,7 +280,9 @@
 ". . aside aside aside aside aside aside aside . main main main main main main main main main main . ."
 ". . aside aside aside aside aside aside aside . main main main main main main main main main main . ."
 "foot foot foot foot foot foot foot foot foot foot foot foot foot foot foot foot foot foot foot foot foot foot";
-            grid-gap: 16px;            
+            grid-gap: 16px;
+
+            display: var(--info_display);
         }
 
         #info > #left {
@@ -409,12 +419,27 @@
         .song-item.is-playing > .song-name {
             margin-left: calc( 10% - 16px );
         }
-   
+
+        #footer {
+            display: none;
+        }
+
+        /**
+         * Cellphones
+         */
+        @media (min-width: 320px) and (max-width: 560px){
+            :root {
+                --viewport_height: 90vh;
+            }   
+            #poster {
+                width: 100%;
+            }
+        }
     </style>
 </head>
 <body>
     {{ .Content }}
-    <footer>
+    <footer id="footer">
         <div class="footer_social_links">
 
         </div>

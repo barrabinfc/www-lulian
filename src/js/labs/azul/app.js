@@ -2,7 +2,7 @@
 
 import ClipPlayer from './ClipPlayer';
 import GradualSteps from './GradualSteps';
-import { CSSVariables , listen , Cronometer, spy } from './utils';
+import { CSSVariables , listen , Cronometer, spy  } from './utils';
 
 const AzulStages = {
     'BLANK': 'BLANK',

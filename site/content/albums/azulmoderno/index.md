@@ -1,9 +1,12 @@
 +++
 draft = false
 Title = "AZUL MODERNO"
-subtitle = "AZUL MODERNO"
+subtitle = "Entre as estrelas em volta de andrômeda"
+description = "Clipe de Azul Moderno, música que da título ao álbum \"Azul Moderno\" de Luiza Lian."
+
 layout = "azul"
 
+info_enabled = true
 video = "https://www.youtube.com/watch?v=sH4gJp_Y4_M"
 youtubeID = "sH4gJp_Y4_M"
 
@@ -23,7 +26,7 @@ buy_link  = "https://lianluiza.bandcamp.com/"
 
 [[resources]]
   name = "logo"
-  src = "images/logo_trans_white.png"
+  src = "images/logo.png"
 
 [[resources]]
   name = "text_poster"
