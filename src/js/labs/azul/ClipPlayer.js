@@ -11,7 +11,7 @@ export default class ClipPlayer {
                 'onReady': this.ready,
             },
             playerVars: {
-                origin: ['localhost:3000','luizalian.com.br'],
+                origin: 'luizalian.com.br',
                 rel: 0,
                 playsinline: 0,
                 modestbranding: 1,
