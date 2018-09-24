@@ -22,8 +22,8 @@ const defaultArgs = ["-d", "../docs",
 gulp.task("hugo", (cb) => buildSite(cb));
 gulp.task("hugo-preview", (cb) => buildSite(cb, ["--buildDrafts", "--buildFuture"]));
 
-gulp.task("build", ["css", "vendor-js", "js", "hugo"]);
-gulp.task("build-preview", ["css", "vendor-js", "js", "hugo-preview"]);
+gulp.task("build", ["css", "vendor-js", "js", "copy", "hugo"]);
+gulp.task("build-preview", ["css", "vendor-js", "js", "copy", "hugo-preview"]);
 
 gulp.task("css", () => (
   gulp.src("./src/css/*.css")
@@ -40,6 +40,11 @@ gulp.task("css", () => (
 gulp.task("vendor-js", () => {
   gulp.src("./src/js/vendor/*.js")
     .pipe(gulp.dest("./docs/js/vendor"))
+})
+
+gulp.task("copy", () => {
+  gulp.src("./_*")
+      .pipe(gulp.dest("./docs"))
 })
 
 gulp.task("js", (cb) => {
