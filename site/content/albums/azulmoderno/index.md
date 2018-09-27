@@ -68,7 +68,6 @@ buy_link  = "https://lianluiza.bandcamp.com/"
   name = "spotify_icon"
   src = "images/spot_icon.svg"
 
-
 +++
 
 
@@ -109,15 +108,19 @@ buy_link  = "https://lianluiza.bandcamp.com/"
           </p>
         </div>
         <div class="content">
-          <a href="https://www.youtube.com/watch?v=sH4gJp_Y4_M" class="song-item is-playing">
+        
+          <iframe style="border: 0; width: 100%; height: 100%;"   src="https://bandcamp.com/EmbeddedPlayer/album=3413521932/size=large/bgcol=ffffff/linkcol=0687f5/artwork=none/track=2818734274/transparent=true/" seamless></iframe>
+
+        <!--
+          <a href="#" class="song-item is-playing">
             <span class="song-name">Azul Moderno</span>
             <span class="song-length">3:55</span>
           </a>
-          <a href="https://soundcloud.com/luizalian/" class="song-item blurred">
+          <a href="https://lianluiza.bandcamp.com/track/vem-dizer-tchau" class="song-item">
             <span class="song-name">Vem Dizer Tchau</span>
             <span class="song-length">4:00</span>
           </a>
-          <a href="#" class="song-item ">
+          <a href="#" class="song-item">
             <span class="song-name">Mil Mulheres</span>
             <span class="song-length">3:45</span>
           </a>
@@ -149,6 +152,8 @@ buy_link  = "https://lianluiza.bandcamp.com/"
             <span class="song-name">Santa Bárbara</span>
             <span class="song-length">3:01</span>
           </a>
+          -->
+
         </div>
       </section>
     </div>
