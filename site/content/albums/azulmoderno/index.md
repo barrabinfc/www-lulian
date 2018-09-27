@@ -91,9 +91,9 @@ buy_link  = "https://lianluiza.bandcamp.com/"
         </picture>
         <div class="other">
           <div class="players_links">
-            <a href="https://soundcloud.com/luizalian" class="player-icon sc-icon" alt="Soundcloud">Soundcloud</a>
-            <a href="https://www.youtube.com/channel/UCYUL2PB2a06Iv_VxN98Ka8Q" class="player-icon yt-icon" alt="Youtube">Youtube</a>
-            <a href="https://open.spotify.com/album/04oq2cO06zbmUSGW6Br7n9" class="player-icon spot-icon" alt="Spotify">Spotify</a>
+            <a href="https://soundcloud.com/luizalian" class="player-icon sc-icon" alt="Soundcloud" target="_blank">Soundcloud</a>
+            <a href="https://www.youtube.com/playlist?list=PLm8ISRwZVCAOxav1tHjRT_Z-vWQBLBuWM" class="player-icon yt-icon" alt="Youtube" target="_blank">Youtube</a>
+            <a href="https://open.spotify.com/album/3ocMFmdWIfjrfNdHVFQ41I" class="player-icon spot-icon" alt="Spotify" target="_blank">Spotify</a>
           </div>
           <!--
             <button class="buy_link"><a href="">COMPRAR</a></button>
@@ -117,35 +117,35 @@ buy_link  = "https://lianluiza.bandcamp.com/"
             <span class="song-name">Vem Dizer Tchau</span>
             <span class="song-length">4:00</span>
           </a>
-          <a href="#" class="song-item blurred">
+          <a href="#" class="song-item ">
             <span class="song-name">Mil Mulheres</span>
             <span class="song-length">3:45</span>
           </a>
-          <a href="#" class="song-item blurred">
+          <a href="#" class="song-item ">
             <span class="song-name">Sou Yaba</span>
             <span class="song-length">3:00</span>
           </a>
-          <a href="#" class="song-item blurred">
+          <a href="#" class="song-item ">
             <span class="song-name">Mira</span>
             <span class="song-length">4:01</span>
           </a>
-          <a href="#" class="song-item blurred">
+          <a href="#" class="song-item ">
             <span class="song-name">Larinhas</span>
             <span class="song-length">3:28</span>
           </a>
-          <a href="#" class="song-item blurred">
+          <a href="#" class="song-item ">
             <span class="song-name">Pomba Gira do Luar</span>
             <span class="song-length">4:26</span>
           </a>
-          <a href="#" class="song-item blurred">
+          <a href="#" class="song-item ">
             <span class="song-name">Geladeira</span>
             <span class="song-length">3:24</span>
           </a>
-          <a href="#" class="song-item blurred">
+          <a href="#" class="song-item ">
             <span class="song-name">Notícias do Japão</span>
             <span class="song-length">2:54</span>
           </a>
-          <a href="#" class="song-item blurred">
+          <a href="#" class="song-item ">
             <span class="song-name">Santa Bárbara</span>
             <span class="song-length">3:01</span>
           </a>
