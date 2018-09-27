@@ -16,22 +16,27 @@
 
     {{ $info_enabled := .Params.info_enabled }}
 
+    {{ $fav := .Page.Resources.GetMatch "favicon"}}
     {{ $play := .Page.Resources.GetMatch "seta_icon" }}
     {{ $sc := .Page.Resources.GetMatch "soundcloud_icon" }}
     {{ $yt := .Page.Resources.GetMatch "youtube_icon" }}
     {{ $spot := .Page.Resources.GetMatch "spotify_icon" }}
 
-    <meta property="og:title" content="Luiza Lian - Azul Moderno"/>
-    <meta property="og:description" content="Azul Moderno"/>
+    <link rel="shortcut icon" href="{{ $fav.Permalink }}">
+    <link rel="apple-touch-icon" href="{{ $fav.Permalink }}">
+
+    <meta property="og:title" content="Azul Moderno, by Luiza Lian"/>
+    <meta property="og:description" content="track from the album Azul Moderno"/>
+    <meta property="og:type" content="song">
     <meta property="og:image" content="{{ $cover.Permalink }}"/>
     <meta property="og:url" content="https://www.luizalian.com.br"/>
     <meta property="og:site_name" content="Luiza Lian"/>
-    <meta property="og:see_also" content="https://soundcloud.com/luizalian/sets/azul-moderno/"/>
+    <meta property="og:see_also" content=""/>
     
     <meta name="twitter:card" content="summary"/>  <!-- Card type -->
     <meta name="twitter:site" content="luizalian.com.br"/>
     <meta name="twitter:title" content="Azul Moderno">
-    <meta name="twitter:description" content="Azul Moderno"/>
+    <meta name="twitter:description" content="album Azul Moderno"/>
     <meta name="twitter:image:src" content="{{ $cover.Permalink }}"/>
     <meta name="twitter:domain" content="https://www.luizalian.com.br"/> 
 

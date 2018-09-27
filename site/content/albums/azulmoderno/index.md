@@ -13,6 +13,10 @@ youtubeID = "sH4gJp_Y4_M"
 buy_link  = "https://lianluiza.bandcamp.com/"
 
 [[resources]]
+  name = "favicon"
+  src = "images/favicon.jpg"
+  
+[[resources]]
   name = "fundo"
   src = "images/fundo.png"
 
@@ -104,7 +108,8 @@ buy_link  = "https://lianluiza.bandcamp.com/"
           <h1>Azul MODERNO</h1>
           <h3>Entre as estrelas em volta de andrômeda</h3>
           <p>
-          Clipe de Azul Moderno, música que da título ao álbum "Azul Moderno" de Luiza Lian.
+          <!-- Clipe de Azul Moderno, música que da título ao álbum "Azul Moderno" de Luiza Lian.
+          -->
           </p>
         </div>
         <div class="content">
