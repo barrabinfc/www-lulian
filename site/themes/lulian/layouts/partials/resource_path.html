@@ -1,0 +1,1 @@
+{{ $image := .resources.GetMatch .name }}{{ if $image }}{{ safeHTML $image.Permalink }}{{ end }}

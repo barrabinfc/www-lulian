@@ -15,3 +15,11 @@ pygmentsCodeFences = true
 
 [imaging]  
   quality = 85
+
+[params]
+  [params.social]
+    facebook		= "luizalian"
+    instagram		= "luizalian"
+    youtube		  = "user/luizalianshow"
+    soundcloud  = "luizalian"
+    spotify     = "artist/0mqrSBamArf14pPZE2Q9kW"

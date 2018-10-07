@@ -54,8 +54,15 @@ class Azul {
         },5000 )
     }
 
-    loadClip( youtubeID ) {
+    loadClip( videoURL ) {
         cronometer.tap('YOUTUBE_READY');
+
+        let youtubeID = ''
+        try { 
+            youtubeID = videoURL.match(/\?v=(.*?)/)[1]
+        } catch (e) {
+            throw new Error("Invalid youtube video...", videoURL)
+        }
 
         this.player = new ClipPlayer(this.dom.clip, youtubeID);
         this.player.play  = spy( [this.player.play, this.player],   cronometer.tap.bind(cronometer,'PLAYER_PLAY'));
