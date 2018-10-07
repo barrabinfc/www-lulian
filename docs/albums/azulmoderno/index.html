@@ -10,13 +10,15 @@
 
     
     
-    
 
     
 
     
     
     
+    
+    
+
     
     
 
@@ -24,10 +26,11 @@
     <link rel="apple-touch-icon" href="/albums/azulmoderno/images/favicon.jpg">
 
     <meta property="og:title" content="Azul Moderno, by Luiza Lian"/>
-    <meta property="og:description" content="track from the album Azul Moderno"/>
+    <meta property="og:description" content="Clipe de Azul Moderno, música que da título ao álbum &#34;Azul Moderno&#34; de Luiza Lian." />
     <meta property="og:type" content="song">
     <meta property="og:image" content="/albums/azulmoderno/images/Album_Cover.jpg"/>
     <meta property="og:url" content="https://www.luizalian.com.br"/>
+    <meta property="og:video" content="" />
     <meta property="og:site_name" content="Luiza Lian"/>
     <meta property="og:see_also" content=""/>
     
@@ -38,8 +41,8 @@
     <meta name="twitter:image:src" content="/albums/azulmoderno/images/Album_Cover.jpg"/>
     <meta name="twitter:domain" content="https://www.luizalian.com.br"/> 
 
-    <meta name="youtubeID" content=sH4gJp_Y4_M />
-    <meta name="buy_link" content=https://lianluiza.bandcamp.com/ />
+    <meta name="youtubeID" content="" />
+    <meta name="gid" content="UA-960953172" /> 
 
     <style>
         * { box-sizing: border-box; }
@@ -110,8 +113,6 @@
             height: var(--viewport_height);
              
             background: var(--bg);
-              
-
             margin: 0; padding: 0;
         }
         body { 
@@ -420,6 +421,7 @@
 </head>
 <body>
     <div class="theater">
+<!--
     <div id="screen" class="screen hidden">
         <div id="videoclip"></div>
     </div>
@@ -440,6 +442,10 @@
           </video>
         <a href="#play" class="logo">AZUL<br/>moderno</a>
     </div>
+-->
+    <h1>
+https://www.youtube.com/watch?v=sH4gJp_Y4_M</h1>
+
     <div id="info" class="info" style='background-image: url(
 
 
@@ -467,9 +473,7 @@
             <a href="https://www.youtube.com/playlist?list=PLm8ISRwZVCAOxav1tHjRT_Z-vWQBLBuWM" class="player-icon yt-icon" alt="Youtube" target="_blank">Youtube</a>
             <a href="https://open.spotify.com/album/3ocMFmdWIfjrfNdHVFQ41I" class="player-icon spot-icon" alt="Spotify" target="_blank">Spotify</a>
           </div>
-          <!--
             <button class="buy_link"><a href="">COMPRAR</a></button>
-          -->
         </div>
       </section>
       <section id="right">
@@ -477,12 +481,11 @@
           <h1>Azul MODERNO</h1>
           <h3>Entre as estrelas em volta de andrômeda</h3>
           <p>
-          <!-- Clipe de Azul Moderno, música que da título ao álbum "Azul Moderno" de Luiza Lian.
-          -->
+           Clipe de Azul Moderno, música que da título ao álbum "Azul Moderno" de Luiza Lian.
           </p>
         </div>
         <div class="content">
-        
+      
           <iframe style="border: 0; width: 100%; height: 100%;"   src="https://bandcamp.com/EmbeddedPlayer/album=3413521932/size=large/bgcol=ffffff/linkcol=0687f5/artwork=none/track=2818734274/transparent=true/" seamless></iframe>
 
         <!--
@@ -534,22 +537,30 @@
 </div>
 
     <footer id="footer">
-        <div class="footer_social_links">
-
+        <div class="footer_social_links">   
         </div>
         <div class="selo">
             <a href="">Selo Risco</a>
         </div>
     </footer>
     <script src="https://www.youtube.com/iframe_api" defer></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-960953172"></script>
     <script type="text/javascript" src="/js/vendor/vanilla-tilt.babel.min.js" defer></script>
     <script src="/js/azul.js" defer></script>
     <script defer>
+        
+        window.dataLayer = window.dataLayer || []
+        function gtag(){ dataLayer.push(arguments); }
+
+        gtag('js', new Date());
+        gtag('config', "UA-960953172" );
+
         console.log(`%c 
  🌊 Built by vical.me
 `, "font-size: 1.5em;");
         document.addEventListener('DOMContentLoaded', () => {
             window.azul = new window.Azul(document);
+            window.cronometer.hook = gtag;
         });
         function onYouTubeIframeAPIReady( ) {
             let el = document.querySelector('meta[name="youtubeID"]')

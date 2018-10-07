@@ -8,17 +8,13 @@ layout = "azul"
 
 info_enabled = true
 video = "https://www.youtube.com/watch?v=sH4gJp_Y4_M"
-youtubeID = "sH4gJp_Y4_M"
+analytics_id = "UA-960953172"
 
 buy_link  = "https://lianluiza.bandcamp.com/"
 
 [[resources]]
   name = "favicon"
   src = "images/favicon.jpg"
-  
-[[resources]]
-  name = "fundo"
-  src = "images/fundo.png"
 
 [[resources]]
   name = "info_fundo"
@@ -76,6 +72,7 @@ buy_link  = "https://lianluiza.bandcamp.com/"
 
 
 <div class="theater">
+<!--
     <div id="screen" class="screen hidden">
         <div id="videoclip"></div>
     </div>
@@ -86,6 +83,9 @@ buy_link  = "https://lianluiza.bandcamp.com/"
 	      </video>
         <a href="#play" class="logo">AZUL<br/>moderno</a>
     </div>
+-->
+    <h1>{{% mparams "video" %}}</h1>
+
     <div id="info" class="info" style='background-image: url({{% resource_path path="info_fundo" %}});'>
       <section id="left">
         <picture class="cover" data-tilt data-tilt-max="10" data-tilt-speed="800" data-tilt-scale="1.025" data-tilt-glare data-tilt-max-glare="0.5">
@@ -98,9 +98,7 @@ buy_link  = "https://lianluiza.bandcamp.com/"
             <a href="https://www.youtube.com/playlist?list=PLm8ISRwZVCAOxav1tHjRT_Z-vWQBLBuWM" class="player-icon yt-icon" alt="Youtube" target="_blank">Youtube</a>
             <a href="https://open.spotify.com/album/3ocMFmdWIfjrfNdHVFQ41I" class="player-icon spot-icon" alt="Spotify" target="_blank">Spotify</a>
           </div>
-          <!--
             <button class="buy_link"><a href="">COMPRAR</a></button>
-          -->
         </div>
       </section>
       <section id="right">
@@ -108,12 +106,11 @@ buy_link  = "https://lianluiza.bandcamp.com/"
           <h1>Azul MODERNO</h1>
           <h3>Entre as estrelas em volta de andrômeda</h3>
           <p>
-          <!-- Clipe de Azul Moderno, música que da título ao álbum "Azul Moderno" de Luiza Lian.
-          -->
+           Clipe de Azul Moderno, música que da título ao álbum "Azul Moderno" de Luiza Lian.
           </p>
         </div>
         <div class="content">
-        
+      
           <iframe style="border: 0; width: 100%; height: 100%;"   src="https://bandcamp.com/EmbeddedPlayer/album=3413521932/size=large/bgcol=ffffff/linkcol=0687f5/artwork=none/track=2818734274/transparent=true/" seamless></iframe>
 
         <!--
