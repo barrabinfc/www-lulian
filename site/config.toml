@@ -17,9 +17,13 @@ pygmentsCodeFences = true
   quality = 85
 
 [params]
+  selo = "https://www.facebook.com/selorisco"
   [params.social]
     facebook		= "luizalian"
     instagram		= "luizalian"
     youtube		  = "user/luizalianshow"
     soundcloud  = "luizalian"
     spotify     = "artist/0mqrSBamArf14pPZE2Q9kW"
+  
+  [params.analytics]
+    uid = "UA-960953172"

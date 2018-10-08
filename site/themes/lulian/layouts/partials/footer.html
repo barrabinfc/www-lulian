@@ -1,7 +1,36 @@
 <footer id="footer">
-    <div class="footer_social_links">
+    <div class="social_links">
+        {{ if (isset .Site.Params.social "facebook") }}
+            {{ $fb := .Site.Params.social.facebook }}
+            <a href="https://soundcloud.com/{{$fb}}" class="social-icon fb-icon" title="Facebook" target="_blank">Facebook</a>
+        {{end}}
+
+        {{ if (isset .Site.Params.social "instagram") }}
+            {{ $fb := .Site.Params.social.instagram }}
+            <a href="https://instagram.com/{{$fb}}" class="social-icon insta-icon" title="Instagram" target="_blank">Instagram</a>
+        {{end}}
+
+        {{ if (isset .Site.Params.social "youtube") }}
+            {{ $yt := .Site.Params.social.youtube }}
+            <a href="https://www.youtube.com/{{$yt}}" class="social-icon yt-icon" title="Youtube"
+                target="_blank">Youtube</a>
+        {{ end }}
+    
+        {{ if (isset .Site.Params.social "spotify" ) }}    
+            {{ $spot := .Site.Params.social.spotify }}
+            <a href="https://open.spotify.com/{{ $spot }}" class="social-icon spot-icon" title="Spotify" target="_blank">Spotify</a>
+        {{ end }}
+
+        {{ if (isset .Site.Params.social "soundcloud") }}
+            {{ $sc := .Site.Params.social.soundcloud }}
+            <a href="https://soundcloud.com/{{$sc}}" class="social-icon sc-icon" title="Soundcloud" target="_blank">Soundcloud</a>
+        {{end}}
+
     </div>
     <div class="selo">
-        <a href="">Selo Risco</a>
+        {{ if (isset .Site.Params "selo") }}
+            {{ $selo := .Site.Params.selo }}
+            <a href="{{$selo}}" class="social-icon risco-icon" title="Selo" target="_blank">Selo Risco</a>
+        {{end}}
     </div>
 </footer>

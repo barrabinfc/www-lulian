@@ -59,7 +59,8 @@ class Azul {
 
         let youtubeID = ''
         try { 
-            youtubeID = videoURL.match(/\?v=(.*?)/)[1]
+            youtubeID = videoURL.match(/\?v=(.*)/)[1]
+            console.log("Loading youtube: ", youtubeID)
         } catch (e) {
             throw new Error("Invalid youtube video...", videoURL)
         }

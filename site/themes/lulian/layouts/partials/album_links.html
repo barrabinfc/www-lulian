@@ -1,7 +1,17 @@
 <div class="players_links">
-    <a href="https://soundcloud.com/luizalian" class="player-icon sc-icon" alt="Soundcloud" target="_blank">Soundcloud</a>
-    <a href="https://www.youtube.com/playlist?list=PLm8ISRwZVCAOxav1tHjRT_Z-vWQBLBuWM" class="player-icon yt-icon" alt="Youtube"
-        target="_blank">Youtube</a>
-    <a href="https://open.spotify.com/album/3ocMFmdWIfjrfNdHVFQ41I" class="player-icon spot-icon" alt="Spotify" target="_blank">Spotify</a>
+    {{ if (isset .Params.album.platforms "soundcloud") }}
+        {{ $sc := .Params.album.platforms.soundcloud }}
+        <a href="https://soundcloud.com/{{$sc}}" class="player-icon sc-icon" title="Soundcloud" target="_blank">Soundcloud</a>
+    {{end}}
+
+    {{ if (isset .Params.album.platforms "youtube") }}
+        {{ $yt := .Params.album.platforms.youtube }}
+        <a href="https://www.youtube.com/{{$yt}}" class="player-icon yt-icon" title="Youtube"
+            target="_blank">Youtube</a>
+    {{ end }}
+    
+    {{ if (isset .Params.album.platforms "spotify" ) }}    
+        {{ $spot := .Params.album.platforms.spotify }}
+        <a href="https://open.spotify.com/{{ $spot }}" class="player-icon spot-icon" title="Spotify" target="_blank">Spotify</a>
+    {{ end }}
 </div>
-<button class="buy_link"><a href="">COMPRAR</a></button>

@@ -1,0 +1,15 @@
+{{ $resources := .Page.Resources }}
+{{ $poster := "text_poster" }}
+{{ $movie  := "text_movie" }}
+
+<div id="screen" class="screen hidden">
+    <div id="videoclip"></div>
+</div>
+<div id="poster" class="spotlight">
+    <video autoplay playsinline muted loop preload
+    onloadeddata="document.dispatchEvent(new Event('posterPreloaded'))"  
+        poster='{{ partial "resource_path" (dict "resources" $resources "name" $poster) }}'>
+        <source src='{{ partial "resource_path" (dict "resources" $resources "name" $movie) }}'/>
+    </video>
+    <a href="#play" class="logo" title="Aperte para ver o clipe">{{ .Title }}</a>
+</div>

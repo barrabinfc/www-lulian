@@ -3,7 +3,7 @@
 
 {{ if $image }}
     {{ $alt := .Get "alt" | default $image.Title }}
-    <img src="{{ $image.Permalink }}" alt="{{ $alt }}" />
+    <img src="{{ $image.Permalink }}" title="{{ $alt }}" />
 {{ else }}
     <div class="error">Image {{ $path }} not found</div>
 {{ end }}

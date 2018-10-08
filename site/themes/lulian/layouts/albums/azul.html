@@ -14,36 +14,25 @@
     {{ $cover := .Page.Resources.GetMatch "album_cover" }}
 
     {{ $info_enabled := .Params.info_enabled }}
+    {{ $gid := (default .Site.Params.uid "") }}
 
-    {{ $fav := .Page.Resources.GetMatch "favicon"}}
-    {{ $play := .Page.Resources.GetMatch "seta_icon" }}
-    {{ $sc := .Page.Resources.GetMatch "soundcloud_icon" }}
-    {{ $yt := .Page.Resources.GetMatch "youtube_icon" }}
-    {{ $spot := .Page.Resources.GetMatch "spotify_icon" }}
-
-    {{ $yid := (default .Params.youtubeID "")  }}
-    {{ $gid := (default .Params.analytics_id "") }}
-
-    <link rel="shortcut icon" href="{{ $fav.Permalink }}">
-    <link rel="apple-touch-icon" href="{{ $fav.Permalink }}">
+    <link rel="shortcut icon" href="/images/favicon.jpg">
+    <link rel="apple-touch-icon" href="/images/favicon.jpg">
 
     <meta property="og:title" content="{{ .Title }}"/>
     <meta property="og:description" content="{{ if .Description }}{{ .Description }}{{ else }}{{if .IsPage}}{{ .Summary }}{{ end }}{{ end }}" />
     <meta property="og:type" content="song">
     <meta property="og:image" content="{{ $cover.Permalink }}"/>
-    <meta property="og:url" content="https://www.luizalian.com.br"/>
-    <meta property="og:video" content="{{ $yid }}" />
-    <meta property="og:site_name" content="Luiza Lian"/>
-    <meta property="og:see_also" content=""/>
+    <meta property="og:url" content="{{ .Permalink }}"/>
+    <meta property="og:video" content="{{ .Params.video }}" />
     
     <meta name="twitter:card" content="summary"/>  <!-- Card type -->
-    <meta name="twitter:site" content="www.luizalian.com.br"/>
+    <meta name="twitter:site" content="{{ .Permalink }}"/>
     <meta name="twitter:title" content="{{ .Title }}">
     <meta name="twitter:description" content="{{ if .Description }}{{ .Description }}{{ else }}{{if .IsPage}}{{ .Summary }}{{ end }}{{ end }}"/>
     <meta name="twitter:image:src" content="{{ $cover.Permalink }}"/>
     <meta name="twitter:domain" content="https://www.luizalian.com.br"/> 
 
-    <meta name="videoURL" content="{{ $yid }}" />
     <meta name="gid" content="{{ $gid }}" /> 
 
     <style>
@@ -131,7 +120,7 @@
         /**
          * Icons
          */
-         .player-icon {
+         .player-icon, .social-icon {
             display: block;
             text-indent: -99999px;
             background-repeat: no-repeat;
@@ -141,16 +130,23 @@
             fill: white;
             color: white;
          }
-        .sc-icon {
-            background-image: url('{{ $sc.Permalink}}');
-        }
-        .yt-icon {
-            background-image: url('{{ $yt.Permalink}}');            
-        }
-        .spot-icon {
-            background-image: url('{{ $spot.Permalink}}');            
-        }
+        .fb-icon { background-image: url('/images/fb_icon.svg'); }
+        .insta-icon { background-image: url('/images/insta_icon.svg'); }
+        .sc-icon { background-image: url('/images/sc_icon.svg'); }
+        .yt-icon { background-image: url('/images/yt_icon.svg'); }
+        .spot-icon { background-image: url('/images/spot_icon.svg');  }
+        .risco-icon { background-image: url('/images/logo_risco.png'); }
 
+        .nav-header {
+            position: absolute;
+            width: 100%;
+            text-align: center;
+            color: var(--cashmere);
+        }
+        .nav-header .title {
+            font-size: 36px;
+            text-transform: uppercase;
+        }
 
         .theater {
             margin: 0 auto;
@@ -172,13 +168,15 @@
             position: absolute;
             background-color: var(--blue-light);
             
+            /*
             animation-name: focusIn;
+            */
             animation-iteration-count: 1;
             animation-fill-mode: both;
             animation-play-state: paused;
             animation-duration: var(--intro-time);
 
-            animation-timing-function: cubic-bezier(0.55, 0.06, 0.68, 0.19);
+            /*animation-timing-function: cubic-bezier(0.55, 0.06, 0.68, 0.19);*/
             animation-timing-function: cubic-bezier(0.55, 0.06, 0.59, 0.83);
 
             transform: translate3d(0,0,0) scale(1.0);
@@ -231,7 +229,7 @@
             opacity: 0;
             transition: opacity var(--logo-time) ease-in-out;
         }
-        a.logo:hover::before { opacity: 0.5; }
+        a.logo:hover::before { opacity: 0.9; }
 
 
         /** Screen video clip */
@@ -243,6 +241,8 @@
             top: 0; left: 0;
             bottom:0; right: 0;
             transition: opacity var(--intro-time) ease-in;
+            transform: translate3d(0,0,0);
+            will-change: opacity;            
         }
         #screen > #videoclip {
             width: 100%;
@@ -412,7 +412,7 @@
         .song-item.is-playing::before {
             content: ' ';
             background-repeat: no-repeat;
-            background-image: url('{{ $play.Permalink}}');
+            background-image: url('/images/seta.svg');
             background-size: 16px 16px;
             width: 16px;
             height: 16px;
@@ -423,7 +423,29 @@
         }
 
         #footer {
-            display: none;
+            position: absolute;
+            width: 100%;
+            height: 48px;
+            top: calc( 100vh - 48px );
+            border-top: 1px solid rgba(255,255,255,0.1);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 24px 0 24px;            
+        }
+
+        #footer .social_links {
+            display: flex;
+            width: 15%;
+            align-items: center;
+            justify-content: space-between;            
+        }
+
+        #footer .social-icon {
+            width: 24px;
+            height: 24px;
+            background-size: 24px 24px;
         }
 
         /**
@@ -440,8 +462,9 @@
     </style>
 </head>
 <body>
+    {{ partial "header.html" . }}
     <div class="theater">
-        {{ .Content }}
+        {{ partial "videoclip.html" . }}
         {{ partial "album_info.html" . }}
     </div>
     {{ partial "footer" . }}
@@ -466,7 +489,7 @@
             window.cronometer.hook = gtag;
         });
         function onYouTubeIframeAPIReady( ) {
-            let el = document.querySelector('meta[name="videoURL"]')
+            let el = document.querySelector('meta[property="og:video"]')
             window.azul.loadClip( el.getAttribute('content') )
         }
     </script>
