@@ -21,10 +21,10 @@
     </section>
     <section id="right">
       <div class="title">
-        <h1>Azul MODERNO</h1>
-        <h3>Entre as estrelas em volta de andrômeda</h3>
+        <h1>{{ .Title }}</h1>
+        <h3>{{ .Page.Params.subtitle | default "" }}</h3>
         <p>
-         Clipe de Azul Moderno, música que da título ao álbum "Azul Moderno" de Luiza Lian.
+          {{ .Description }}
         </p>
       </div>
       <div class="content">
