@@ -48,11 +48,7 @@ class Azul {
         this.listeners['poster'] = new listen(this.dom.poster_video);
         this.listeners['poster'].when('loadeddata').do(this.poster_loaded.bind(this));
 
-        cronometer.tap('APP_READY'); 
-
-        setTimeout( () => {
-            cronometer.debug();
-        },5000 )
+        cronometer.tap('APP_READY');
     }
 
     loadClip( videoURL ) {
