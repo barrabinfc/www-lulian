@@ -27,6 +27,7 @@ class Azul {
             'poster_video': this.ctx.querySelector('#poster > video'),
             'screen': this.ctx.getElementById('screen'),
             'clip': this.ctx.querySelector('#screen > #videoclip'),
+            'footer': this.ctx.querySelector('#footer'),
         }
         this.listeners = {};
 
@@ -119,6 +120,7 @@ class Azul {
      */
     [AzulStages.INTRO + ":exit"](curr,next) {
         return new Promise( (resolve, reject) => {
+            this.dom.footer.style['animation-name'] = 'slideBottom';
             this.dom.poster.style['animation-name'] = 'focusOut';
             this.listeners['logo'].mute('click');
 
@@ -133,6 +135,7 @@ class Azul {
         return new Promise((resolve, reject) => {
             document.body.style['overflow-y'] = 'auto';
 
+            this.dom.footer.classList.add('collapsed');
             this.dom.poster.classList.add('hidden');
             this.dom.screen.classList.remove('hidden');
             this.dom.screen.classList.add('visible');

@@ -41,7 +41,7 @@
             --fg: #fff;
             --bg: #000;
 
-            --viewport_height: 100vh;
+            --viewport_height: 200vh;
             --info_display: {{ cond $info_enabled "grid" "none" }};
 
             --black: #3E3E3E;
@@ -99,9 +99,15 @@
             100% { visibility: hidden; }
         }
 
+        @keyframes slideBottom {
+            from { transform: translate3d(0,0,0); }
+            to { transform: translate3d(0,100%,0); }
+        }
+
+
         html {
             width: 100%;
-            height: var(--viewport_height);
+            height: 100vh;
             /*background: linear-gradient(90deg, #4753a9 30%, #32ab52 70%);*/
             background: var(--bg);
             margin: 0; padding: 0;
@@ -111,6 +117,7 @@
             color: var(--fg);
             font-size: 14px;
             font-family: var(--font);
+            overflow: hidden;
         }
         ::selection {
             background-color: var(--blue-white);
@@ -131,7 +138,7 @@
             color: white;
          }
         .fb-icon { background-image: url('/images/fb_icon.svg'); }
-        .insta-icon { background-image: url('/images/insta_icon.svg'); }
+        .insta-icon { background-image: url('/images/insta_circle_icon2.svg'); }
         .sc-icon { background-image: url('/images/sc_icon.svg'); }
         .yt-icon { background-image: url('/images/yt_icon.svg'); }
         .spot-icon { background-image: url('/images/spot_icon.svg');  }
@@ -154,18 +161,19 @@
             /* top: 25%; */
             /* position: relative; */
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
 
             perspective: var(--perspective);
-            perspective-origin: 50% 50%;
+            perspective-origin: 50% 25%;
         }
 
         #poster {
             width: 50%;
-            height: 50vh;
+            height: 25%;
             overflow: hidden;
-            position: absolute;
+            position: relative;
             background-color: var(--blue-light);
             
             /*
@@ -204,7 +212,7 @@
             color: transparent;
             width: 100%;
             height: 100%;
-             background-color: #000;
+            background-color: #000;
             background-image:  url('{{ $logo.Permalink}}'); /*linear-gradient(black, black), 
                                url('{{ $logo.Permalink}}');
             */
@@ -216,6 +224,7 @@
             margin: 0;
             opacity: 1;
             transform: translate3d(0,0,0) scale(1.01);
+            text-indent: -9999px;            
         }
         a.logo.interactive::before {
             content: ' ';
@@ -236,7 +245,7 @@
         #screen {
             position: absolute;
             width: 100%;
-            height: 100%;
+            height: 50%;
             overflow: hidden;
             top: 0; left: 0;
             bottom:0; right: 0;
@@ -255,10 +264,12 @@
          */
         #info {
             width: 100%;
-            height: var(--viewport_height);
-            position: absolute;
-            top: var(--viewport_height); left: 0;
-            right: 0; bottom: calc( var(--viewport_height) * 2);
+            height: 50%;
+            position: relative;
+            top: 12.5%;
+            
+            /*top: var(--viewport_height); left: 0;
+            right: 0; bottom: calc( var(--viewport_height) * 2);*/
 
             transform: translate3d(0,0,0);
             perspective: var(--perspective);
@@ -366,6 +377,7 @@
             font-style: normal;
             font-size: 1.25em;
             font-family: var(--font);
+            opacity: 0.85;
 
             counter-reset: song_number; 
         }
@@ -426,13 +438,27 @@
             position: absolute;
             width: 100%;
             height: 48px;
-            top: calc( 100vh - 48px );
+            bottom: 0;
             border-top: 1px solid rgba(255,255,255,0.1);
             overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0 24px 0 24px;            
+            padding: 0 24px 0 24px;
+
+            animation-iteration-count: 1;
+            animation-fill-mode: both;
+            animation-play-state: running;
+            animation-duration: var(--intro-time);
+
+            /*animation-timing-function: cubic-bezier(0.55, 0.06, 0.68, 0.19);*/
+            animation-timing-function: cubic-bezier(0.55, 0.06, 0.59, 0.83);
+        }
+
+        #footer.collapsed {
+            bottom: -100%;
+            transform: translate3d(0,0,0);
+            animation-play-state: paused;
         }
 
         #footer .social_links {

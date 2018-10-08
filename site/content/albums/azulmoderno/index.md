@@ -26,7 +26,7 @@ album_embed = '<iframe style="border: 0; width: 100%; height: 100%;" src="https:
 
 [[resources]]
   name = "text_poster"
-  src = "images/poster7.jpg"
+  src = "images/poster3.jpg"
 
 [[resources]]
   name = "text_movie"
@@ -34,7 +34,7 @@ album_embed = '<iframe style="border: 0; width: 100%; height: 100%;" src="https:
 
 [[resources]]
   name = "info_fundo"
-  src = "images/AZMO-SINGLE.jpg"
+  src = "images/AZMO-SINGLE_low.jpg"
 
 [[resources]]
   name = "album_cover"
