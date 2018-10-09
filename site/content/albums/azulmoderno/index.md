@@ -1,11 +1,11 @@
 +++
 draft = false
-layout = "azul"
 Title = "AZUL MODERNO"
 subtitle = "Entre as estrelas em volta de Andrômeda"
 description = "Clipe de Azul Moderno, música que da título ao álbum \"Azul Moderno\" de Luiza Lian."
 
 poster_enabled = true
+poster_masked = true
 info_enabled = true
 
 # Videoclip and full album embed
@@ -18,6 +18,11 @@ album_embed = '<iframe style="border: 0; width: 100%; height: 100%;" src="https:
     soundcloud = "luizalian"
     youtube = "playlist?list=PLm8ISRwZVCAOxav1tHjRT_Z-vWQBLBuWM"
     spotify = "album/3ocMFmdWIfjrfNdHVFQ41I"
+
+# Colors
+[colors]
+  foreground =  "#fff"
+  background =  "#000"
 
 # Images
 [[resources]]
@@ -42,4 +47,18 @@ album_embed = '<iframe style="border: 0; width: 100%; height: 100%;" src="https:
 
 +++
 
-
+<div class="ficha_tecnica">
+  <div><label>Direção Artística:</label><p>Luiza Lian</p></div>
+  <div><label>Produção Musical:</label><p>Charles Tixier</p></div>
+  <div><label>Mixagem e Masterização:</label><p> Gui Jesus Toledo</p></div>
+  <div><label>Produção Executiva:</label><p> João Bagdadi</p></div>
+  <div><label>Filme</label><p> Camila Maluhy e Octávio Tavares (Filmes da Diaba)</p></div>
+  <div><label>Identidade Visual</label><p> Maria Cau Levy (Goma Oficina)</p></div>
+  <div><label>Assistente identidade visual</label><p> Christian Salmeron</p></div>
+  <div><label>Fotos de divulgação:</label><p>Filmes da Diaba e Bruno Moya</p></div>
+  <div><label>Figurino:</label><p> Gabi Cherubini</p></div>
+  <div><label>Maquiagem:</label><p> Leon Gurfein</p></div>
+  <div><label>Performance:</label><p> Luiza Lian, Bianca Turner e Sonia Costa</p></div>
+  <div><label>Participações:</label><p> Moita Carvalho (vocais em "É Nela Que se Mora?") / Gabriel Milliet (sax baritono e "Pó de Ouro)</p></div>
+  <div><label>Composição:</label><p>Luiza Lian exceto - "É Nela Que se Mora?" (Luiza Lian e Moita Carvalho) - "Manada" (Gê Marques)</p></div>
+</div>

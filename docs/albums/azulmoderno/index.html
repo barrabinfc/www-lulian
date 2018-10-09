@@ -11,6 +11,12 @@
 
     
     
+    
+    
+
+    
+    
+    
 
     
     
@@ -25,7 +31,7 @@
     <meta property="og:url" content="/albums/azulmoderno/"/>
     <meta property="og:video" content="https://www.youtube.com/watch?v=sH4gJp_Y4_M" />
     
-    <meta name="twitter:card" content="summary"/>  
+    <meta name="twitter:card" content="summary"/>
     <meta name="twitter:site" content="/albums/azulmoderno/"/>
     <meta name="twitter:title" content="AZUL MODERNO">
     <meta name="twitter:description" content="Clipe de Azul Moderno, música que da título ao álbum &#34;Azul Moderno&#34; de Luiza Lian."/>
@@ -366,6 +372,33 @@
             counter-reset: song_number; 
         }
 
+        #right .content .ficha_tecnica {
+            padding: 8px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow-y: auto;
+            font-size: 1.0rem;
+            height: 100%;            
+        }
+        .ficha_tecnica > div {
+            margin: 0;
+            display: flex;
+            text-align: left;
+        }
+        .ficha_tecnica > div > label {
+            max-width: 40%;
+            width: 40%;
+            text-overflow: ellipsis;
+            margin: 0;
+            font-weight: bold;
+        }
+        .ficha_tecnica > div > p {
+            margin: 0;
+            width: 60%;
+        }
+
+
          
         .song-item {
             position: relative;
@@ -524,7 +557,24 @@
         </p>
       </div>
       <div class="content">
-        <iframe style="border: 0; width: 100%; height: 100%;" src="https://bandcamp.com/EmbeddedPlayer/album=3413521932/size=large/bgcol=ffffff/linkcol=0687f5/artwork=none/track=2818734274/transparent=true/" seamless></iframe>
+        
+        <div class="ficha_tecnica">
+  <div><label>Direção Artística:</label><p>Luiza Lian</p></div>
+  <div><label>Produção Musical:</label><p>Charles Tixier</p></div>
+  <div><label>Mixagem e Masterização:</label><p> Gui Jesus Toledo</p></div>
+  <div><label>Produção Executiva:</label><p> João Bagdadi</p></div>
+  <div><label>Filme</label><p> Camila Maluhy e Octávio Tavares (Filmes da Diaba)</p></div>
+  <div><label>Identidade Visual</label><p> Maria Cau Levy (Goma Oficina)</p></div>
+  <div><label>Assistente identidade visual</label><p> Christian Salmeron</p></div>
+  <div><label>Fotos de divulgação:</label><p>Filmes da Diaba e Bruno Moya</p></div>
+  <div><label>Figurino:</label><p> Gabi Cherubini</p></div>
+  <div><label>Maquiagem:</label><p> Leon Gurfein</p></div>
+  <div><label>Performance:</label><p> Luiza Lian, Bianca Turner e Sonia Costa</p></div>
+  <div><label>Participações:</label><p> Moita Carvalho (vocais em "É Nela Que se Mora?") / Gabriel Milliet (sax baritono e "Pó de Ouro)</p></div>
+  <div><label>Composição:</label><p>Luiza Lian exceto - "É Nela Que se Mora?" (Luiza Lian e Moita Carvalho) - "Manada" (Gê Marques)</p></div>
+</div>
+
+      </div>
     </section>
 </div>
     </div>
