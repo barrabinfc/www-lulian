@@ -45,8 +45,12 @@ class Azul {
         this.listeners['logo'] = new listen(this.dom.logo);
         this.listeners['screen'] = new listen(this.dom.screen);
 
-        this.listeners['poster'] = new listen(this.dom.poster_video);
-        this.listeners['poster'].when('loadeddata').do(this.poster_loaded.bind(this));
+        if(this.dom.poster_video){
+            this.listeners['poster'] = new listen(this.dom.poster_video);
+            this.listeners['poster'].when('loadeddata').do(this.poster_loaded.bind(this));
+        } else {
+            this.poster_loaded()
+        }
 
         cronometer.tap('APP_READY');
     }
