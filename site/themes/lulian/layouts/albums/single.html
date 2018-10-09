@@ -24,8 +24,8 @@
     {{ $fg := (default "#fff" .Params.colors.foreground ) }}
     {{ $bg := (default "#000" .Params.colors.background ) }}
 
-    <link rel="shortcut icon" href="/images/favicon.jpg">
-    <link rel="apple-touch-icon" href="/images/favicon.jpg">
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/favicon.ico">
 
     <meta property="og:title" content="{{ .Title }}"/>
     <meta property="og:description" content="{{ if .Description }}{{ .Description }}{{ else }}{{if .IsPage}}{{ .Summary }}{{ end }}{{ end }}" />
