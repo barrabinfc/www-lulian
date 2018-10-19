@@ -12,7 +12,9 @@ export default class ClipPlayer {
             },
             playerVars: {
                 origin: 'luizalian.com.br',
+                controls: 2,
                 rel: 0,
+                showinfo: 0,
                 playsinline: 0,
                 modestbranding: 1,
             }

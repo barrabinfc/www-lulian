@@ -165,12 +165,11 @@
             background-position: center;
             background-repeat: no-repeat;
             background-size: contain;
-             
+            width: 36px;
             height: 36px;
             fill: var(--fg);
             color: var(--fg);
-            margin-top: 0.67em;
-            margin-bottom: 0.67em;
+            margin: 0.67em auto;
         }
 
         .theater {
@@ -322,7 +321,7 @@
             max-width: 100%;
             width: 100%;
             box-shadow: 8px 12px 40px rgba(0, 0, 0, 0.3);
-            height: 342px;
+            height: auto;
         }
 
         .players_links {
@@ -505,7 +504,7 @@
         }
 
          
-        @media (min-width: 320px) and (max-width: 560px){
+        @media (min-width: 320px) and (max-width: 425px){
             :root {
                 --viewport_height: 300vh;
             }   
@@ -552,10 +551,13 @@
 
             #footer .social_links {
                 width: 80%;
-            }
-
-            
+            }            
         }
+
+         
+         @media (min-width: 426px) and (max-width: 1024){
+         }
+
     </style>
 </head>
 <body>
