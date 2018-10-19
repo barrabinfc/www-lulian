@@ -103,7 +103,7 @@ class Azul {
     [AzulStages.INTRO + ":enter"](curr,next) {
         return new Promise((resolve, reject) => {
             this.dom.poster.style['animation-play-state'] = 'running';
-            document.body.style['overflow-y'] = 'hidden';
+            //document.body.style['overflow-y'] = 'hidden';
             setTimeout(() => {
                 this.dom.logo.classList.add('interactive');
                 this.listeners['logo'].when('click').do(this.poster_click.bind(this));
