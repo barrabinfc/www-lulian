@@ -30,8 +30,9 @@ gulp.task("css", () => (
     .pipe(sourcemaps.init())
     .pipe(postcss([
       cssImport({ from: "./src/css/main.css" }),
+      svgInline(),
       cssPreset({ stage: 0 }),
-      svgInline()]))
+      ]))
     .pipe(sourcemaps.write("."))
     .pipe(gulp.dest("./docs/css"))
   //.pipe(browserSync.stream())

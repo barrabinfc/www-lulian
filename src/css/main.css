@@ -1,1 +1,11 @@
+svg {
+    fill: currentColor;
+}
+
 /** Nothing for now **/
+.fb-icon { background-image: url('/images/fb_icon.svg'); }
+.insta-icon { background-image: url('/images/insta_circle_icon2.svg'); }
+.sc-icon { background-image: svg-load('../../site/static/images/sc_icon.svg',fill='#ffffff'); }
+.yt-icon { background-image: url('/images/yt_icon.svg'); }
+.spot-icon { background-image: url('/images/spot_icon.svg');  }
+.risco-icon { background-image: url('/images/logo_risco.png'); }

@@ -5,8 +5,11 @@ export default {
   module: {
     rules: [
       {
-        test: /\.((png)|(eot)|(woff)|(woff2)|(ttf)|(svg)|(gif))(\?v=\d+\.\d+\.\d+)?$/,
+        test: /\.((png)|(eot)|(woff)|(woff2)|(ttf)|(gif))(\?v=\d+\.\d+\.\d+)?$/,
         use: "file?name=/[hash].[ext]"
+      },
+      {test: /\.svg$/,
+       use: 'svg-inline-loader'
       },
       {test: /\.json$/, use: "json-loader"},
       {
