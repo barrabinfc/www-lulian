@@ -24,6 +24,7 @@ album_embed = '<iframe scrolling="no" frameborder="no" src="https://w.soundcloud
 [colors]
   foreground =  "#333"
   background =  "#000"
+  primary    =  "#ff0964"
 
 # Images
 [[resources]]
