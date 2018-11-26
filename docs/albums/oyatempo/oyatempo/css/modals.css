@@ -1,0 +1,26 @@
+@font-face {
+    font-family: 'klartext_monolight';
+    src: url('klartextmono-light-webfont.woff2') format('woff2'),
+         url('klartextmono-light-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+.janela {background-color: hsla(0, 0%, 0%, 0.6);
+    min-width: 550px; max-width: 800px; display: none;
+    padding: 20px;
+}
+
+.janela > h2:first-child {
+  margin-top: 0;
+}
+
+/* Hide the soundcloud embed */
+#sc-embed {  display: none;  visibility: hidden;}
+
+#fichatecnica > picture:first-child > img {max-width: 100%; height: auto}
+#fichatecnica .parceiros img {width: 96px;}
+
+/* Make iframe/youtube aligned */
+#filme iframe {min-width: 100%;  min-height: 360px;  display: block;  margin: 0 auto;}
+#release img {max-width: 100%;}

@@ -1,0 +1,13 @@
+.menu {width: 140px; margin-top:0; display: block; opacity: 0.90;
+  position: fixed; z-index: 999; padding: 15px 0px;  /*30px;*/
+	color: #fff; text-align: center; transform: translate3d(0,0,0); /* renderlayer hack */}
+.menu li { display: none; margin-bottom: 9px;}
+.menu li.titulo { border-bottom: 0; display: block;
+	text-align: center; text-transform: uppercase; margin-bottom: 18px; }
+.menu li.simbolo {display: block; text-align: center; border: 0; margin-top: 0;}
+.menu li.simbolo img {max-width: 45px}
+.menu a, .cell-menu a {color: white; text-decoration: none; text-transform: uppercase;  }
+.menu a:hover { font-weight: bold; color: #6AEBFF; }
+.menu:hover {opacity: 1; cursor: pointer;}
+.cell-menu li {margin-bottom: 9px;}
+.cell-menu li:last-child {margin-bottom: 0;}

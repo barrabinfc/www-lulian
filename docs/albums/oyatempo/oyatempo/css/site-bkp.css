@@ -1,0 +1,149 @@
+@import "reset.css";
+@import "animations.css";
+@import "modals.css";
+@import "utilities.css";
+@import "player.css";
+@import "menu.css";
+/* GLOBAL SITE*/
+.cellphones-message {display: none}
+.cell-message {text-align: center}
+.cell-message p {font-weight: bold; text-transform: uppercase;}
+#sky-clouds, #crouds, .raios, .raio, .mar, #gradient-zero, #skyline {position: relative;}
+.crab-nebula, .pluto-rising, .cosmica-mulher, .galaxia{ 
+  background-repeat: no-repeat; background-size: contain; position: relative; margin: 0 auto;}
+.crab-nebula {max-width: 1237px; height: 450px;
+  background-image: url(../img/crab-static.png);  top: 15px;  opacity: 0.65; margin-bottom: 10px;}
+.pluto-rising {max-width: 250px; height: 248px; filter: blur(1px); 
+  background-image: url(../img/pluto-rising.png); opacity: 0.85; z-index: 3}
+.cosmos {width: 100%; background-repeat: repeat-y; height: 1000px; z-index: 2;
+  background-image: url(../img/bg-cosmo-small.png); }
+#gradient-zero {position: relative; height: 840px;
+  background-image: url(../img/gradient-big-0.png); z-index: 1;}
+#skyline {height: 408px; opacity: 0.9;
+  background-image: url(../img/sp-skyline.gif); z-index: 4; margin-top: -400px;}
+#sky-clouds {height: 408px; z-index: 2;
+  background-image: url(../img/sky-clouds.png); margin-top: -408px; opacity: 0.6}
+.landlines {height:650px; z-index:4;
+  background-image:url(../img/landlines.png); margin-top: -650px;}
+.gradiente {height: 650px; z-index:1; background-image:url(../img/gradiente.png); }
+.garden {position: relative; margin-top: -800px; margin-bottom: 660px;}
+.luazul {position:absolute; width: 110px; height: 110px; background-size: contain;
+  background-image: url(../img/luazul.gif); z-index: 3; left: 13%; bottom: 120px;}
+.moira {position: absolute; height: 800px; width: 275px; 
+  background-image:url(../img/moira-mira.png);  z-index: 5; right: 23%}
+#crouds {height: 200px; background-image: url(../img/croud-pixel.png);  z-index:7;}
+#nuvens-atras {position: absolute; height: 500px; z-index: 5; background-image: url(../img/nuvens-atras.png); width: 100%}
+.raios {position: relative; height: 500px; overflow: hidden;}
+.raio {height: 1000px; background-repeat: no-repeat; z-index: 6;  top:0; position: absolute}
+#dois {background-image: url(../img/raiodois.gif); width: 422px;}
+#tres {background-image: url(../img/raiotres.gif); width: 481px; right: 10%}
+#quatro {background-image: url(../img/raioquatro.gif); width: 297px; right: 0}
+.mar, .mar-ampl, .mar-ampl-rev, .mar-ampl-rev-blue, .fade2 {position: relative; z-index: 5}
+.mar {height: 497px; background-image: url(../img/mar-reflect-emerald.gif);}
+.mar-ampl {height: 310px; background-image: url(../img/mar-ampl.gif);}
+
+
+/* Smartphones */
+@media screen and (max-width: 598px){
+  .janela {min-width: inherit;}
+  .cell-message {display: block;visibility: visible;opacity: 1;transition: all 0.2s ease-out; z-index: 9999; padding: 20px;}
+}
+
+@media screen and (min-width: 420px){
+}
+
+/* TABLETES */
+@media screen and (min-width: 599px) {
+
+body {height: 9000px;}
+.cell-message {display: none}
+.menu:hover li {display: block}
+.player {bottom: 15px; right: auto; top: auto;}
+/* sprites */
+.cosmos {background-repeat: no-repeat;  background-image: url(../img/bg-cosmo-0.png); }
+.pluto-rising {max-width: 500px; height: 496px;}
+.crab-nebula {margin-bottom: 60px; height: 949px;}
+.cosmica-mulher {max-width: 990px; height: 497px; z-index:2; background-repeat: no-repeat;
+	background-image: url(../img/mulher-cosmica-deitada-ani.gif); margin-top: -40px;}
+.galaxia {max-width: 949px; height: 621px; background-repeat: no-repeat;
+	background-image: url(../img/galaxia-static.png); z-index: 1; margin-top: -475px;}
+
+/* POSICIONAMENTO ABSOLUTO JARDIM DE ESCULTURAS */
+.statua1, .statuagemini, .statua4, .jaw, .broken_torso, .statuaface {position: absolute}
+/* ESCULTURAS */
+.statua1 {width:233px; height:350px; background-image:url(../img/statua-1-233.png); z-index: 5; left: 5%; top: 350px;}
+.statuagemini {width:187px; height:200px; background-image:url(../img/statua-quebrada2-pq.png); z-index: 4; left: 30%; top: 220px;}
+.statua4 {width: 230px; height: 346px; background-image: url(../img/statua4.png); z-index: 4; top: 60px; right: 6%}
+.jaw {width: 93px; height: 90px; background-image: url(../img/jaw.png); z-index: 4; top: 120px; left: 6%;}
+.broken_torso {width: 215px; height: 490px; background-image: url(../img/broken_torso.png); z-index: 5; left: 13%; top: -100px;}
+.statuaface {width: 240px; height: 160px; background-image: url(../img/statua-face-pq.png); z-index: 4; left: 43%; top: 460px;}
+.luazul {width: 220px; height: 220px; left: 43%; bottom: 0px;}
+#um {background-image: url(../img/raioum.gif); width:422px; left: 25%;}
+#quatro {right: 22%}
+#cinco {background-image: url(../img/raiocinco.gif); width: 910px; left: 30%}
+
+.mar-ampl-rev {height: 141px; background-image: url(../img/mar-ampl-rev.gif); opacity: 0.75}
+.mar-ampl-rev-blue {height: 141px; background-image: url(../img/mar-ampl-rev-blue.gif); opacity: 0.6}
+.fade1 {opacity: 0.3} .fade2 {opacity: 0.1}
+
+.algae1 {z-index: 4; position: relative; width: 891px; height: 725px; background-image: url(../img/Paragorgia_arborea.png); top: -600px;}
+
+.deep {position: relative; width: 100%}
+
+.loligovulgaris, .dart, .vaermina-g , .vaermina-r, .moon-jelly, .jelly-mater, .jellyfish, .moon-jello {position: absolute; z-index: 3;}
+#dark, #dark-dots, #dark-j, #dark-dots-2, #greenshroom {position: absolute; width: 100%; background-repeat: repeat-x; left: 0;}
+
+#dark {
+	background-image: url(../img/dark.png); opacity: 0.7;
+	height: 800px; z-index: 2; top: -200px;}
+
+#dark-dots {
+	background-image: url(../img/dark-dots.png); opacity: 0.35;
+	height: 950px; z-index: 1; top: 100px;
+}
+
+#dark-j {
+	background-image: url(../img/dark-j.png); opacity: 0.1;
+	height: 600px; z-index: 1; top:600px;}
+
+#dark-dots-2 {
+	background-image: url(../img/dark-dots-2.png); opacity: 0.15;
+	height: 950px; z-index: 2; top: 100px; top: 400px;
+}
+
+.moon-jelly {width: 200px; height: 192px; background-image: url(../img/moon-jelly.gif); right: 13%; top: 300px; opacity: 0.4}
+.jelly-mater {width: 330px; height: 660px; background-image: url(../img/jelly-mater.gif); left: 23%; top: 400px; opacity: 0.4}
+.jellyfish {width: 332px; height: 257px; background-image: url(../img/jellyfish.png); left: 9%; top: 100px; opacity: 0.4}
+.moon-jello {width: 460px; height: 445px; background-image: url(../img/moon-jello.png); right: 6%; top: 750px; opacity: 0.5}
+
+.underdark {position: relative; width: 100%; top: 1200px;}
+.bigrock, .greenshroom, .venus-w, .space-algae, .mono-um, .mono-dois, .mono-tres,
+	.mono-quatro, .landlines-deep, .paragorgia, .vagveg, #dust-under-1, #dust-under-2, #dust-under-3, #dust-under-4 {position: absolute; }
+
+.landlines-deep {height: 650px; background-image: url(../img/landlines-deep.png); z-index: 2; width: 100%; top: 1680px; background-color: #0F0F1E}
+
+.bigrock {width: 571px; height: 674px; background-image: url(../img/bigrock.png); z-index:4; top: -674px; left: 12%;}
+#greenshroom {background-image: url(../img/greenshroom.gif); z-index: 3; width: 100%; height: 240px; z-index: 1; opacity: 0.7; top: -240px;}
+.venus-w {width: 262px; height: 500px; background-image: url(../img/venus-willendorf.png); z-index: 6; top: -44px;}
+.space-algae {width: 600px; height: 800px; background-image: url(../img/space-algae.png); z-index: 2; top: -1650px;  background-repeat: no-repeat; background-size: contain;}
+.mono-um {width: 200px; height: 620px; background-image: url(../img/mono-ejagham.png); z-index: 4; top: -480px; left: 1%; opacity: 0.9}
+.mono-dois {width: 209px; height: 450px; background-image: url(../img/mono-dois.png); z-index: 5; top: -350px; left: 40%; opacity: 0.9}
+.mono-tres {width: 150px; height: 517px; background-image: url(../img/mono-tres.png); z-index: 4; top: -517px; right: 20%; opacity: 0.9}
+.mono-quatro {width: 160px; height: 501px; background-image: url(../img/mono-quatro.png); z-index: 5; top: -391px; right: 10%;}
+.paragorgia {width: 100%; height: 997px; background-image: url(../img/paragorgia.png); z-index: 2; top: -997px; opacity: 0.35}
+.vagveg {width: 100%; height: 289px; background-image: url(../img/vagveg.png); z-index: 7; opacity: 0.85; top: 361px;}
+#dust-under-1 {width: 100%; height: 800px; background-image: url(../img/stardust-underdark.png); z-index: 6; opacity: 0.25; top: 180px;}
+#dust-under-2 {width: 100%; height: 1200px; background-image: url(../img/stardust-underdark-2.png); z-index: 5; opacity: 0.4; }
+#dust-under-3 {width: 100%; height: 1200px; background-image: url(../img/stardust-underdark-3.png); z-index: 8; opacity: 0.3; top: 1000px;}
+#dust-under-4 {width: 100%; height: 1200px; background-image: url(../img/stardust-underdark-4.png); z-index: 8; opacity: 0.21; top: 1100px;}
+
+
+.venus-w, .space-algae {left: 0; right: 0; margin: 0 auto}
+
+/*}*/
+
+
+/*TELAS GRANDES*/
+@media screen and (min-width: 1024px) {
+	.space-algae {width: 800px;}
+}
