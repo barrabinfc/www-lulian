@@ -3,7 +3,7 @@ draft = false
 Title = "oyá_tempo _ luiza_lian"
 subtitle = ""
 description = "oya_tempo"
-layout = "oyatempo/single.html"
+layout = "oyatempo.html"
 
 # Colors
 [colors]
