@@ -1,0 +1,17 @@
+{{ $currentNode := . }}
+{{ $navModifier := .Scratch.Get "navModifier" }}
+<nav class="menu grid :end {{ $navModifier }}">
+
+  {{ range .Site.Menus.main }}
+    {{ $is  := $currentNode.IsMenuCurrent "main" . }}
+    {{ $has := $currentNode.HasMenuCurrent "main" . }}
+    
+    <a class="menu-header animated
+             {{ if $has }}selected{{end}}"
+        href="{{ .URL }}"
+        id="menu-{{ .Identifier }}">
+        {{ trim .Name " "}}
+      </a>
+  {{ end }}
+
+</nav>

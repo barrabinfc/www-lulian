@@ -1,35 +1,11 @@
-<!--alfa-->
-<!doctype html>
-<html>
-<!--cabeça-->
-<head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="description" content="">
-<meta name="robot" content="index,follow">
-<meta name="author" content="rafaeltrabasso.com">
-<!--mobile-->
-<meta name="HandheldFriendly" content="True">
-<meta name="MobileOptimized" content="320">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<!--favicon-->
-<link rel="apple-touch-icon" href="img/apple-icon-touch.png">
-<link rel="icon" href="favicon.png">
-<!--[if IE]>
-<link rel="shortcut icon" href="favicon.ico">
-<![endif]-->
-<meta name="msapplication-TileColor" content="#f01d4f">
-<meta name="msapplication-TileImage" content="img/win8-tile-icon.png">
-<!--css-->
+{{ define "above_fold" }}
 <link rel="stylesheet" type="text/css" href="css/site-bkp.css" />
 <link href="css/featherlight.css" type="text/css" rel="stylesheet" title="Featherlight Styles" />
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<!-- título -->
-<title>oyá_tempo _ luiza_lian</title>
-</head>
+{{ end }}
 
 <!--corpo-->
-<body>
+{{ define "main" }}
 
 <div class="cellphones-message"><h1>Veja esse site no computador ou ipad</h1></div>
 
@@ -598,6 +574,4 @@ function cellphonemessage(){
 	})
 }
 </script>
-</body>
-<!--omega-->
-</html>
+{{end}}

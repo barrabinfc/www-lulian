@@ -9,9 +9,6 @@ import svgInline from "postcss-inline-svg";
 import BrowserSync from "browser-sync";
 import webpack from "webpack";
 import webpackConfig from "./webpack.conf";
-//import serve from 'webpack-serve';
-
-import path from 'path';
 
 const browserSync = BrowserSync.create();
 const hugoBin = "hugo";
@@ -35,7 +32,7 @@ gulp.task("css", () => (
       ]))
     .pipe(sourcemaps.write("."))
     .pipe(gulp.dest("./docs/css"))
-  //.pipe(browserSync.stream())
+    .pipe(browserSync.stream())
 ));
 
 gulp.task("vendor-js", () => {
@@ -43,9 +40,11 @@ gulp.task("vendor-js", () => {
     .pipe(gulp.dest("./docs/js/vendor"))
 })
 
+  /** 
+   * Copy necessary assets to root
+   */
 gulp.task("copy", () => {
-  /** Copy netlify assets */
-  gulp.src("./_*")
+  gulp.src("./src/static/**/*")
       .pipe(gulp.dest("./docs"))
 })
 
@@ -69,18 +68,6 @@ gulp.task("server", ["hugo", "css", "vendor-js", "js"], () => {
       baseDir: './docs'
     }
   })
-  /*
-  serve({}, {
-    hotClient: false,
-    config: Object.assign({}, webpackConfig),
-    content: path.resolve('./docs')
-  })
-    .then((server) => {
-      server.on('listening', ({ server, options }) => {
-        console.log('happy fun time');
-      });
-    })
-    */
   gulp.watch("./src/js/vendor/*.js", ["vendor-js"]);
   gulp.watch("./src/js/**/*.js", ["js"]);
   gulp.watch("./src/css/**/*.css", ["css"]);

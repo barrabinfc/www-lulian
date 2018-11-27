@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>{{ .Title }}</title>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="{{ plainify .Params.subtitle }}{{ plainify .Description }}">
+
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/favicon.ico">
+
+    {{ $gid := (default "" .Site.Params.uid ) }}
+
+    <meta property="og:title" content="{{ .Title }}"/>
+    <meta property="og:description" content="{{ if .Description }}{{ plainify .Description }}{{ else }}{{if .IsPage}}{{ plainify .Summary }}{{ end }}{{ end }}" />
+    <meta name="gid" content="{{ $gid }}" /> 
+
+    {{ block "above_fold" . }}{{ end }} 
+  </head>  
+  <body>
+    {{ partial "header.html" . }}
+
+    {{ $section := .Section | default "" }}
+    <main id="page-trans-wrapper">
+      <div id="page-container" class="page-container {{ $section }}">
+        {{ block "main" .}}{{ end }}
+      </div>
+    </main>
+    {{ partial "footer" . }}
+
+    {{ block "under_fold" . }} {{ end }}
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ $gid }}"></script>
+    <script defer>
+        // Analytics
+        window.dataLayer = window.dataLayer || []
+        function gtag(){ dataLayer.push(arguments); }
+
+        gtag('js', new Date());
+        gtag('config', "{{ $gid }}" );
+    </script>
+  </body>
+</html>

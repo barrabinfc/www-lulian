@@ -3,7 +3,7 @@ draft = false
 Title = "oyá_tempo _ luiza_lian"
 subtitle = ""
 description = "oya_tempo"
-layout = "oyatempo.html"
+layout = "oyatempo"
 
 # Colors
 [colors]
@@ -15,6 +15,10 @@ layout = "oyatempo.html"
 [[resources]]
   name = "logo"
   src = "images/luiza-logo.svg"
+
+[[resources]]
+  name = "album_cover"
+  src = "images/Album_Cover.jpg"
 
 +++
 

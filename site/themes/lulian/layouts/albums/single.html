@@ -1,18 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>{{ .Title }}</title>
-    <meta name="Description" content="{{ if .Description }}{{ .Description }}{{ else }}{{if .IsPage}}{{ .Summary }}{{ end }}{{ end }}">
-
-<!--
-    {{ partial "password" (dict "password" "azul") }}
--->
-
-    {{ $gid := (default "" .Site.Params.uid ) }}
-    
+{{ define "above_fold" }}
     {{ $logo := .Page.Resources.GetMatch "logo" }}
     {{ $cover := .Page.Resources.GetMatch "album_cover" }}
 
@@ -25,11 +11,8 @@
     {{ $bg := (default "#000" .Params.colors.background ) }}
     {{ $primary := (default "#fff" .Params.colors.primary ) }}
 
-    <link rel="shortcut icon" href="/images/favicon.ico">
-    <link rel="apple-touch-icon" href="/images/favicon.ico">
-
     <meta property="og:title" content="{{ .Title }}"/>
-    <meta property="og:description" content="{{ if .Description }}{{ .Description }}{{ else }}{{if .IsPage}}{{ .Summary }}{{ end }}{{ end }}" />
+    <meta property="og:description" content="{{ if .Description }}{{ plainify .Description }}{{ else }}{{if .IsPage}}{{ plainify .Summary }}{{ end }}{{ end }}" />
     <meta property="og:type" content="song">
     <meta property="og:image" content="{{ $cover.Permalink }}"/>
     <meta property="og:url" content="{{ .Permalink }}"/>
@@ -42,7 +25,6 @@
     <meta name="twitter:image:src" content="{{ $cover.Permalink }}"/>
     <meta name="twitter:domain" content="https://www.luizalian.com.br"/> 
 
-    <meta name="gid" content="{{ $gid }}" /> 
     <meta name="poster_video" content="{{ $poster_video }}" /> 
 
     <link rel="stylesheet" href="/css/main.css" media="all">
@@ -73,29 +55,30 @@
             display: var(--info_display);
         }
     </style>
-</head>
-<body>
+{{ end }}
+
+{{ define "header" }}
     {{ partial "header.html" . }}
+{{ end }}
+
+{{ define "main" }} 
     <div class="theater">
         {{ partial "videoclip.html" . }}
         {{ partial "album_info.html" . }}
     </div>
-    {{ partial "footer" . }}
+{{ end }}
 
+{{ define "footer" }}
+    {{ partial "footer" . }}
+{{ end }}
+
+{{ define "under_fold" }}
     <script src="https://www.youtube.com/iframe_api" defer></script>
-    <script async src="https://www.googletagmanager.com/gtag/js?id={{ $gid }}"></script>
     <script type="text/javascript" src="/js/vendor/vanilla-tilt.babel.min.js" async></script>
     <script src="/js/azul.js" defer></script>
-    <script defer>
-        // Analytics
-        window.dataLayer = window.dataLayer || []
-        function gtag(){ dataLayer.push(arguments); }
-
-        gtag('js', new Date());
-        gtag('config', "{{ $gid }}" );
-
+    <script>
         console.log(`%c 
- 🌊 Built by vical.me
+🌊 Built by vical.me
 `, "font-size: 1.5em;");
         document.addEventListener('DOMContentLoaded', () => {
             window.azul = new window.Azul(document);
@@ -106,5 +89,4 @@
             window.azul.loadClip( el.getAttribute('content') )
         }
     </script>
-</body>
-</html>
+{{ end }}
