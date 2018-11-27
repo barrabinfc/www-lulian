@@ -44,6 +44,7 @@ gulp.task("vendor-js", () => {
 })
 
 gulp.task("copy", () => {
+  /** Copy netlify assets */
   gulp.src("./_*")
       .pipe(gulp.dest("./docs"))
 })
