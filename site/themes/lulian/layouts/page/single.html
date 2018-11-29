@@ -1,7 +1,6 @@
 {{ define "above_fold" }}
-    {{ $fg := (default "#fff" .Params.colors.foreground ) }}
-    {{ $bg := (default "#000" .Params.colors.background ) }}
-    {{ $primary := (default "#fff" .Params.colors.primary ) }}
+    {{ $primary := (default "#ff0964" .Params.colors.primary ) }}
+    {{ $footer := (default "#0c0c0c" .Params.colors.footer_color ) }}
 
     <meta property="og:title" content="{{ .Title }}"/>
     <meta property="og:description" content="{{ if .Description }}{{ plainify .Description }}{{ else }}{{if .IsPage}}{{ plainify .Summary }}{{ end }}{{ end }}" />
@@ -16,9 +15,10 @@
     <link rel="stylesheet" href="/css/main.css" media="all">
     <style>
         :root {
-            --fg: {{ $fg | safeHTML }};
-            --bg: {{ $bg | safeHTML }};
             --color-primary: {{ $primary | safeHTML }};
+            --footer-color: {{ $footer | safeHTML }};
+
+            --viewport_height: 100vh;
         }
     </style>
 {{ end }}
@@ -28,7 +28,7 @@
 {{ end }}
 
 {{ define "main" }} 
-    <div class="contact">
+    <div class="page-generic">
         {{ .Content }}
     </div>
 {{ end }}

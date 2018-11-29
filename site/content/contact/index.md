@@ -5,9 +5,7 @@ draft = false
 
 # Colors
 [colors]
-  foreground =  "#fff"
-  background =  "#000"
-
+  footer_color = "#0c0c0c"
 +++
 
 Para mais informações, <a href="">gmail</a>

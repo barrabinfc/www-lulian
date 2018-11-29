@@ -6,20 +6,23 @@
  *  + Icons
  *  + Document
  *  + header
- *  + Theather
+ *  + Footer
+ *  + Album Theather
         ----- (page1)
         + screen (videoclip)
-        + #poster
+        + #poster (mask)
         ----- (page2)
         + info
-    + Footer
+    + .Page
  */
 * { box-sizing: border-box; }
 :root {
-    --fg: "#ffffff";
-    --bg: "#000000";
-    --color-primary: "#ff0964";
+    --fg: #0c0c0c;
+    --bg: #efefef;
+    --color-primary: #ff0964;
+    --footer-color: transparent;
 
+    --header-height: 72px;
     --viewport_height: 200vh;
     --info_display: "grid";
 
@@ -33,6 +36,9 @@
     --blue-light: #305db3;
     --blue-two: #0014ffd9;
 
+    --pad: 16px;
+    --pad-big: 32px;
+
     --blur-start: 30px;
     --blur-end: 0px;
     --z-start: 150px;
@@ -44,7 +50,9 @@
 
     --logo-time: 150ms;
 
+    /** Typography */
     --font: Univers;
+    --typoscale: calc(5/4); /* Major third */
 }
 .hidden { opacity: 0 !important; pointer-events: none; }
 .visible { opacity: 1 !important; pointer-events: all; }
@@ -129,16 +137,65 @@ body {
 }
 
 /**
- * Header navigation
+ * Header/Nav
  */
-.nav-header {
+#menu-toggle { display: none; }      
+nav.menu {
     position: absolute;
-    width: 100%;
-    text-align: center;
-    color: var(--cashmere);
-    z-index: 100;
+    top: 0;
+    z-index: 1001;
+    flex: 0.5;
+    height: var(--header-height);
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    right: calc( 2 * var(--pad-big)) /* Menu */;
+    /* Menu */
+    & .menu-header {
+        position: relative;
+        background-color: transparent;
+
+        vertical-align: baseline;
+        z-index: 10;
+
+        font-family: inherit;
+        font-size: calc( 1.00rem * var(--typoscale));
+        font-weight: normal;
+        text-align: center;
+        text-transform: uppercase;
+        color: inherit;
+
+        padding: 1rem;
+        margin-left: var(--pad-big);
+
+        /** Avoid last link to have a right margin, 
+            making it container alignment easier */
+        &:last-child { margin-right: 0; }
+        
+        border: 0px solid transparent;
+    }
 }
-.nav-header .title {
+
+header#menu {
+    width: 100%;
+    height: var(--header-height);
+    font-family: 'FuturaStd', sans-serif;
+    /*font-family: var(--hero-font);*/
+    color: var(--fg );
+    margin: 0;
+    padding: 0 calc( 2 * var(--pad-big));
+    /*border-bottom: 1px solid var(--black);*/
+    position: absolute;
+    top: 0px;
+    z-index: 1000;
+    background-color: var(--bg);
+    box-shadow: 0 -10px 30px rgba(0,0,0,.4);
+    -webkit-perspective: 800px;
+    perspective: 800px;
+    transition-duration: 0.65s /* Shrink menu*/;
+}
+
+header#menu .title {
     display: block;
     font-size: 36px;
     text-transform: uppercase;
@@ -154,10 +211,68 @@ body {
     margin: 0.67em auto;
 }
 
+
+#footer {
+    position: absolute;
+    width: 100%;
+    height: 48px;
+    bottom: 0;
+    background-color: var(--footer-color);
+    border-top: 1px solid rgba(255,255,255,0.1);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px 0 24px;
+
+    animation-iteration-count: 1;
+    animation-fill-mode: both;
+    animation-play-state: running;
+    animation-duration: var(--intro-time);
+
+    /*animation-timing-function: cubic-bezier(0.55, 0.06, 0.68, 0.19);*/
+    animation-timing-function: cubic-bezier(0.55, 0.06, 0.59, 0.83);
+}
+
 /**
- * Theather (container)
+ * Footer
  */
-.theater {
+#footer.collapsed {
+    bottom: -100%;
+    transform: translate3d(0,0,0);
+    animation-play-state: paused;
+}
+
+#footer .social_links {
+    display: flex;
+    width: 15%;
+    align-items: center;
+    justify-content: space-between;            
+}
+
+#footer .social-icon {
+    width: 24px;
+    height: 24px;
+    background-size: 24px 24px;
+}
+
+
+/**
+ * Generic Page
+ */
+.page-generic {
+    z-index: 0;
+    margin: var(--header-height) auto;
+    padding: var(--pad-big);
+    width: 80%;
+}
+
+
+/**
+ * Album Theather (album container)
+ * @START_ALBUM
+ */
+.album-theater {
     z-index: 0;
     margin: 0 auto;
     height: var(--viewport_height);
@@ -170,7 +285,7 @@ body {
     perspective-origin: 50% 25%;
 }
 
-#poster {
+.album-theater #poster {
     width: 50%;
     height: 25%;
     overflow: hidden;
@@ -198,7 +313,7 @@ body {
     transform: translate3d(0,0,0) scale(1.005);
 }
 */
-#poster video {
+.album-theater #poster video {
     pointer-events: none; 
     width: 100%; 
     height: 100%;
@@ -208,7 +323,7 @@ body {
 }
 
 
-#poster .logo {
+.album-theater #poster .logo {
     display: block;
     color: transparent;
     width: 100%;
@@ -223,7 +338,7 @@ body {
     transform: translate3d(0,0,0) scale(1.01);
     text-indent: -9999px;            
 }
-#poster .logo.interactive::before {
+.album-theater #poster .logo.interactive::before {
     content: ' ';
     opacity: 0;
     position: absolute;
@@ -235,14 +350,14 @@ body {
     opacity: 0;
     transition: opacity var(--logo-time) ease-in-out;
 }
-#poster a.logo:hover::before { opacity: 0.9; }
+.album-theater #poster a.logo:hover::before { opacity: 0.9; }
 
 
 /** 
  * Background of theather,
  * generally a video clip 
  */
-#screen {
+ .album-theater #screen {
     position: absolute;
     width: 100%;
     height: 50%;
@@ -253,7 +368,7 @@ body {
     transform: translate3d(0,0,0);
     will-change: opacity;            
 }
-#screen > #videoclip {
+.album-theater #screen > #videoclip {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -262,7 +377,7 @@ body {
 /**
  * Info screens (second page of album)
  */
-#info {
+.album-theater #info {
     width: 100%;
     height: 50%;
     position: relative;
@@ -299,7 +414,7 @@ body {
     display: var(--info_display);
 }
 
-#info > #left {
+.album-theater #info > #left {
     grid-area: aside;
     color: var(--cashmere);
     width: 80%;
@@ -307,18 +422,18 @@ body {
     /*background-color: #00ff00;*/
 }
 
-#left .cover {
+.album-theater #left .cover {
     display: flex;
     margin: 0 auto;
 }
-.cover > img {
+.album-theater .cover > img {
     max-width: 100%;
     width: 100%;
     box-shadow: 8px 12px 40px rgba(0, 0, 0, 0.3);
     height: 100%;
 }
 
-.players_links {
+.album-theater  .players_links {
     display: flex;
     justify-content: space-around;
     width: 50%;
@@ -326,12 +441,12 @@ body {
     margin-top: 4em;
     transform: scale(1.5);            
 }
-.players_links .player-icon {
+.album-theater  .players_links .player-icon {
     background-color: var( --color-primary );
 }
 
 
-.buy_link {
+.album-theater  .buy_link {
     padding: 8px;
     font-size: 1.25em;
     font-size: 1.25em;
@@ -344,17 +459,20 @@ body {
     background-color: var(--blue-white);
     color: var(--cashmere);            
 }
-.buy_link a { color: inherit; text-decoration: none; }
+.album-theater  .buy_link a { color: inherit; text-decoration: none; }
 
-#info > #right {
+/**
+ * Right info area
+ */
+.album-theater  #info > #right {
     grid-area: main;
     /*background-color: #0000ff;*/
 }
 
-#right .title {
+.album-theater #right .title {
 }
 
-#right .title > h1 { 
+.album-theater  #right .title > h1 { 
     margin: 0; 
     text-transform: uppercase; 
     font-size: 2em;
@@ -365,9 +483,9 @@ body {
     line-height: 36px;
     transform: translate3d(0,-4px,0);
 }
-#right .title > h3 { margin: 0; font-weight: normal; }
+.album-theater  #right .title > h3 { margin: 0; font-weight: normal; }
 
-#right .content {
+.album-theater  #right .content {
     width: 100%;
     height: 75%;
     display: flex;
@@ -383,9 +501,9 @@ body {
 
     counter-reset: song_number; 
 }
-#right .content > iframe { height: 100%; }
+.album-theater  #right .content > iframe { height: 100%; }
 
-#right .content .ficha_tecnica {
+.album-theater  #right .content .ficha_tecnica {
     padding: 8px;
     display: flex;
     flex-direction: column;
@@ -394,19 +512,19 @@ body {
     font-size: 1.0rem;
     height: 100%;            
 }
-.ficha_tecnica > div {
+.album-theater  .ficha_tecnica > div {
     margin: 0;
     display: flex;
     text-align: left;
 }
-.ficha_tecnica > div > label {
+.album-theater  .ficha_tecnica > div > label {
     max-width: 40%;
     width: 40%;
     text-overflow: ellipsis;
     margin: 0;
     font-weight: bold;
 }
-.ficha_tecnica > div > p {
+.album-theater  .ficha_tecnica > div > p {
     margin: 0;
     width: 60%;
 }
@@ -414,7 +532,8 @@ body {
 
 /**
  * Song details
- */
+ * DEPRECATED
+
 .song-item {
     position: relative;
     margin-left: 32px;            
@@ -448,9 +567,6 @@ body {
     text-align: center;
 }
 
-/**
- * Playing song style
- */
 .song-item.is-playing::before {
     content: ' ';
     background-repeat: no-repeat;
@@ -463,46 +579,8 @@ body {
 .song-item.is-playing > .song-name {
     margin-left: calc( 10% - 16px );
 }
+*/
 
-#footer {
-    position: absolute;
-    width: 100%;
-    height: 48px;
-    bottom: 0;
-    border-top: 1px solid rgba(255,255,255,0.1);
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 24px 0 24px;
-
-    animation-iteration-count: 1;
-    animation-fill-mode: both;
-    animation-play-state: running;
-    animation-duration: var(--intro-time);
-
-    /*animation-timing-function: cubic-bezier(0.55, 0.06, 0.68, 0.19);*/
-    animation-timing-function: cubic-bezier(0.55, 0.06, 0.59, 0.83);
-}
-
-#footer.collapsed {
-    bottom: -100%;
-    transform: translate3d(0,0,0);
-    animation-play-state: paused;
-}
-
-#footer .social_links {
-    display: flex;
-    width: 15%;
-    align-items: center;
-    justify-content: space-between;            
-}
-
-#footer .social-icon {
-    width: 24px;
-    height: 24px;
-    background-size: 24px 24px;
-}
 
 /**
  * Cellphones portrait
