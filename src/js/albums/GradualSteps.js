@@ -8,6 +8,18 @@ const success = () => {
 }
 
 export default class GradualSteps {
+    /**
+     * Usage:
+     * let stages = new GradualSteps('BLANK')
+     * stages.addStep('STEP_TWO', enter2Fn, exit2Fn )
+     * stages.addStep('STEP_THREE, enter2Fn, exit2Fn )
+     * 
+     * stages.to(STEP_TWO).then( () => {
+     *  stages.to(STEP_THREE).then( () => {
+     *      console.log("ALL STEPS COMPLETE")
+     *  });
+     * })
+     */
     constructor( defaultStep ) {
         this.step     = defaultStep
         this.steps    = [];

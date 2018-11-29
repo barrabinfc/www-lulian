@@ -1,6 +1,6 @@
 +++
 draft = false
-Title = "oyá_tempo _ luiza_lian"
+title = "oyá_tempo _ luiza_lian"
 subtitle = ""
 description = "oya_tempo"
 layout = "oyatempo"

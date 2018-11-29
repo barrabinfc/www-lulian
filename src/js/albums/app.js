@@ -2,9 +2,9 @@
 
 import ClipPlayer from './ClipPlayer';
 import GradualSteps from './GradualSteps';
-import { CSSVariables , listen , Cronometer, spy  } from './utils';
+import { CSSVariables , listen , Cronometer, spy  } from '../utils/utils';
 
-const AzulStages = {
+const AlbumStages = {
     'BLANK': 'BLANK',
     'INTRO': 'INTRO',
     'CLIP': 'CLIP',
@@ -14,8 +14,16 @@ const AzulStages = {
 let cronometer = new Cronometer();
 cronometer.tap('SCRIPT_PARSING');
 
-/* Azul */
-class Azul {
+const domain = (location.origin.replace(/http(s):\/\//, ''))
+
+/* Album */
+class Album {
+    /**
+     * Azul album page.
+     * Has tree stages 
+     *  (INTRO->CLIP)
+     *  (CREDITS)
+     */
     constructor(document = window.document) {
         this.ctx = document;
         this.$vars = CSSVariables(this.ctx.body, getComputedStyle(this.ctx.documentElement));
@@ -31,7 +39,7 @@ class Azul {
         }
         this.listeners = {};
 
-        this.stages = new GradualSteps(AzulStages.BLANK);
+        this.stages = new GradualSteps(AlbumStages.BLANK);
         
         this.init();
     }
@@ -66,7 +74,7 @@ class Azul {
             throw new Error("Invalid youtube video...", videoURL)
         }
 
-        this.player = new ClipPlayer(this.dom.clip, youtubeID);
+        this.player = new ClipPlayer(this.dom.clip, youtubeID, domain);
         this.player.play  = spy( [this.player.play, this.player],   cronometer.tap.bind(cronometer,'PLAYER_PLAY'));
         this.player.pause = spy( [this.player.pause, this.player],  cronometer.tap.bind(cronometer,'PLAYER_PAUSE'));
         this.player.ready = (ev) => {
@@ -82,14 +90,14 @@ class Azul {
     }
 
     setupStepTransitions() {
-        this.stages.addStep(AzulStages.INTRO)
-            .enter( this[AzulStages.INTRO + ':enter'].bind(this)  )
-            .exit( this[AzulStages.INTRO + ':exit'].bind(this)  )
+        this.stages.addStep(AlbumStages.INTRO)
+            .enter( this[AlbumStages.INTRO + ':enter'].bind(this)  )
+            .exit( this[AlbumStages.INTRO + ':exit'].bind(this)  )
 
         // When entering Clip
-        this.stages.addStep(AzulStages.CLIP)
-            .enter( this[AzulStages.CLIP + ':enter'].bind(this) )
-            .exit( this[AzulStages.CLIP + ':exit'].bind(this) )
+        this.stages.addStep(AlbumStages.CLIP)
+            .enter( this[AlbumStages.CLIP + ':enter'].bind(this) )
+            .exit( this[AlbumStages.CLIP + ':exit'].bind(this) )
     }
 
     /******************
@@ -100,7 +108,7 @@ class Azul {
      * Transition INTRO:enter
      * FocusIn & set logo interactive after some delay, add click listener
      */
-    [AzulStages.INTRO + ":enter"](curr,next) {
+    [AlbumStages.INTRO + ":enter"](curr,next) {
         return new Promise((resolve, reject) => {
             this.dom.poster.style['animation-play-state'] = 'running';
             //document.body.style['overflow-y'] = 'hidden';
@@ -108,7 +116,7 @@ class Azul {
                 this.dom.logo.classList.add('interactive');
                 this.listeners['logo'].when('click').do(this.poster_click.bind(this));
 
-                cronometer.tap('CHANGE_STAGE', AzulStages.INTRO);
+                cronometer.tap('CHANGE_STAGE', AlbumStages.INTRO);
 
                 resolve();
             }, this.$vars['--intro-time']);
@@ -118,7 +126,7 @@ class Azul {
      * Transition INTRO:exit
      * apply focusOut animation, clean click listener
      */
-    [AzulStages.INTRO + ":exit"](curr,next) {
+    [AlbumStages.INTRO + ":exit"](curr,next) {
         return new Promise( (resolve, reject) => {
             this.dom.footer.style['animation-name'] = 'slideBottom';
             this.dom.poster.style['animation-name'] = 'focusOut';
@@ -131,7 +139,7 @@ class Azul {
     /**
      * Clip
      */
-    [AzulStages.CLIP + ":enter"](curr,next) {
+    [AlbumStages.CLIP + ":enter"](curr,next) {
         return new Promise((resolve, reject) => {
             document.body.style['overflow-y'] = 'auto';
 
@@ -141,14 +149,14 @@ class Azul {
             this.dom.screen.classList.add('visible');
 
             this.listeners['screen'].when('click').do(this.screen_click.bind(this));
-            cronometer.tap('CHANGE_STAGE', AzulStages.CLIP);
+            cronometer.tap('CHANGE_STAGE', AlbumStages.CLIP);
 
             this.player.play();
             resolve();
         })
     }
 
-    [AzulStages.CLIP + ":exit"](curr,next) {
+    [AlbumStages.CLIP + ":exit"](curr,next) {
         return new Promise( (resolve, reject) => {
             this.player.pause();
         })
@@ -173,13 +181,13 @@ class Azul {
 
     poster_loaded( ev ) {
         cronometer.tap('POSTER_LOADED');
-        this.stages.to(AzulStages.INTRO).then(() => { console.info("*** BG PRELOADED ***") })
+        this.stages.to(AlbumStages.INTRO).then(() => { console.info("*** BG PRELOADED ***") })
     }
 
     poster_click( ev ) { 
         ev.preventDefault();
         ev.stopPropagation();
-        this.stages.to(AzulStages.CLIP)
+        this.stages.to(AlbumStages.CLIP)
     }
 
     screen_click( ev ) { 
@@ -188,43 +196,9 @@ class Azul {
 }
 
 
-/* Intro animation 
-function intro_setReady(){ logo.classList.add('ready'); }
-function intro(){
-    poster.style['animation-play-state'] = 'running';
-    setTimeout( intro_setReady, getCSSVar('--intro-time'));
-}
-
-/* Out Animation 
-function clip_setReady(){  
-    screen.classList.remove('hidden')
-    screen.classList.add('visible'); 
-    player.play();
-}
-function intro_finish(){
-    poster.style['animation-name'] = 'focusOut';
-}
-
-logo.addEventListener('pointerup', (ev) => {
-    ev.preventDefault();
-
-    requestAnimationFrame( intro_finish );
-    setTimeout( clip_setReady, getCSSVar('--intro-time'));
-
-    return false;
-})
-
-document.addEventListener('posterPreloaded', () => {
-    setTimeout( intro, getCSSVar('--intro-delay'));
-});
-
-*/
-
 module.exports = {
-    CSSVariables,
-    Azul,
-    AzulStages,
-    cronometer
+    Album,
+    AlbumStages
 };
 
-export default Azul;
+export default Album;

@@ -1,6 +1,6 @@
 +++
 draft = false
-Title = "Luiza Lian"
+title = "Luiza Lian"
 subtitle = ""
 description = "ALBUM DE ESTRÉIA LUIZA LIAN"
 

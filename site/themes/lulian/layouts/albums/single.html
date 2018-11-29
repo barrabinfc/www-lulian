@@ -75,18 +75,18 @@
 {{ define "under_fold" }}
     <script src="https://www.youtube.com/iframe_api" defer></script>
     <script type="text/javascript" src="/js/vendor/vanilla-tilt.babel.min.js" async></script>
-    <script src="/js/azul.js" defer></script>
+    <script src="/js/album.js" defer></script>
     <script>
         console.log(`%c 
 🌊 Built by vical.me
 `, "font-size: 1.5em;");
         document.addEventListener('DOMContentLoaded', () => {
-            window.azul = new window.Azul(document);
+            window.album = new window.Album(document);
             window.cronometer.hook = gtag;
         });
         function onYouTubeIframeAPIReady( ) {
             let el = document.querySelector('meta[property="og:video"]')
-            window.azul.loadClip( el.getAttribute('content') )
+            window.album.loadClip( el.getAttribute('content') )
         }
     </script>
 {{ end }}

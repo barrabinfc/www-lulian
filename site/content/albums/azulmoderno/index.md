@@ -1,6 +1,7 @@
 +++
 draft = false
-Title = "AZUL MODERNO"
+type = "albums"
+title = "AZUL MODERNO"
 subtitle = "Entre as estrelas em volta de Andrômeda"
 description = "Clipe de Azul Moderno, música que da título ao álbum \"Azul Moderno\" de Luiza Lian."
 

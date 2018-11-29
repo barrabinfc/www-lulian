@@ -7,6 +7,8 @@
     "hugo": "gulp hugo",
     "build": "gulp build",
     "build-preview": "gulp build-preview",
+    "js": "gulp js",
+    "css": "gulp css",
     "start": "gulp server",
     "lint": "eslint src"
   },

@@ -1,8 +1,8 @@
 /**
- * Play listeners
+ * Youtube Player with events
  */
 export default class ClipPlayer {
-    constructor( clipElement, youtubeID ){
+    constructor( clipElement, youtubeID , origin='luizalizan.com.br'){
         this.playing = false;
         this.clip  = clipElement;
         this.player = new YT.Player(clipElement, {
@@ -11,7 +11,7 @@ export default class ClipPlayer {
                 'onReady': this.ready,
             },
             playerVars: {
-                origin: 'luizalian.com.br',
+                origin: origin,
                 controls: 2,
                 rel: 0,
                 showinfo: 0,

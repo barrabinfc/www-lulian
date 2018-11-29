@@ -157,6 +157,9 @@ export function parseQS(querystring) {
 }
 
 
+/**
+ * Get value from meta variables in page
+ */
 export function getMetaContent( metaName ) {
     let el = document.querySelector(`meta[name="${metaName}"]`)
     if(el) return el.getAttribute('content')

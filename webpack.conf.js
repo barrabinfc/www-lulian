@@ -33,7 +33,8 @@ export default {
 
   context: path.join(__dirname, "src"),
   entry: {
-    azul: ['./js/labs/azul/app']
+    album: ['./js/albums/app'],
+    utils: ['./js/utils/utils']
   },
   output: {
     path: path.join(__dirname, "docs/js"),
