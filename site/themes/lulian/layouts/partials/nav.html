@@ -10,7 +10,7 @@
              {{ if $has }}selected{{end}}"
         href="{{ .URL }}"
         id="menu-{{ .Identifier }}">
-        {{ trim .Name " "}}
+        {{ .Title }}
       </a>
   {{ end }}
 

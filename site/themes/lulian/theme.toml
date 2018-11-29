@@ -3,19 +3,13 @@
 
 name = "Lulian"
 license = "MIT"
-licenselink = "https://github.com/yourname/yourtheme/blob/master/LICENSE.md"
+licenselink = "https://bitbucket.org/barrabinfc/luizalian"
 description = ""
-homepage = "http://example.com/"
+homepage = "http://luizalian.com.br/"
 tags = []
 features = []
 min_version = "0.38"
 
 [author]
-  name = ""
-  homepage = ""
-
-# If porting an existing theme
-[original]
-  name = ""
-  homepage = ""
-  repo = ""
+  name = "Vitor Calejuri"
+  homepage = "vical;me"

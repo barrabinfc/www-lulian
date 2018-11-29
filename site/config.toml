@@ -13,8 +13,20 @@ SectionPagesMenu="main"
 footnoteReturnLinkContents = "↩"
 pygmentsCodeFences = true
 
-[imaging]  
-  quality = 85
+[menu]
+  [[menu.main]]
+    identifier = "albums"
+    name = "Albums section"
+    title = "Albums"
+    url = "/albums/"
+    weight = 0
+  [[menu.main]]
+    identifier = "contact"
+    name = "Contact"
+    title = "Contact"
+    url = "/contact/"
+    weight = 100
+ 
 
 [params]
   selo = "https://www.facebook.com/selorisco"
@@ -27,3 +39,6 @@ pygmentsCodeFences = true
   
   [params.analytics]
     uid = "UA-960953172"
+
+[imaging]  
+  quality = 85

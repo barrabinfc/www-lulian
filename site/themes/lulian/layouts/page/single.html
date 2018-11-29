@@ -1,0 +1,38 @@
+{{ define "above_fold" }}
+    {{ $fg := (default "#fff" .Params.colors.foreground ) }}
+    {{ $bg := (default "#000" .Params.colors.background ) }}
+    {{ $primary := (default "#fff" .Params.colors.primary ) }}
+
+    <meta property="og:title" content="{{ .Title }}"/>
+    <meta property="og:description" content="{{ if .Description }}{{ plainify .Description }}{{ else }}{{if .IsPage}}{{ plainify .Summary }}{{ end }}{{ end }}" />
+    <meta property="og:url" content="{{ .Permalink }}"/>
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="{{ .Permalink }}"/>
+    <meta name="twitter:title" content="{{ .Title }}">
+    <meta name="twitter:description" content="{{ if .Description }}{{ .Description }}{{ else }}{{if .IsPage}}{{ .Summary }}{{ end }}{{ end }}"/>
+    <meta name="twitter:domain" content="https://www.luizalian.com.br"/> 
+
+    <link rel="stylesheet" href="/css/main.css" media="all">
+    <style>
+        :root {
+            --fg: {{ $fg | safeHTML }};
+            --bg: {{ $bg | safeHTML }};
+            --color-primary: {{ $primary | safeHTML }};
+        }
+    </style>
+{{ end }}
+
+{{ define "header" }}
+    {{ partial "header.html" . }}
+{{ end }}
+
+{{ define "main" }} 
+    <div class="contact">
+        {{ .Content }}
+    </div>
+{{ end }}
+
+{{ define "footer" }}
+    {{ partial "footer" . }}
+{{ end }}
