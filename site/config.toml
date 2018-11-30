@@ -19,13 +19,13 @@ pygmentsCodeFences = true
     name = "Albums section"
     title = "Albums"
     url = "/albums/"
-    weight = 0
+    weight = 100
   [[menu.main]]
     identifier = "contact"
     name = "Contact"
     title = "Contact"
     url = "/contact/"
-    weight = 100
+    weight = 0
  
 
 [params]

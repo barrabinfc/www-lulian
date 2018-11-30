@@ -1,3 +1,9 @@
+import '../vendor/pep.js'
+
+export function isMobile(){
+    return Math.min(window.screen.width, window.screen.height) < 768
+}
+
 /**
  * Get CSS Variable. ComputedStyles is necessary.
  *  
@@ -157,12 +163,16 @@ export function parseQS(querystring) {
 }
 
 
-/**
- * Get value from meta variables in page
- */
-export function getMetaContent( metaName ) {
-    let el = document.querySelector(`meta[name="${metaName}"]`)
-    if(el) return el.getAttribute('content')
-    else return undefined
-}
 
+
+module.exports = {
+    parseQS,
+    Cronometer,
+    spy,
+    listen,
+    CSSVariables,
+    getCSSVar,
+    isMobile
+};
+
+export default Cronometer;

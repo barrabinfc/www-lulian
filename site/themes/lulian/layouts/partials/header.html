@@ -1,9 +1,10 @@
 {{ $menuModifier := .Params.menuModifier | default "" }}
 <input type="checkbox" id="menu-toggle">
-{{ partial "nav" . }}
-<header class="header {{ $menuModifier }}" id="menu">
+<header class="header {{ $menuModifier }}">
   <div class="wrapper">
+    {{ block "header" .}}<div class="logo-container"><a href="/" class="title">Luiza Lian</a></div>{{ end }}
     <label for="menu-toggle" class="label-toggle"></label>
-    {{ block "header" .}}{{ end }}
   </div>
+  {{ partial "nav" . }}
+  <div class="shadow"></div>
 </header>

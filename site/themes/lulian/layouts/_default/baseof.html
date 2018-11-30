@@ -17,6 +17,7 @@
     <meta property="og:description" content="{{ if .Description }}{{ plainify .Description }}{{ else }}{{if .IsPage}}{{ plainify .Summary }}{{ end }}{{ end }}" />
     <meta name="gid" content="{{ $gid }}" /> 
 
+    <script src="/js/utils.js"></script>
     {{ block "above_fold" . }}{{ end }} 
   </head>  
   <body>
@@ -28,12 +29,16 @@
         {{ block "main" .}}{{ end }}
       </div>
     </main>
-    {{ partial "footer" . }}
+    {{ partial "footer" . }} 
 
-    {{ block "under_fold" . }} {{ end }}
     <script async src="https://www.googletagmanager.com/gtag/js?id={{ $gid }}"></script>
-    <script async src="/js/utils.js"></script>
-    <script defer>
+    <script>
+        /** Setup Globals */
+        window.cronometer = new window.Cronometer();
+        window.domain = (location.origin.replace(/http(s):\/\//, ''));
+
+        cronometer.tap('DOM_CONTENT_LOADED');
+        
         // Analytics
         window.dataLayer = window.dataLayer || []
         function gtag(){ dataLayer.push(arguments); }
@@ -41,5 +46,6 @@
         gtag('js', new Date());
         gtag('config', "{{ $gid }}" );
     </script>
+    {{ block "under_fold" . }} {{ end }}
   </body>
 </html>

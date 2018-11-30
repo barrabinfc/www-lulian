@@ -1,6 +1,6 @@
 {{ $currentNode := . }}
 {{ $navModifier := .Scratch.Get "navModifier" }}
-<nav class="menu grid :end {{ $navModifier }}">
+<nav class="menu {{ $navModifier }}">
 
   {{ range .Site.Menus.main }}
     {{ $is  := $currentNode.IsMenuCurrent "main" . }}

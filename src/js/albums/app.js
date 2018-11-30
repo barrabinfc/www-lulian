@@ -1,20 +1,23 @@
-"use strict";
-
 import ClipPlayer from './ClipPlayer';
 import GradualSteps from './GradualSteps';
-import { CSSVariables , listen , Cronometer, spy  } from '../utils/utils';
+import { FoldableHeader, HEADER_STATES} from './HeaderFoldable';
 
+/**
+* Globals
+*/
+const cronometer = window.cronometer;
+const domain = window.domain;
+const spy = window.spy
+const listen = window.listen
+console.log("GLobals: ", cronometer, domain, spy, listen);
+
+/** Locals */
 const AlbumStages = {
     'BLANK': 'BLANK',
     'INTRO': 'INTRO',
     'CLIP': 'CLIP',
     'CREDITS': 'CREDITS'
 }
-
-let cronometer = new Cronometer();
-cronometer.tap('SCRIPT_PARSING');
-
-const domain = (location.origin.replace(/http(s):\/\//, ''))
 
 /* Album */
 class Album {
@@ -25,21 +28,29 @@ class Album {
      *  (CREDITS)
      */
     constructor(document = window.document) {
+
         this.ctx = document;
         this.$vars = CSSVariables(this.ctx.body, getComputedStyle(this.ctx.documentElement));
 
         this.dom = {
             'style': this.ctx.body.style,
+            
+            'mobile_input': this.ctx.querySelector('#menu-toggle'),
+            'header': this.ctx.querySelector('header.header'),
+
             'logo': this.ctx.querySelector('a.logo'),
             'poster': this.ctx.getElementById('poster'),
             'poster_video': this.ctx.querySelector('#poster > video'),
+
             'screen': this.ctx.getElementById('screen'),
             'clip': this.ctx.querySelector('#screen > #videoclip'),
+
             'footer': this.ctx.querySelector('#footer'),
         }
         this.listeners = {};
 
         this.stages = new GradualSteps(AlbumStages.BLANK);
+        this.headerManager = new FoldableHeader( this.dom.mobile_input, this.dom.header );
         
         this.init();
     }
@@ -61,6 +72,7 @@ class Album {
         }
 
         cronometer.tap('APP_READY');
+        debugger;
     }
 
     loadClip( videoURL ) {
@@ -142,6 +154,8 @@ class Album {
     [AlbumStages.CLIP + ":enter"](curr,next) {
         return new Promise((resolve, reject) => {
             document.body.style['overflow-y'] = 'auto';
+
+            this.headerManager.to( HEADER_STATES.MICRO );
 
             this.dom.footer.classList.add('collapsed');
             this.dom.poster.classList.add('hidden');

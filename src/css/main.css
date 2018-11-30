@@ -22,7 +22,7 @@
     --color-primary: #ff0964;
     --footer-color: transparent;
 
-    --header-height: 72px;
+    --header-height: 48px;
     --viewport_height: 200vh;
     --info_display: "grid";
 
@@ -123,6 +123,7 @@ html {
     /*background: linear-gradient(90deg, #4753a9 30%, #32ab52 70%);*/
     background: var(--bg);
     margin: 0; padding: 0;
+    overflow-x: hidden;
 }
 body { 
     margin: 0; padding: 0;
@@ -140,45 +141,12 @@ body {
  * Header/Nav
  */
 #menu-toggle { display: none; }      
-nav.menu {
-    position: absolute;
-    top: 0;
-    z-index: 1001;
-    flex: 0.5;
-    height: var(--header-height);
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    right: calc( 2 * var(--pad-big)) /* Menu */;
-    /* Menu */
-    & .menu-header {
-        position: relative;
-        background-color: transparent;
-
-        vertical-align: baseline;
-        z-index: 10;
-
-        font-family: inherit;
-        font-size: calc( 1.00rem * var(--typoscale));
-        font-weight: normal;
-        text-align: center;
-        text-transform: uppercase;
-        color: inherit;
-
-        padding: 1rem;
-        margin-left: var(--pad-big);
-
-        /** Avoid last link to have a right margin, 
-            making it container alignment easier */
-        &:last-child { margin-right: 0; }
-        
-        border: 0px solid transparent;
-    }
-}
-
-header#menu {
+header.header {
     width: 100%;
     height: var(--header-height);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     font-family: 'FuturaStd', sans-serif;
     /*font-family: var(--hero-font);*/
     color: var(--fg );
@@ -188,30 +156,128 @@ header#menu {
     position: absolute;
     top: 0px;
     z-index: 1000;
-    background-color: var(--bg);
+    background-color: var(--bege);
     box-shadow: 0 -10px 30px rgba(0,0,0,.4);
     -webkit-perspective: 800px;
     perspective: 800px;
     transition-duration: 0.65s /* Shrink menu*/;
+
+    & .wrapper {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        & .logo-container {
+            flex: 0.2;
+            & .title {
+                display: block;
+                font-size: 36px;
+                text-transform: uppercase;
+                text-indent: -9999px;
+                background-image: url('/images/favicon.svg');
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: contain;
+                width: 24px;
+                height: 24px;
+                fill: var(--fg);
+                color: var(--fg);
+            }        
+        }
+    
+        & .label-toggle {
+            cursor: pointer;
+            display: block;
+            display: none;
+            float: right;
+            height: 18px;
+            width: 24px;
+    
+            background: linear-gradient(to bottom, 
+                                            hsl(0, 0%, 20%) 0%, 
+                                            hsl(0, 0%, 20%) 20%, 
+                                            transparent 20%, 
+                                            transparent 40%, 
+                                            hsl(0, 0%, 20%) 40%, 
+                                            hsl(0, 0%, 20%) 60%, 
+                                            transparent 60%, 
+                                            transparent 80%, 
+                                            hsl(0, 0%, 20%) 80%, 
+                                            hsl(0, 0%, 20%) 100%)
+        }
+    
+    }
+
+    /**
+     * Where links are 
+     */
+    & nav.menu {
+        top: 0;
+        z-index: 1001;
+        flex: 0.5;
+        height: var(--header-height);
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        right: calc( 2 * var(--pad-big)) /* Menu */;
+        
+        /* Menu */
+        & .menu-header {
+            position: relative;
+            background-color: transparent;
+    
+            vertical-align: baseline;
+            z-index: 10;
+    
+            font-family: inherit;
+            font-size: calc( 1.00rem * var(--typoscale));
+            font-weight: normal;
+            text-align: center;
+            text-transform: uppercase;
+            color: inherit;
+    
+            padding: 1rem;
+            margin-left: var(--pad-big);
+            border: 0px solid transparent;
+    
+            /** Avoid last link to have a right margin, 
+                making it container alignment easier */
+            &:last-child { margin-right: 0; }        
+        }
+    
+    }
+    
+
+    /**
+     * Horizontal states:
+     * Collapsed, a minimal menu.
+     *  Useful to give more area to videoclip
+     */
+     &.micro {
+        position: absolute;
+        transform: translateY( calc((var(--header-height) - 8px) * -1) );
+        & + header.header {
+            position: absolute;
+            cursor: pointer;
+            transform: translateY( calc((var(--header-height) - 8px) * -1) );
+        }
+     }
+     &.offscreen {
+        position: absolute;
+        transform: translateY( calc(var(--header-height)  * -1) );
+        & + header.header {
+            position: absolute;
+            cursor: auto;
+            transform: translateY( calc(var(--header-height) * -1) );
+        }
+
+     }
 }
 
-header#menu .title {
-    display: block;
-    font-size: 36px;
-    text-transform: uppercase;
-    text-indent: -9999px;
-    background-image: url('/images/favicon.svg');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: contain;
-    width: 36px;
-    height: 36px;
-    fill: var(--fg);
-    color: var(--fg);
-    margin: 0.67em auto;
-}
-
-
+/**
+ * Footer
+ */
 #footer {
     position: absolute;
     width: 100%;
@@ -232,28 +298,40 @@ header#menu .title {
 
     /*animation-timing-function: cubic-bezier(0.55, 0.06, 0.68, 0.19);*/
     animation-timing-function: cubic-bezier(0.55, 0.06, 0.59, 0.83);
+
+    &.collapsed {
+        bottom: -100%;
+        transform: translate3d(0,0,0);
+        animation-play-state: paused;
+    }
+
+    & .social_links {
+        display: flex;
+        width: 15%;
+        align-items: center;
+        justify-content: space-between;            
+    }
+
+    & .social-icon {
+        width: 24px;
+        height: 24px;
+        background-size: 24px 24px;
+    }
 }
 
 /**
- * Footer
+ * Overlay
  */
-#footer.collapsed {
-    bottom: -100%;
-    transform: translate3d(0,0,0);
-    animation-play-state: paused;
-}
+.overlay {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0; left: 0;
+    z-index: 100;
 
-#footer .social_links {
-    display: flex;
-    width: 15%;
-    align-items: center;
-    justify-content: space-between;            
-}
-
-#footer .social-icon {
-    width: 24px;
-    height: 24px;
-    background-size: 24px 24px;
+    opacity: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    transition: opacity 0.750ms ease-in-out;
 }
 
 
@@ -586,37 +664,109 @@ header#menu .title {
  * Cellphones portrait
  */
 @media (min-width: 320px) and (max-width: 425px){
-    :root {
-        --viewport_height: 300vh;
+    html {
+        overflow-x: hidden;
     }
-    #poster {
-        width: 100%;
+    /**
+     * Header/Nav
+     */
+    header.header {
+        padding: 0;
+        display: block;
+
+        & .wrapper {
+            padding: 12px 12px;
+        }
+
+        & .shadow {
+            width: 100vw;
+            z-index: -1;
+            opacity: 0;
+            height: 100vh;
+            position: absolute;
+            top: 0; left: 0;
+            pointer-events: none;
+            will-change: opacity; 
+        
+            background-color: rgba(255, 255, 255, 0.3);
+            transition: opacity 0.750ms ease-in-out;   
+        }
+    }
+    header.header .wrapper .label-toggle { display: block; }  
+    header.header > nav.menu { 
+        will-change: transform, opacity;
+        position: absolute;  
+        display: none;
+        top: 0px;
+        left: 0vw;
+        width: 55vw;
+        height: 100vh;
+        z-index: 1500;
+        transform: translateX(100vw);
+        transition: all 750ms ease-out;
+        background-color: #000;
+        box-shadow: 0 0 50px rgba(0,0,0,0.3);
+        border-left: 1px solid rgba(255,255,255,0.1);
+
+        & .menu-header {
+            margin-left: 0;
+            color: #fff;
+        }
+    }   
+
+    /** Activate nav menu */
+    #menu-toggle:checked ~ header.header > nav.menu {
+        transform: translateX(45vw);
+        display: block;
+        
+        & > .menu-header {
+            display: block;
+            margin-left: 0;
+
+            &#menu-albums {
+                background-color: white;
+                color: var(--bg);
+                mix-blend-mode: difference;
+            }
+        }
+    }
+
+    /* Shadow below menu */
+    #menu-toggle:checked ~ header.header > .shadow {
+        opacity: 1;
+    }
+
+    /**
+     * General styles
+     */
+    .album-theater #poster {
+        width: 80%;
         height: 33.3%;
     }
-    .logo {
+    .album-theater .logo {
         width: 80%;
         margin: 0 auto;
     }
-    #screen {
+    .album-theater #screen {
         height: 33.3%;
     }
-    #info {
+    .album-theater #info {
         display: flex;
         flex-direction: column;
         height: 66.6%;
         top:  0;
     }
-    #info #left {
+    .album-theater #info #left {
         margin-top: 4em;
         margin-bottom: 4em;
     }
-    #info #right { 
+    .album-theater #info #right { 
         width: 80%;
         margin: 0 auto;
         margin-top: 1em;
         height: 60%;
     }
-    #right .content {
+    .album-theater #right .content {
         height: 75%;
     }
 
@@ -632,7 +782,7 @@ header#menu .title {
 /**
  * Cellphone landscape or tablets
  */
- @media (min-width: 426px) and (max-width: 1024){
+ @media (min-width: 425px) and (orientation: portrait){
  }
 
 

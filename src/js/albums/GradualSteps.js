@@ -11,8 +11,8 @@ export default class GradualSteps {
     /**
      * Usage:
      * let stages = new GradualSteps('BLANK')
-     * stages.addStep('STEP_TWO', enter2Fn, exit2Fn )
-     * stages.addStep('STEP_THREE, enter2Fn, exit2Fn )
+     * stages.addStep('STEP_TWO').enter( enter2Fn ).exit( exit2Fn )
+     * stages.addStep('STEP_THREE).enter( enter2Fn ).exit( exit2Fn )
      * 
      * stages.to(STEP_TWO).then( () => {
      *  stages.to(STEP_THREE).then( () => {
@@ -20,11 +20,11 @@ export default class GradualSteps {
      *  });
      * })
      */
-    constructor( defaultStep ) {
+    constructor( defaultStep='UNITIALIZED', enterFn=success, exitFn=success) {
         this.step     = defaultStep
-        this.steps    = [];
-        this.enterFns = []; 
-        this.exitFns  = [];
+        this.steps    = [defaultStep];
+        this.enterFns = [enterFn]; 
+        this.exitFns  = [enterFn];
     }
 
     /**
@@ -57,7 +57,7 @@ export default class GradualSteps {
                 })
                 // And call intro handlers
                 .then( () => {
-                    enterFn(this.previousStep, this.step);
+                    enterFn(this.previousStep, nextStep);
                 })
 
                 // Finally pass control back to where it came to('newStep').then() 
