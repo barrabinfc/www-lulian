@@ -15,8 +15,10 @@ export default class ClipPlayer {
                 controls: 2,
                 rel: 0,
                 showinfo: 0,
-                playsinline: 0,
-                modestbranding: 1,
+                playsinline: 1,
+                modestbranding: 0,
+                iv_load_policy: 3,
+                showinfo: 0
             }
         })
     }

@@ -3,7 +3,8 @@
 {{ $movie  := "text_movie" }}
 
 <div id="screen" class="screen hidden">
-    <div id="videoclip"></div>
+    <div id="videoclip">
+    </div>
 </div>
 <div id="poster" class="spotlight">
     {{ if .Page.Resources.GetMatch $movie }}
