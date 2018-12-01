@@ -8,6 +8,7 @@ description = ""
 poster_enabled = true
 poster_masked = true
 info_enabled = true
+poster_mask = true
 
 # Videoclip and full album embed
 video = "https://www.youtube.com/watch?v=sH4gJp_Y4_M"
@@ -24,6 +25,7 @@ album_embed = '<iframe style="border: 0; width: 100%; height: 100%;" src="https:
 [colors]
   foreground =  "#fff"
   background =  "#000"
+  primary = "#ff00ff"
 
 # Images
 [[resources]]

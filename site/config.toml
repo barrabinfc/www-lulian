@@ -13,21 +13,6 @@ SectionPagesMenu="main"
 footnoteReturnLinkContents = "↩"
 pygmentsCodeFences = true
 
-[menu]
-  [[menu.main]]
-    identifier = "albums"
-    name = "Albums section"
-    title = "Albums"
-    url = "/albums/"
-    weight = 100
-  [[menu.main]]
-    identifier = "contact"
-    name = "Contact"
-    title = "Contact"
-    url = "/contact/"
-    weight = 0
- 
-
 [params]
   selo = "https://www.facebook.com/selorisco"
   [params.social]
@@ -42,3 +27,17 @@ pygmentsCodeFences = true
 
 [imaging]  
   quality = 85
+
+[menu]
+  [[menu.main]]
+    identifier = "albums"
+    name = "This is the blog section"
+    title = "albums"
+    url = "/albums/"
+    weight = 100
+  [[menu.main]]
+    identifier = "contact"
+    name = "This is the contact section"
+    title = "contact"
+    url = "/contact/"
+    weight = 200    

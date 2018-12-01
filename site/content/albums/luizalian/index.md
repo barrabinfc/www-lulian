@@ -1,49 +1,54 @@
-+++
-draft = false
-title = "Luiza Lian"
-subtitle = ""
-description = "ALBUM DE ESTRÉIA LUIZA LIAN"
+---
+draft: false
+title: "Luiza Lian"
+subtitle: ""
+description: "ALBUM DE ESTRÉIA LUIZA LIAN"
 
-poster_enabled = true
-poster_masked = false
-poster_video = false
-info_enabled = true
+poster_enabled: true
+poster_masked: false
+poster_video: false
+info_enabled: true
 
 # Videoclip and full album embed
-video = "https://www.youtube.com/?v=vNQHgBOM6Lk"
-album_embed = '<iframe scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/86649977&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&visual=false&show_artwork=false"></iframe>'
+video: "https://www.youtube.com/?v=vNQHgBOM6Lk"
+album_embed: '<iframe scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/86649977&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&visual=false&show_artwork=false"></iframe>'
 
 # Social plataforms
-[album]
-  [album.platforms]
-    soundcloud = "luizalian"
-    youtube = "user/luizalianshow"
-    spotify = "album/3ocMFmdWIfjrfNdHVFQ41I"
+album:
+  platforms:
+    soundcloud: "luizalian"
+    youtube: "user/luizalianshow"
+    spotify: "album/3ocMFmdWIfjrfNdHVFQ41I"
 
 # Colors
-[colors]
-  foreground =  "#333"
-  background =  "#000"
-  primary    =  "#ff0964"
+colors:
+  foreground:  "#fff"
+  background:  "#000"
+  primary:     "#cc4400"
+
+# Menu
+menu:
+  main:
+    identifier: "luizalian"
+    title: "Luiza Lian"
+    parent: "albums"
+    url: "/albums/luizalian/"
+    weight: 105
 
 # Images
-[[resources]]
-  name = "logo"
-  src = "images/luiza-logo.svg"
+resources:
+- name: menu_icon
+  src: "images/menu_icon.svg"
+- name: logo
+  src: "images/luiza-logo.svg"
+- name: album_cover
+  src: "images/Album_Cover.jpg"
+- name: text_poster
+  src: "images/bg-m.jpg"
+- name: info_fundo
+  src: "images/bg.jpg"
 
-[[resources]]
-  name = "text_poster"
-  src = "images/poster3.jpg"
-
-[[resources]]
-  name = "info_fundo"
-  src = "images/bg.jpg"
-
-[[resources]]
-  name = "album_cover"
-  src = "images/Album_Cover.jpg"
-
-+++
+---
 
 <div class="ficha_tecnica">
   <div><label>Direção Artística:</label><p>Luiza Lian</p></div>

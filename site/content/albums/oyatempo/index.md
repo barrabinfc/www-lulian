@@ -1,26 +1,35 @@
-+++
-draft = false
-title = "oyá_tempo _ luiza_lian"
-subtitle = ""
-description = "oya_tempo"
-layout = "oyatempo"
+---
+draft: false
+title: "oyá_tempo"
+subtitle: "Oya Tempo"
+description: "oya_tempo"
+
+info_enabled: false
+
+# Menu
+menu:
+  main:
+    identifier: "oyatempo"
+    title: "Oya Tempo"
+    parent: "albums"
+    url: "/albums/oyatempo/"
+    weight: 102
 
 # Colors
-[colors]
-  foreground =  "#333"
-  background =  "#000"
-  primary    =  "#ff0964"
+colors:
+  foreground:  "#333"
+  background:  "#000"
+  primary:  "#ff0964"
 
 # Images
-[[resources]]
-  name = "logo"
-  src = "images/luiza-logo.svg"
-
-[[resources]]
-  name = "album_cover"
-  src = "images/Album_Cover.jpg"
-
-+++
+resources:
+- name: menu_icon
+  src: "images/menu_icon.png"
+- name: logo
+  src: "images/logo.png"
+- name: album_cover
+  src: "images/Album_Cover.jpg"
+---
 
 <div class="ficha_tecnica">
   <div><label>Direção Artística:</label><p>Luiza Lian</p></div>

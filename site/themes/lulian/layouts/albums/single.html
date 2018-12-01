@@ -1,5 +1,6 @@
 {{ define "above_fold" }}
-    {{ $logo := .Page.Resources.GetMatch "logo" }}
+    
+    {{ $logo  := .Page.Resources.GetMatch "logo" }}
     {{ $cover := .Page.Resources.GetMatch "album_cover" }}
 
     {{ $info_enabled := .Params.info_enabled }}
@@ -22,7 +23,7 @@
     <meta name="twitter:site" content="{{ .Permalink }}"/>
     <meta name="twitter:title" content="{{ .Title }}">
     <meta name="twitter:description" content="{{ if .Description }}{{ .Description }}{{ else }}{{if .IsPage}}{{ .Summary }}{{ end }}{{ end }}"/>
-    <meta name="twitter:image:src" content="{{ $cover.Permalink }}"/>
+    {{/*<meta name="twitter:image:src" content="{{ $cover.Permalink }}"/>*/}}
     <meta name="twitter:domain" content="https://www.luizalian.com.br"/> 
 
     <meta name="poster_video" content="{{ $poster_video }}" /> 
@@ -39,10 +40,7 @@
         }
 
         .logo {
-            background-image:  url('{{ $logo.Permalink}}'); 
-            /*linear-gradient(black, black), 
-                               url('{{ $logo.Permalink}}');
-            */
+            background-image:  url('{{ $logo.Permalink}}');
             background-size: contain;
             background-repeat: no-repeat;
             background-position: center;

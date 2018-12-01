@@ -140,11 +140,11 @@ class Album {
      */
     [AlbumStages.INTRO + ":exit"](curr,next) {
         return new Promise( (resolve, reject) => {
-            this.dom.footer.style['animation-name'] = 'slideBottom';
+            this.dom.footer.style['animation-play-state'] = 'running';
             this.dom.poster.style['animation-name'] = 'focusOut';
             this.listeners['logo'].mute('click');
 
-            setTimeout(resolve, this.$vars['--intro-time']);
+            setTimeout(resolve, this.$vars['--intro-time'] + 250);
         })
     }
 
@@ -153,19 +153,21 @@ class Album {
      */
     [AlbumStages.CLIP + ":enter"](curr,next) {
         return new Promise((resolve, reject) => {
-            document.body.style['overflow-y'] = 'auto';
-
             this.headerManager.to( HEADER_STATES.MICRO );
 
-            this.dom.footer.classList.add('collapsed');
             this.dom.poster.classList.add('hidden');
-            this.dom.screen.classList.remove('hidden');
-            this.dom.screen.classList.add('visible');
+
+            setTimeout( () => {
+                this.dom.footer.classList.add('collapsed');
+                this.dom.screen.classList.remove('hidden');
+                this.dom.screen.classList.add('visible');
+
+                this.player.play();
+            }, 1000 )
 
             this.listeners['screen'].when('click').do(this.screen_click.bind(this));
             cronometer.tap('CHANGE_STAGE', AlbumStages.CLIP);
 
-            this.player.play();
             resolve();
         })
     }

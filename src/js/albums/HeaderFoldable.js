@@ -31,8 +31,8 @@ const HEADER_STATES = {'VISIBLE': 'VISIBLE',
                         'MICRO': 'MICRO', 
                         'OFFSCREEN': 'OFFSCREEN'}
 
-const MOBILE_STATES = {'HIDDEN': 'HIDDEN',
-                       'VISIBLE': 'VISIBLE'}
+const MOBILE_STATES = {'MOB_HIDDEN': 'MOB_HIDDEN',
+                       'MOB_VISIBLE': 'MOB_VISIBLE'}
 
 const MODES = {'HORIZONTAL': 'HORIZONTAL', 
                 'VERTICAL': 'VERTICAL'}
@@ -41,25 +41,25 @@ class FoldableHeader {
     constructor( inputEl, headerEl , mode=(isMobile ? MODES.VERTICAL : MODES.HORIZONTAL)) {
         this.inputEl = inputEl
         this.headerEl = headerEl
-        this.navEl = headerEl.querySelector('nav.menu')
-        this.shadowEl = headerEl.querySelector('.shadow')
+        this.bodyEl = document.body
+        this.navEl = this.headerEl.querySelector('nav.menu')
+        this.shadowEl = this.bodyEl.querySelector('.shadow')
 
         this.listeners = {
             'header_over': new listen( this.headerEl ),
             'header_out': new listen( this.headerEl ),
 
             'mob_input': new listen( this.inputEl ), 
-            'shadow': new listen( this.shadowEl )
+            'shadow': new listen( this.shadowEl ),
+
+            'document': new listen( document )
         }
 
         // Default mode
         this.mode = mode
-        console.log("CUrrent mode is ", this.mode)
 
         this.setupTransitions()
         this.setupListeners()
-
-        console.log(this.mob_state.step)
     }
 
     /**
@@ -89,27 +89,41 @@ class FoldableHeader {
         return state_machine.step;        
     }
 
+    /**
+     * Toggle menu mobile visible
+     */
+    toggleMobileMenu(){
+        this.inputEl.dispatchEvent( new MouseEvent('click') );
+    }
+
     setupListeners(){
-        this.listeners['mob_input'].when('change').do( (el) => {
-            const tgt = el.target;
+        /**
+         * Mobile menu icon click
+         */
+        this.listeners['mob_input'].when('change').do( (e) => {
+            const tgt = e.target;
             let isMenuOpen = tgt['checked']
-            console.log("mob_input changed", isMenuOpen)
             
             if(isMenuOpen)
-                this.to(MOBILE_STATES.VISIBLE)
+                this.to(MOBILE_STATES.MOB_VISIBLE)
             else
-                this.to(MOBILE_STATES.HIDDEN)            
+                this.to(MOBILE_STATES.MOB_HIDDEN)            
         })
+
         // When clicked over shadow, same thing as clicked on input
-        this.listeners['shadow'].when('pointerup').do( (el) => {
-            this.inputEl.dispatchEvent( new MouseEvent('click') );
-        })
+        this.listeners['shadow'].when('pointerdown', {capture: true}).do( (e) => {
+            e.stopPropagation();
+            e.preventDefault();
+
+            this.toggleMobileMenu();
+            return false;
+        });
     }
 
     setupTransitions(){
-
         /** Vertical Header */
-        this.state = new GradualSteps( HEADER_STATES.VISIBLE , this[HEADER_STATES.VISIBLE + ":enter"].bind(this) )
+        this.state = new GradualSteps( HEADER_STATES.VISIBLE , 
+                                        this[HEADER_STATES.VISIBLE + ":enter"].bind(this) )
         this.state.addStep( HEADER_STATES.MICRO )
             .enter( this[HEADER_STATES.MICRO + ':enter'].bind(this)  )
             .exit( this[HEADER_STATES.MICRO + ':exit'].bind(this) );
@@ -119,11 +133,12 @@ class FoldableHeader {
             .exit( this[HEADER_STATES.OFFSCREEN + ':exit'].bind(this) )
 
         /** Horizontal Header */
-        this.mob_state = new GradualSteps( MOBILE_STATES.HIDDEN ,
-                                            )
-        this.mob_state.addStep( MOBILE_STATES.VISIBLE )
-                      .enter( this[MOBILE_STATES.VISIBLE + ':enter'].bind(this) )
-                      .exit( this[MOBILE_STATES.VISIBLE + ':exit'].bind(this) )
+        this.mob_state = new GradualSteps( MOBILE_STATES.MOB_HIDDEN , 
+                                            this[MOBILE_STATES.MOB_HIDDEN + ':enter'].bind(this))
+                                            
+        this.mob_state.addStep( MOBILE_STATES.MOB_VISIBLE )
+                      .enter( this[MOBILE_STATES.MOB_VISIBLE + ':enter'].bind(this) )
+                      .exit( this[MOBILE_STATES.MOB_VISIBLE + ':exit'].bind(this) )
     }
 
     /**
@@ -190,17 +205,36 @@ class FoldableHeader {
     /**
      *  Mobile menu states
      */
-    [MOBILE_STATES.VISIBLE + ':enter'](curr,next) {
+    [MOBILE_STATES.MOB_VISIBLE + ':enter'](curr,next) {
         return new Promise( (resolve,reject) => {
-            this.shadowEl.style = "pointer-events: all;"
-            resolve();
+            requestAnimationFrame( () => {
+                this.bodyEl.style = "max-height: 100vh; overflow-y: hidden;"
+
+                resolve();
+            })
+            
+            /* Setup ESC key */
+            this.listeners['document'].when('keyup').do( (e) => {
+                if(e.key == 'Escape') this.toggleMobileMenu()
+                return
+            });
+    
+        })
+    }
+    [MOBILE_STATES.MOB_VISIBLE + ':exit'](curr,next) {
+        return new Promise( (resolve,reject) => {
+            this.listeners['document'].mute('keyup')
+
+            resolve() 
         })
     }
 
-    [MOBILE_STATES.HIDDEN + ':enter'](curr,next) {
+    [MOBILE_STATES.MOB_HIDDEN + ':enter'](curr,next) {
         return new Promise( (resolve,reject) => {
-            this.shadowEl.style = "pointer-events: none;"
-            resolve();
+            requestAnimationFrame(() => {
+                this.bodyEl.style = "max-height: var(--viewport_height); overflow-y: hidden;"
+                resolve();    
+            })
         })
     }
 
@@ -208,6 +242,7 @@ class FoldableHeader {
 
 module.exports = {
     HEADER_STATES,
+    MOBILE_STATES,
     FoldableHeader
 };
 

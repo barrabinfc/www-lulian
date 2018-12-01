@@ -21,7 +21,7 @@
         </p>
       </div>
       <div class="content">
-        {{ .Page.Params.album_embed | safeHTML }}
+        {{ .Page.Params.album_embed | default "" | safeHTML }}
         <!-- {{ .Content }} -->
       </div>
     </section>
