@@ -1,15 +1,14 @@
 import ClipPlayer from './ClipPlayer';
-import GradualSteps from './GradualSteps';
-import { FoldableHeader, HEADER_STATES} from './HeaderFoldable';
+import GradualSteps from 'utils/GradualSteps';
 
 /**
 * Globals
 */
 const cronometer = window.cronometer;
 const domain = window.domain;
-const spy = window.spy
-const listen = window.listen
-console.log("GLobals: ", cronometer, domain, spy, listen);
+const spy = window.spy;
+const listen = window.listen;
+const headerManager = window.headerManager;
 
 /** Locals */
 const AlbumStages = {
@@ -50,7 +49,6 @@ class Album {
         this.listeners = {};
 
         this.stages = new GradualSteps(AlbumStages.BLANK);
-        this.headerManager = new FoldableHeader( this.dom.mobile_input, this.dom.header );
         
         this.init();
     }
@@ -75,12 +73,16 @@ class Album {
         debugger;
     }
 
-    loadClip( videoURL ) {
-        cronometer.tap('YOUTUBE_READY');
+    setClip( videoURL ) {
+        this.videoURL = videoURL
+    }
+
+    loadClip() {
+        cronometer.tap('YOUTUBE_LOADING');
 
         let youtubeID = ''
         try { 
-            youtubeID = videoURL.match(/\?v=(.*)/)[1]
+            youtubeID = this.videoURL.match(/\?v=(.*)/)[1]
             console.log("Loading youtube: ", youtubeID)
         } catch (e) {
             throw new Error("Invalid youtube video...", videoURL)
@@ -89,10 +91,8 @@ class Album {
         this.player = new ClipPlayer(this.dom.clip, youtubeID, domain);
         this.player.play  = spy( [this.player.play, this.player],   cronometer.tap.bind(cronometer,'PLAYER_PLAY'));
         this.player.pause = spy( [this.player.pause, this.player],  cronometer.tap.bind(cronometer,'PLAYER_PAUSE'));
-        this.player.ready = (ev) => {
-            console.log("videoclip ready...")
+        this.player.onReady = (ev) => {
             cronometer.tap('VIDEOCLIP_READY');
-            this.player.play();
         }
 
         this.listeners['clip'] = new listen(this.dom.clip);
@@ -123,7 +123,7 @@ class Album {
     [AlbumStages.INTRO + ":enter"](curr,next) {
         return new Promise((resolve, reject) => {
             this.dom.poster.style['animation-play-state'] = 'running';
-            //document.body.style['overflow-y'] = 'hidden';
+            
             setTimeout(() => {
                 this.dom.logo.classList.add('interactive');
                 this.listeners['logo'].when('click').do(this.poster_click.bind(this));
@@ -132,6 +132,7 @@ class Album {
 
                 resolve();
             }, this.$vars['--intro-time']);
+
         })
     }
     /*
@@ -140,8 +141,10 @@ class Album {
      */
     [AlbumStages.INTRO + ":exit"](curr,next) {
         return new Promise( (resolve, reject) => {
+
             this.dom.footer.style['animation-play-state'] = 'running';
             this.dom.poster.style['animation-name'] = 'focusOut';
+
             this.listeners['logo'].mute('click');
 
             setTimeout(resolve, this.$vars['--intro-time'] + 250);
@@ -153,15 +156,21 @@ class Album {
      */
     [AlbumStages.CLIP + ":enter"](curr,next) {
         return new Promise((resolve, reject) => {
-            this.headerManager.to( HEADER_STATES.MICRO );
+            // change header to micro state
+            if(!window.isMobile())
+                headerManager.to( 'MICRO' );
 
+            // hide poster
             this.dom.poster.classList.add('hidden');
 
+            // Give some time to poster fadeout animation appear
+            // and show screen
             setTimeout( () => {
                 this.dom.footer.classList.add('collapsed');
                 this.dom.screen.classList.remove('hidden');
                 this.dom.screen.classList.add('visible');
 
+                // Play video, wee!
                 this.player.play();
             }, 1000 )
 

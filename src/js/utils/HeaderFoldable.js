@@ -19,12 +19,7 @@
  * header.header -> Contains logo and hamburguer menu 
  */
 import GradualSteps from './GradualSteps';
-
-/** Globals from utils
- * import {listen} from '../utils/utils.js'
- */
-const listen = window.listen
-const isMobile = window.isMobile()
+import {listen} from './utils'
 
 /* Only one nav.menu per page */
 const HEADER_STATES = {'VISIBLE': 'VISIBLE', 
@@ -38,12 +33,15 @@ const MODES = {'HORIZONTAL': 'HORIZONTAL',
                 'VERTICAL': 'VERTICAL'}
 
 class FoldableHeader {
-    constructor( inputEl, headerEl , mode=(isMobile ? MODES.VERTICAL : MODES.HORIZONTAL)) {
+    constructor( inputEl, headerEl , mode=(MODES.HORIZONTAL)) {
         this.inputEl = inputEl
         this.headerEl = headerEl
         this.bodyEl = document.body
         this.navEl = this.headerEl.querySelector('nav.menu')
         this.shadowEl = this.bodyEl.querySelector('.shadow')
+        
+        // Default mode
+        this.mode = mode
 
         this.listeners = {
             'header_over': new listen( this.headerEl ),
@@ -54,9 +52,6 @@ class FoldableHeader {
 
             'document': new listen( document )
         }
-
-        // Default mode
-        this.mode = mode
 
         this.setupTransitions()
         this.setupListeners()
@@ -243,6 +238,7 @@ class FoldableHeader {
 module.exports = {
     HEADER_STATES,
     MOBILE_STATES,
+    MODES,
     FoldableHeader
 };
 

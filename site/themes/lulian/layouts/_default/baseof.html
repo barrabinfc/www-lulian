@@ -33,6 +33,7 @@
     <div class="shadow"></div>
 
     <script async src="https://www.googletagmanager.com/gtag/js?id={{ $gid }}"></script>
+
     <script>
         /** Setup Globals */
         window.cronometer = new window.Cronometer();
@@ -46,6 +47,11 @@
 
         gtag('js', new Date());
         gtag('config', "{{ $gid }}" );
+
+        /** Setup Smart Mobile menu **/
+        const mobileInputEl = document.querySelector('#menu-toggle');
+        const headerEl = document.querySelector('header.header');
+        window.headerManager = new window.setupSmartHeaderNavigation( mobileInputEl, headerEl );
     </script>
     {{ block "under_fold" . }} {{ end }}
   </body>

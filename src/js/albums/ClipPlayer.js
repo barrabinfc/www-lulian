@@ -8,7 +8,7 @@ export default class ClipPlayer {
         this.player = new YT.Player(clipElement, {
             videoId: youtubeID,
             events: {
-                'onReady': this.ready,
+                'onReady': this.ready.bind(this),
             },
             playerVars: {
                 origin: origin,
@@ -16,7 +16,7 @@ export default class ClipPlayer {
                 rel: 0,
                 showinfo: 0,
                 playsinline: 1,
-                modestbranding: 0,
+                modestbranding: 1,
                 iv_load_policy: 3,
                 showinfo: 0
             }
@@ -38,6 +38,7 @@ export default class ClipPlayer {
     }
 
     ready(){
-
+        console.debug("Video ready")
+        if(this.onReady) this.onReady()
     }
 }

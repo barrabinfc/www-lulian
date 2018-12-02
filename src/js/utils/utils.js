@@ -1,8 +1,7 @@
-import '../vendor/pep.js'
-
 export function isMobile(){
     return Math.min(window.screen.width, window.screen.height) < 768
 }
+
 
 /**
  * Get CSS Variable. ComputedStyles is necessary.

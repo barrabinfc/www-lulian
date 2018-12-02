@@ -34,13 +34,13 @@ export default {
   context: path.join(__dirname, "src"),
   resolve: {
     alias: {
-      'vendor': path.join(__dirname,"src/js/vendor/"),
+      'vendor': path.join(__dirname,"src/js/utils/vendor/"),
       'utils':  path.join(__dirname,"src/js/utils/")
     }
   },
   entry: {
     album: ['./js/albums/app'],
-    utils: ['./js/utils/utils']
+    utils: ['./js/utils/index']
   },
   output: {
     path: path.join(__dirname, "docs/js"),

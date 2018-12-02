@@ -87,13 +87,25 @@
         console.log(`%c 
 🌊 Built by vical.me
 `, "font-size: 1.5em;");
-        document.addEventListener('DOMContentLoaded', () => {
+        document.addEventListener('DOMContentLoaded', () => {            
             window.album = new window.Album(document);
             window.cronometer.hook = gtag;
         });
+
+        /*
+        * HACK: Pre-Load youtube video, to avoid
+        * a second between animation-out and video display.
+        *  This should be in CLIP:enter, but let's do it preemptively
+        */
         function onYouTubeIframeAPIReady( ) {
             let el = document.querySelector('meta[property="og:video"]')
-            window.album.loadClip( el.getAttribute('content') )
+            window.album.setClip( el.getAttribute('content') )
+
+            if(window.requestIdleCallback)
+                requestIdleCallback( window.album.loadClip.bind(window.album) );
+            else   
+                window.album.loadClip()
+            //window.album.loadClip( el.getAttribute('content') )
         }
     </script>
 {{ end }}

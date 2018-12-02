@@ -40,4 +40,10 @@ pygmentsCodeFences = true
     name = "This is the contact section"
     title = "contact"
     url = "/contact/"
-    weight = 200    
+    weight = 200 
+  [[menu.main]]
+    identifier = "agenda"
+    name = "This is the agenda section"
+    title = "agenda"
+    url = "/agenda/"
+    weight = 300    
