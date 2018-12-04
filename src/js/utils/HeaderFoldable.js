@@ -43,12 +43,14 @@ class FoldableHeader {
         // Default mode
         this.mode = mode
 
+        // Mobile state (true=VIsible or false=Hidden)
+        this.isOpen = false;
+
         this.listeners = {
             'header_over': new listen( this.headerEl ),
             'header_out': new listen( this.headerEl ),
 
             'mob_input': new listen( this.inputEl ), 
-            'shadow': new listen( this.shadowEl ),
 
             'document': new listen( document )
         }
@@ -97,22 +99,14 @@ class FoldableHeader {
          */
         this.listeners['mob_input'].when('change').do( (e) => {
             const tgt = e.target;
-            let isMenuOpen = tgt['checked']
+            this.isOpen = tgt['checked']
             
-            if(isMenuOpen)
+            if(this.isOpen)
                 this.to(MOBILE_STATES.MOB_VISIBLE)
             else
                 this.to(MOBILE_STATES.MOB_HIDDEN)            
         })
 
-        // When clicked over shadow, same thing as clicked on input
-        this.listeners['shadow'].when('pointerdown', {capture: true}).do( (e) => {
-            e.stopPropagation();
-            e.preventDefault();
-
-            this.toggleMobileMenu();
-            return false;
-        });
     }
 
     setupTransitions(){
@@ -214,11 +208,30 @@ class FoldableHeader {
                 return
             });
     
+            /** Detect click outside header.header and toggle menu*/
+            this.listeners['document'].when('pointerdown', {capture: true}).do( (e) => {
+                let navBounds = this.navEl.getBoundingClientRect();
+                let mouseX = e.clientX;
+
+                if(mouseX < navBounds.x){
+                    this.toggleMobileMenu();
+
+                    e.preventDefault();
+                    e.stopPropagation();
+
+                    console.log("MouseX clicked on shadow");
+                } else {
+                    console.log("MouseX", mouseX);
+                }
+
+                return false;
+            });
         })
     }
     [MOBILE_STATES.MOB_VISIBLE + ':exit'](curr,next) {
         return new Promise( (resolve,reject) => {
             this.listeners['document'].mute('keyup')
+            this.listeners['document'].mute('pointerdown');
 
             resolve() 
         })

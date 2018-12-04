@@ -126,7 +126,7 @@ class Album {
             
             setTimeout(() => {
                 this.dom.logo.classList.add('interactive');
-                this.listeners['logo'].when('click').do(this.poster_click.bind(this));
+                this.listeners['logo'].when('pointerup', {capture: true}).do(this.poster_click.bind(this));
 
                 cronometer.tap('CHANGE_STAGE', AlbumStages.INTRO);
 
@@ -145,7 +145,7 @@ class Album {
             this.dom.footer.style['animation-play-state'] = 'running';
             this.dom.poster.style['animation-name'] = 'focusOut';
 
-            this.listeners['logo'].mute('click');
+            this.listeners['logo'].mute('pointerup');
 
             setTimeout(resolve, this.$vars['--intro-time'] + 250);
         })
@@ -212,7 +212,9 @@ class Album {
     poster_click( ev ) { 
         ev.preventDefault();
         ev.stopPropagation();
+        
         this.stages.to(AlbumStages.CLIP)
+        return false;
     }
 
     screen_click( ev ) { 

@@ -28,8 +28,9 @@
 {{ end }}
 
 {{ define "main" }} 
-    <div class="page-generic">
-        {{ .Content }}
+    <div class="page-content {{ urlize  .Title | lower }}">
+        <h1 class="page-title">{{.Page.Params.subtitle | default ""}}</h1>
+        <section class="md-section {{ urlize .Title | lower}}">{{ .Content }}</section>
     </div>
 {{ end }}
 

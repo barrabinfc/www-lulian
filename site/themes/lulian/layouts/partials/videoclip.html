@@ -4,6 +4,7 @@
 
 <div id="screen" class="screen hidden">
     <div id="videoclip">
+        <!-- Youtube embed dynamically goes here -->
     </div>
 </div>
 <div id="poster" class="spotlight">
@@ -14,5 +15,9 @@
         <source src='{{ partial "resource_path" (dict "resources" $resources "name" $movie) }}'/>
     </video>
     {{ end }}
-    <a href="#play" class="logo" title="Aperte para ver o clipe">{{ .Title }}</a>
+    {{ if .Page.Params.video }}
+        <a href="{{ .Page.Params.video }}" onclick="return false;" class="logo" title="Aperte para ver o clipe">{{ .Title }}</a>
+    {{ else }}
+        <a href="#play" class="logo" title="Aperte para ver o clipe">{{ .Title }}</a>
+    {{ end }}
 </div>

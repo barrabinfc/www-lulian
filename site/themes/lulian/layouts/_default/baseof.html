@@ -4,7 +4,7 @@
     <title>{{ .Title }}</title>
     
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 
     <meta name="description" content="{{ plainify .Params.subtitle }}{{ plainify .Description }}">
 
@@ -20,10 +20,12 @@
     <script src="/js/utils.js"></script>
     {{ block "above_fold" . }}{{ end }} 
   </head>  
-  <body>
+  {{ $section := .Section | default .Type }}
+  {{ $title := .Title | urlize | lower }}
+  <body class="{{ $section }} {{$title}}">
     {{ partial "header.html" . }}
 
-    {{ $section := .Section | default "" }}
+    {{ $section := .Section | default .Type }}
     <main id="page-trans-wrapper">
       <div id="page-container" class="page-container {{ $section }}">
         {{ block "main" .}}{{ end }}
@@ -33,13 +35,14 @@
     <div class="shadow"></div>
 
     <script async src="https://www.googletagmanager.com/gtag/js?id={{ $gid }}"></script>
+    <script type="text/javascript" src="/js/vendor/vanilla-tilt.babel.min.js" async></script>
 
     <script>
         /** Setup Globals */
         window.cronometer = new window.Cronometer();
         window.domain = (location.origin.replace(/http(s):\/\//, ''));
 
-        cronometer.tap('DOM_CONTENT_LOADED');
+        cronometer.tap('PAGE_FIRST_PASS');
         
         // Analytics
         window.dataLayer = window.dataLayer || []
@@ -52,6 +55,9 @@
         const mobileInputEl = document.querySelector('#menu-toggle');
         const headerEl = document.querySelector('header.header');
         window.headerManager = new window.setupSmartHeaderNavigation( mobileInputEl, headerEl );
+        
+        
+        window.scrollTo(0,1);
     </script>
     {{ block "under_fold" . }} {{ end }}
   </body>

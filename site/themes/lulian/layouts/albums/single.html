@@ -35,7 +35,7 @@
             --bg: {{ $bg | safeHTML }};
             --color-primary: {{ $primary | safeHTML }};
 
-            --viewport_height: 200vh;
+            --viewport_height: 200%;
             --info_display: {{ cond $info_enabled "grid" "none" }};
         }
 
@@ -58,7 +58,7 @@
         */
         @media (min-width: 320px) and (max-width: 425px){
             :root {
-                --viewport_height: 300vh;
+                --viewport_height: 300%;
             }
         }
     </style>
@@ -81,7 +81,6 @@
 
 {{ define "under_fold" }}
     <script src="https://www.youtube.com/iframe_api" defer></script>
-    <script type="text/javascript" src="/js/vendor/vanilla-tilt.babel.min.js" async></script>
     <script src="/js/album.js" defer></script>
     <script>
         console.log(`%c 

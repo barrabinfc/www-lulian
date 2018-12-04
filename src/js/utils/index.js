@@ -3,9 +3,7 @@ import {FoldableHeader, HEADER_STATES,
         MODES} from './HeaderFoldable'
 
 export function setupSmartHeaderNavigation( inputCheckEl, headerEl ) {
-    return new FoldableHeader( inputCheckEl, headerEl , 
-                                utils.isMobile() ? MODES.HORIZONTAL 
-                                                 : MODES.VERTICAL );
+    return new FoldableHeader( inputCheckEl, headerEl ,  MODES.VERTICAL );
 }
 
 let exp = {
