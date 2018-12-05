@@ -134,12 +134,8 @@ class FoldableHeader {
      * Vertical Header changes
      */
     [HEADER_STATES.VISIBLE + ":enter"](curr,next) {
-        console.log("visible:enter")
         return new Promise( (resolve, reject) => {
-            console.log("visible:enter-promise")
-
             this.listeners['header_out'].when( 'pointerleave' ).do( () => {
-                console.log("pointerleave")
                 this.to( HEADER_STATES.MICRO );
             });
 
@@ -148,7 +144,6 @@ class FoldableHeader {
     }
     [HEADER_STATES.VISIBLE + ":exit"](curr,next) {
         return new Promise( (resolve, reject) => {
-            console.log('visible:leave')
             this.listeners['header_out'].mute( 'pointerleave' );
             resolve()
         })
@@ -157,7 +152,6 @@ class FoldableHeader {
 
     [HEADER_STATES.MICRO + ":enter"](curr,next) {
         return new Promise( (resolve, reject) => {
-            console.log("micro:enter")
             this.headerEl.classList.add('micro')
             
             this.listeners['header_over'].when('pointerenter').do( () => {
@@ -169,7 +163,6 @@ class FoldableHeader {
     
     [HEADER_STATES.MICRO + ":exit"](curr,next) {
         return new Promise( (resolve, reject) => {
-            console.log('micro:exit')
             this.navEl.classList.remove('micro')
             this.listeners['header_over'].mute('pointerenter');
             resolve()
@@ -178,7 +171,6 @@ class FoldableHeader {
 
     [HEADER_STATES.OFFSCREEN + ":enter"](curr,next) {
         return new Promise( (resolve, reject) => {
-            console.log("offscreen:enter")
             this.headerEl.classList.add('offscreen')
             resolve()
         })
@@ -197,7 +189,7 @@ class FoldableHeader {
     [MOBILE_STATES.MOB_VISIBLE + ':enter'](curr,next) {
         return new Promise( (resolve,reject) => {
             requestAnimationFrame( () => {
-                this.bodyEl.style = "max-height: 100vh; overflow-y: hidden;"
+                this.bodyEl.style = "overflow-y: hidden;"
 
                 resolve();
             })
@@ -214,14 +206,12 @@ class FoldableHeader {
                 let mouseX = e.clientX;
 
                 if(mouseX < navBounds.x){
+                    console.log("MouseX clicked on shadow");
                     this.toggleMobileMenu();
 
                     e.preventDefault();
                     e.stopPropagation();
 
-                    console.log("MouseX clicked on shadow");
-                } else {
-                    console.log("MouseX", mouseX);
                 }
 
                 return false;

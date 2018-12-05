@@ -15,7 +15,7 @@
         + info
     + .Page
  */
-* , *:before, *:after { box-sizing: border-box; } 
+*, *::before, *::after { box-sizing: border-box; } 
 :root {
     --fg: #0c0c0c;
     --bg: #efefef;
@@ -157,7 +157,6 @@ html {
     /*background: linear-gradient(90deg, #4753a9 30%, #32ab52 70%);*/
     background: var(--bg);
     margin: 0; padding: 0;
-    overflow-x: hidden;
 }
 body {
     width: 100%; height: 100%; 
@@ -167,6 +166,12 @@ body {
     font-size: 14px;
     font-family: var(--font);
     text-rendering: optimizeLegibility;
+
+    /* Avoid x overflow, contents slide into view, not other way around */
+    position: fixed;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch; /* iOS velocity scrolling */
 
     -webkit-perspective: var(--perspective);
     perspective: var(--perspective);
@@ -292,7 +297,8 @@ header.header {
         top: 0px;
         left: 0vw;
         width: 40vw;
-        height: 100vh;
+        min-height: 100%;
+        height: 100%;
         z-index: 1500;
         transform: translateX(100vw);
         transition: all 750ms var(--easing);
@@ -424,7 +430,7 @@ header.header {
     position: absolute;
     width: 100%;
     height: 48px;
-    top: calc( 100vh - 48px);    
+    top: calc( 100% - 48px);    
     background-color: var(--bg);
     border-top: 1px solid rgba(255,255,255,0.1);
     overflow: hidden;
@@ -950,7 +956,6 @@ body.page {
     header.header {
         padding: 0;
         display: block;
-        position: absolute;
         top: 0px;
 
         & .wrapper {
