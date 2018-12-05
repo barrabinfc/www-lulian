@@ -11,7 +11,10 @@ info_enabled: true
 
 # Videoclip and full album embed
 video: "https://www.youtube.com/?v=vNQHgBOM6Lk"
-album_embed: '<iframe scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/86649977&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&visual=false&show_artwork=false"></iframe>'
+album_url: 'https://soundcloud.com/luizalian/chororo?in=luizalian/sets/luiza-lian-2015'
+album_embed: 'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/86649977&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&visual=false&show_artwork=false'
+
+album_old_embed: '<iframe scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/86649977&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&visual=false&show_artwork=false"></iframe>'
 
 # Social plataforms
 album:

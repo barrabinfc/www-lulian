@@ -169,7 +169,6 @@ body {
 
     /* Avoid x overflow, contents slide into view, not other way around */
     position: fixed;
-    overflow-y: scroll;
     overflow-x: hidden;
     -webkit-overflow-scrolling: touch; /* iOS velocity scrolling */
 
@@ -298,7 +297,7 @@ header.header {
         left: 0vw;
         width: 40vw;
         min-height: 100%;
-        height: 100%;
+        height: 100vh;
         z-index: 1500;
         transform: translateX(100vw);
         transition: all 750ms var(--easing);
@@ -430,7 +429,7 @@ header.header {
     position: absolute;
     width: 100%;
     height: 48px;
-    top: calc( 100% - 48px);    
+    bottom: 0;    
     background-color: var(--bg);
     border-top: 1px solid rgba(255,255,255,0.1);
     overflow: hidden;
@@ -450,8 +449,7 @@ header.header {
     animation-timing-function: cubic-bezier(0.55, 0.06, 0.59, 0.83);
 
     &.collapsed {
-        top: calc( var(--viewport_height) - 48px );
-        transform: translate3d(0,0,0);
+        bottom: 48px;    
     }
 
     & .social_links {
@@ -737,6 +735,10 @@ body.page {
  */
 .album-theater  #info > #right {
     grid-area: main;
+
+    text-decoration: none;
+    color: inherit;
+
     /*background-color: #0000ff;*/
 }
 
@@ -1166,10 +1168,11 @@ body.page {
      * Footer
      */
     #footer {
-        top: calc( 90vh - var(--header-height) );
+        top: auto;
+        bottom: 0;
 
         &.collapsed {
-            top: calc( var(--viewport_height) - 10vh - (2 * 48px) );
+            bottom: 48px !important;
         }
 
         & .social_links {

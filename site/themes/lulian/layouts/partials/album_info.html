@@ -12,7 +12,7 @@
         {{ partial "album_links.html" . }}
       </div>
     </section>
-    <section id="right">
+    <a target="_blank" href="{{ .Page.Params.album_url }}" id="right" class="album-info">
       <div class="title">
         <h1>{{ .Title }}</h1>
         <h3>{{ .Page.Params.subtitle | default "" }}</h3>
@@ -20,9 +20,9 @@
           {{ .Description }}
         </p>
       </div>
-      <div class="content">
-        {{ .Page.Params.album_embed | default "" | safeHTML }}
+      <div class="album-player content">
+        {{/* {{ .Page.Params.album_embed | default "" | safeHTML }} */}}
         <!-- {{ .Content }} -->
       </div>
-    </section>
+    </a>
 </div>

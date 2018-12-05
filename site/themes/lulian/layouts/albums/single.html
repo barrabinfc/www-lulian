@@ -2,6 +2,8 @@
     
     {{ $logo  := .Page.Resources.GetMatch "logo" }}
     {{ $cover := .Page.Resources.GetMatch "album_cover" }}
+    {{ $album_url := (default "NO ALBUM_URL CONFIGURED" .Params.album_url) }}
+    {{ $album_embed := (default "NO ALBUM_EMBED CONFIGURED" .Params.album_embed) }}
 
     {{ $info_enabled := .Params.info_enabled }}
     {{ $poster_enabled := (default false .Params.poster_enabled ) }}
@@ -27,6 +29,8 @@
     <meta name="twitter:domain" content="https://www.luizalian.com.br"/> 
 
     <meta name="poster_video" content="{{ $poster_video }}" /> 
+    <meta name="album_url" content="{{ $album_url }}" />
+    <meta name="album_embed" content="{{ $album_embed }}" />
 
     <link rel="stylesheet" href="/css/main.css" media="all">
     <style>
@@ -87,7 +91,10 @@
 🌊 Built by vical.me
 `, "font-size: 1.5em;");
         document.addEventListener('DOMContentLoaded', () => {            
-            window.album = new window.Album(document);
+            let player_embed_el = document.querySelector('meta[name="album_embed"]')
+            let player_embed_url = player_embed_el.getAttribute('content')
+
+            window.album = new window.Album(document, player_embed_url);
             window.cronometer.hook = gtag;
         });
 
@@ -103,7 +110,7 @@
             if(window.requestIdleCallback)
                 requestIdleCallback( window.album.loadClip.bind(window.album) );
             else   
-                window.album.loadClip()
+                window.album.loadClip( )
             //window.album.loadClip( el.getAttribute('content') )
         }
     </script>

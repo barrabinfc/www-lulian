@@ -26,10 +26,14 @@ class Album {
      *  (INTRO->CLIP)
      *  (CREDITS)
      */
-    constructor(document = window.document) {
+    constructor(document = window.document, album_player_embed='NO_PLAYER') {
 
         this.ctx = document;
         this.$vars = CSSVariables(this.ctx.body, getComputedStyle(this.ctx.documentElement));
+
+        this.state = {
+            'album_player_embed': album_player_embed
+        }
 
         this.dom = {
             'style': this.ctx.body.style,
@@ -43,6 +47,10 @@ class Album {
 
             'screen': this.ctx.getElementById('screen'),
             'clip': this.ctx.querySelector('#screen > #videoclip'),
+
+            '#info': this.ctx.getElementById('#info'),
+            'album_info': this.ctx.querySelector('.album-info'),
+            'album_player': this.ctx.querySelector('.album-info .album-player'),
 
             'footer': this.ctx.querySelector('#footer'),
         }
@@ -61,6 +69,7 @@ class Album {
 
         this.listeners['logo'] = new listen(this.dom.logo);
         this.listeners['screen'] = new listen(this.dom.screen);
+    
 
         if(this.dom.poster_video){
             this.listeners['poster'] = new listen(this.dom.poster_video);
@@ -69,12 +78,24 @@ class Album {
             this.poster_loaded()
         }
 
+        /**
+         * Load album when album is in view
+         */
+        var intersectionOptions = {
+            root: this.dom['#info'],
+            rootMargin: '100%',
+            treshold: 0.1
+        }
+        this.listeners['album_info'] = new IntersectionObserver( this.loadEmbedAlbum.bind(this), 
+                                                                 intersectionOptions);
+        this.listeners['album_info'].observe( this.dom['album_player'] )
+
         cronometer.tap('APP_READY');
         debugger;
     }
 
     setClip( videoURL ) {
-        this.videoURL = videoURL
+        this.state['videoURL'] = videoURL
     }
 
     loadClip() {
@@ -82,10 +103,10 @@ class Album {
 
         let youtubeID = ''
         try { 
-            youtubeID = this.videoURL.match(/\?v=(.*)/)[1]
+            youtubeID = this.state['videoURL'].match(/\?v=(.*)/)[1]
             console.log("Loading youtube: ", youtubeID)
         } catch (e) {
-            throw new Error("Invalid youtube video...", videoURL)
+            throw new Error("Invalid youtube video...", this.state['videoURL'])
         }
 
         this.player = new ClipPlayer(this.dom.clip, youtubeID, domain);
@@ -126,7 +147,7 @@ class Album {
             
             setTimeout(() => {
                 this.dom.logo.classList.add('interactive');
-                this.listeners['logo'].when('pointerup', {capture: true}).do(this.poster_click.bind(this));
+                this.listeners['logo'].when('pointerup', {capture: false}).do(this.poster_click.bind(this));
 
                 cronometer.tap('CHANGE_STAGE', AlbumStages.INTRO);
 
@@ -190,6 +211,14 @@ class Album {
     /******
      * Handlers
      *****/
+    loadEmbedAlbum( ) {
+        window.requestIdleCallback( () => {
+            let album_player_url = this.state['album_player_embed']
+            console.log("Album player is in view! Load it please! ", album_player_url)
+            this.dom['album_player'].innerHTML = `<iframe scrolling="no" frameborder="no" src="${album_player_url}"></iframe>` 
+        })
+    }
+
     visibility_change(ev){
         cronometer.tap('PAGE_VISIBILITY', document.visibilityState);
     }
