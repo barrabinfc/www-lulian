@@ -41,7 +41,7 @@ class Album {
             'mobile_input': this.ctx.querySelector('#menu-toggle'),
             'header': this.ctx.querySelector('header.header'),
 
-            'logo': this.ctx.querySelector('a.logo'),
+            'logo': this.ctx.querySelector('.logo'),
             'poster': this.ctx.getElementById('poster'),
             'poster_video': this.ctx.querySelector('#poster > video'),
 

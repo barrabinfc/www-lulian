@@ -7,17 +7,37 @@
         <!-- Youtube embed dynamically goes here -->
     </div>
 </div>
-<div id="poster" class="spotlight">
+{{ $video_url := (default "" .Page.Params.video ) }}
+<a id="poster" class="spotlight" href="{{$video_url}}" onclick="return false;">
     {{ if .Page.Resources.GetMatch $movie }}
     <video autoplay playsinline muted loop preload
     onloadeddata="document.dispatchEvent(new Event('posterPreloaded'))"  
         poster='{{ partial "resource_path" (dict "resources" $resources "name" $poster) }}'>
-        <source src='{{ partial "resource_path" (dict "resources" $resources "name" $movie) }}'/>
+        <source src='{{ partial "resource_path" (dict "resources" $resources "name" $movie) }}' />
     </video>
+    <div class="logo" title="Aperte para ver o clipe">{{ .Title }}</div>
     {{ end }}
-    {{ if .Page.Params.video }}
-        <a href="{{ .Page.Params.video }}" onclick="return false;" class="logo" title="Aperte para ver o clipe">{{ .Title }}</a>
-    {{ else }}
-        <a href="#play" class="logo" title="Aperte para ver o clipe">{{ .Title }}</a>
-    {{ end }}
-</div>
+</a>
+<!-- Video metadata -->
+<script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "VideoObject",
+      "name": "{{ .Page.Title }}",
+      "description": "{{ .Page.Description }}",
+      "thumbnailUrl": "{{ partial "resource_path" (dict "resources" $resources "name" $poster) }}",
+      "uploadDate": "{{ .Page.Date }}",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Selo Risco",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://luizalian.com.br/images/selo_risco.png",
+          "width": 32,
+          "height": 32
+        }
+      },
+      "embedUrl": "{{ .Page.Params.album_embed }}",
+    }
+</script>
+    
