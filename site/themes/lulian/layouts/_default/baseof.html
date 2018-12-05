@@ -6,12 +6,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 
+    {{ $gid := (default "" .Site.Params.uid ) }}
+    {{ $keywords := (default "" .Site.Params.keywords )}}
+
+    <meta property="keywords" content="{{ plainify $keywords }}" >
     <meta name="description" content="{{ plainify .Params.subtitle }}{{ plainify .Description }}">
 
     <link rel="shortcut icon" href="/images/favicon.ico">
     <link rel="apple-touch-icon" href="/images/favicon.ico">
-
-    {{ $gid := (default "" .Site.Params.uid ) }}
 
     <meta property="og:title" content="{{ .Title }}"/>
     <meta property="og:description" content="{{ if .Description }}{{ plainify .Description }}{{ else }}{{if .IsPage}}{{ plainify .Summary }}{{ end }}{{ end }}" />
@@ -56,8 +58,6 @@
         const headerEl = document.querySelector('header.header');
         window.headerManager = new window.setupSmartHeaderNavigation( mobileInputEl, headerEl );
         
-        
-        window.scrollTo(0,1);
     </script>
     {{ block "under_fold" . }} {{ end }}
   </body>
