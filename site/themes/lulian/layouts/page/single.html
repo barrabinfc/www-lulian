@@ -1,39 +1,52 @@
 {{ define "above_fold" }}
-    {{ $primary := (default "#ff0964" .Params.colors.primary ) }}
-    {{ $footer := (default "#0c0c0c" .Params.colors.footer_color ) }}
+{{ $primary := (default "#ff0964" .Params.colors.primary ) }}
+{{ $footer := (default "#0c0c0c" .Params.colors.footer_color ) }}
 
-    <meta property="og:title" content="{{ .Title }}"/>
-    <meta property="og:description" content="{{ if .Description }}{{ plainify .Description }}{{ else }}{{if .IsPage}}{{ plainify .Summary }}{{ end }}{{ end }}" />
-    <meta property="og:url" content="{{ .Permalink }}"/>
-    
-    <meta name="twitter:card" content="summary"/>
-    <meta name="twitter:site" content="{{ .Permalink }}"/>
-    <meta name="twitter:title" content="{{ .Title }}">
-    <meta name="twitter:description" content="{{ if .Description }}{{ .Description }}{{ else }}{{if .IsPage}}{{ .Summary }}{{ end }}{{ end }}"/>
-    <meta name="twitter:domain" content="https://www.luizalian.com.br"/> 
+<meta property="og:title" content="{{ .Title }}" />
+<meta property="og:description" content="{{ if .Description }}{{ plainify .Description }}{{ else }}{{if .IsPage}}{{ plainify .Summary }}{{ end }}{{ end }}" />
+<meta property="og:url" content="{{ .Permalink }}" />
 
-    <link rel="stylesheet" href="/css/main.css" media="all">
-    <style>
-        :root {
-            --color-primary: {{ $primary | safeHTML }};
-            --footer-color: {{ $footer | safeHTML }};
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="{{ .Permalink }}" />
+<meta name="twitter:title" content="{{ .Title }}">
+<meta name="twitter:description" content="{{ if .Description }}{{ .Description }}{{ else }}{{if .IsPage}}{{ .Summary }}{{ end }}{{ end }}" />
+<meta name="twitter:domain" content="https://www.luizalian.com.br" />
 
-            --viewport_height: 100vh;
+<link rel="stylesheet" href="/css/main.css" media="all">
+<style>
+    :root {
+        --color-primary: {
+                {
+                $primary | safeHTML
+            }
         }
-    </style>
+
+        ;
+
+        --footer-color: {
+                {
+                $footer | safeHTML
+            }
+        }
+
+        ;
+
+        --viewport_height: 100vh;
+    }
+</style>
 {{ end }}
 
 {{ define "header" }}
-    {{ partial "header.html" . }}
+{{ partial "header.html" . }}
 {{ end }}
 
-{{ define "main" }} 
-    <div class="page-content {{ urlize  .Title | lower }}">
-        <h1 class="page-title">{{.Page.Params.subtitle | default ""}}</h1>
-        <section class="md-section {{ urlize .Title | lower}}">{{ .Content }}</section>
-    </div>
+{{ define "main" }}
+<div class="page-content {{ urlize  .Title | lower }}">
+    <h1 class="page-title">{{.Page.Params.subtitle | default ""}}</h1>
+    <section class="md-section {{ urlize .Title | lower}}">{{ .Content }}</section>
+</div>
 {{ end }}
 
 {{ define "footer" }}
-    {{ partial "footer" . }}
+{{ partial "footer" . }}
 {{ end }}

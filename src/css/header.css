@@ -1,0 +1,196 @@
+/**
+ * Header/Nav
+ */
+#menu-toggle { display: none; }    
+header.header {
+    width: 100%;
+    height: var(--header-height);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: var(--font);
+    color: var(--fg );
+    margin: 0;
+    padding: 0 calc( var(--pad));
+    position: absolute;
+    top: 0px;
+    z-index: 1000;
+    background-color: transparent;
+
+    & .wrapper {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        & .logo-container {
+            flex: 0.5;
+
+            & .title {
+                display: block;
+                letter-spacing: 4px;
+                font-size: 18px;
+                text-transform: uppercase;
+                text-decoration: none;
+                font-family: var(--font);
+                color: var(--fg);
+            }        
+        }
+    
+        & .label-toggle {
+            cursor: pointer;
+            display: block;
+            float: right;
+            height: 18px;
+            width: 24px;
+    
+            background: linear-gradient(to bottom, 
+                                            hsl(0, 0%, 20%) 0%, 
+                                            hsl(0, 0%, 20%) 20%, 
+                                            transparent 20%, 
+                                            transparent 40%, 
+                                            hsl(0, 0%, 20%) 40%, 
+                                            hsl(0, 0%, 20%) 60%, 
+                                            transparent 60%, 
+                                            transparent 80%, 
+                                            hsl(0, 0%, 20%) 80%, 
+                                            hsl(0, 0%, 20%) 100%)
+        }
+    
+    }
+
+    & > nav.menu {
+        will-change: transform, opacity;
+        position: absolute;  
+        display: block;
+        top: 0px;
+        left: 0vw;
+        width: 40vw;
+        height: 100vh;
+        z-index: 1500;
+        transform: translateX(100vw);
+        transition: all 550ms ease-in;
+        background-color: #fff;
+
+        & a { width: 100%; display: block; }
+        & > ul { list-style: none; margin: 0; padding: 0; display: block; }
+        & > ul > li { display: block; }
+        & > ul > li:first-child { padding: 0; }
+        & > ul > li:first-child > a { 
+            text-align: center;
+            padding: calc( var(--pad) * 1.7);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /** First hierarchical menu item */
+        & li.menu-header {
+            padding: var(--pad) 0;
+            margin-left: 0;
+            color: #000;
+            display: block;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+
+            &:last-child { border-bottom: 0; }
+
+            & a { 
+                text-decoration: none; 
+                text-transform: uppercase; 
+                text-align: center; 
+                font-size: 1.2rem;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            &#menu-albums {
+                background-color: black;
+                color: #fff;
+            }
+        }
+
+
+        /** Second hierarchical menus */
+        & ul.sub-menu {
+            display: block; 
+            list-style: none; margin: 0; padding: 0;
+            font-size: 0.9rem;
+            text-align: left;             
+
+            & > li.menu-subheader {
+                display: block; 
+                padding: var(--pad) var(--pad-big); 
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+                margin: 0 0;
+            
+                & a {
+                    font-size: 1.1rem;
+                    color: #fff;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-around;
+                    
+                    & .icon {
+                        width: 32px;
+                        height: 32px;
+                        display: block;
+                        margin: 0 auto;
+                        overflow: hidden;
+                        object-fit: contain;
+                    }        
+
+                    & > span {
+                        flex: 0.8;
+                        text-align: left;
+                    }
+                }
+            }
+
+        }
+        
+    }    
+
+    /**
+     * Horizontal states:
+     * Collapsed, a minimal menu.
+     *  Useful to give more area to videoclip
+     */
+     &.micro {
+        position: absolute;
+        transform: translateY( calc((var(--header-height) - 8px) * -1) );
+        & + header.header {
+            position: absolute;
+            cursor: pointer;
+            transform: translateY( calc((var(--header-height) - 8px) * -1) );
+        }
+     }
+     &.offscreen {
+        position: absolute;
+        transform: translateY( calc(var(--header-height)  * -1) );
+        & + header.header {
+            position: absolute;
+            cursor: auto;
+            transform: translateY( calc(var(--header-height) * -1) );
+        }
+     }
+}
+
+/** Enable shadow transition */
+#menu-toggle ~ .shadow {
+    transition: opacity 350ms ease-out;
+}
+
+/** Active offscreen nav menu */
+#menu-toggle:checked {
+
+    & ~ header.header > nav.menu {
+        box-shadow: 0 0 50px rgba(0,0,0,0.3);
+        transform: translateX(60vw);        
+    }
+
+    /* Disable screen and poster click */
+    & ~ .shadow { 
+        opacity: 1; 
+        pointer-events: all; 
+        touch-action: all; 
+    }
+}

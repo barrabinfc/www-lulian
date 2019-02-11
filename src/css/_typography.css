@@ -1,0 +1,20 @@
+/**
+ * Font declarations
+ */
+
+@font-face {
+    font-family: 'Univers';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Univers LT Std'), url(/fonts/UniversLTStd-Cn.woff) format('woff'),
+         url('/fonts/UniversLTStd-Cn.ttf') format('ttf');
+    font-display: swap; 
+}
+@font-face {
+    font-family: 'Univers';
+    font-style: normal;
+    font-weight: bold;
+    src: local('Univers LT Std-Bold'), url(/fonts/UniversLTStd-BoldCn.woff) format('woff'),
+         url('/fonts/UniversLTStd-BoldCn.ttf') format('ttf');
+    font-display: swap; 
+}

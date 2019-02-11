@@ -1,0 +1,14 @@
+@keyframes focusIn {
+    from { filter: blur(var(--blur-start)); transform: translate3d(0,0,var(--z-start));}
+    to { filter: blur(var(--blur-end)); transform: translate3d(0,0,var(--z-end)); }
+}
+@keyframes focusOut {
+    from { filter: blur(var(--blur-end)); transform: translate3d(0,0,var(--z-end)); opacity: 1; }
+    to { filter: blur(var(--blur-start)); transform: translate3d(0,0,calc( -1 * var(--z-start))); opacity: 0; }
+    100% { visibility: hidden; }
+}
+
+@keyframes slideBottom {
+    from { transform: translate3d(0,0,0); }
+    to { transform: translate3d(0,100%,0); }
+}

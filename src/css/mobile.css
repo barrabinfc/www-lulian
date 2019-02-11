@@ -1,0 +1,238 @@
+/**
+ * Cellphones portrait
+ */
+@media (min-width: 320px) and (max-width: 425px) {
+    :root {
+        --pad: 12px;
+        --pad-big: 24px; 
+    }
+
+    /**
+     * Header/Nav
+     */
+    header.header {
+        padding: 0;
+        display: block;
+        position: absolute;
+        top: 0px;
+
+        & .wrapper {
+            padding: var(--pad);
+
+            & .logo-container { 
+                flex: 0.5;
+                & .title { font-size: 1.2em; }
+            }
+
+            & .label-toggle {
+                filter: invert(1);
+            }
+    
+        }
+
+    }
+    /** When header active */
+    /** Active offscreen nav menu, inverse of nav.menu width */
+    #menu-toggle:checked ~ header.header {
+        & > nav.menu {            
+            transform: translateX(45vw);        
+        }
+    }
+
+
+    header.header .wrapper .label-toggle { display: block; }  
+    header.header > nav.menu { 
+        will-change: transform, opacity;
+        position: absolute;  
+        display: block;
+        top: 0px;
+        left: 0vw;
+        width: 55vw;
+        height: 100vh;
+        z-index: 1500;
+        transform: translateX(100vw);
+        transition: all 750ms var(--easing);
+        background-color: var(--cashmere);
+
+        & a { width: 100%; display: block; }
+        & > ul { list-style: none; margin: 0; padding: 0; display: block; }
+        & > ul > li { display: block; }
+        & > ul > li:first-child { padding: 0; }
+        & > ul > li:first-child > a { 
+            padding: calc( var(--pad) * 1.7);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        & ul.sub-menu {
+            display: block; 
+            list-style: none; margin: 0; padding: 0;
+            font-size: 0.9rem;
+            text-align: left;             
+        }
+        & ul.sub-menu > li.menu-subheader { 
+            display: block; 
+            padding: var(--pad); 
+            margin: 0;
+
+            & a {
+                font-size: inherit;
+            }
+        }
+
+        & li.menu-header {
+            padding: var(--pad) 0;
+            margin-left: 0;
+            color: #000;
+            display: block;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+
+            &:last-child { border-bottom: 0; }
+
+        }
+    }
+
+    /**
+     * General styles
+     */
+    .album-theater #poster {
+        width: 80%;
+        height: 33.3%;
+    }
+    .album-theater #poster .logo:hover::before { display: none; }
+    .album-theater .logo {
+        width: 80%;
+        margin: 0 auto;
+    }
+    .album-theater #info {
+        display: flex;
+        flex-direction: column;
+        height: 66.6%;
+        top:  0;
+    }
+    .album-theater #info #left {
+        padding-top: 4em;
+        padding-bottom: 4em;
+        height: 40%;
+    }
+    .album-theater #info #right { 
+        width: 80%;
+        margin: 0 auto;
+        height: 55%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .album-theater #right .title {
+        max-height: 30%;
+        flex: 0.3;
+
+        & h1 {
+            font-size: 4em;
+        }
+    }
+    .album-theater #right .content {
+        height: 70%;
+        flex: 0.7;
+    }
+
+    /**
+     * Pages
+     */
+    body.page .page-content {
+
+        padding: 0;
+
+        & > .page-title:first-of-type {
+            font-size: 5rem;
+            padding-top: 64px;
+            margin: 0 !important;
+            margin-block-end: 0;
+            margin-block-start: 0;
+        }
+
+
+        /** Agenda page **/
+        &.agenda {
+            & .md-section {
+                font-size: 0.7rem;
+                line-height: 1.2rem;
+            }
+        }
+
+       /**
+        * Contact Page 
+        */
+        &.contact {
+
+            & .md-section {
+                position: relative;
+                width: 100%;
+                font-size: 0.7rem;
+                line-height: 1.2rem;
+
+                & .booking-info.card {
+                    width: 90%;
+                    height: auto;
+                    margin: 0 auto;
+                    padding: calc( var(--pad) );
+                    padding-top: calc( var(--pad) * 2 + 1.0rem);
+                    flex-direction: row;
+                    align-items: center;
+                    justify-content: space-around;
+                    position: relative;
+                    text-decoration: none;
+
+                    &:hover {
+                        cursor: pointer;
+                        background-color: var(--fg);
+                        color: var(--bg);
+                    }
+
+                    & .email { 
+                        position: absolute; 
+                        width: 100%;
+                        top: 0; 
+                        left: 0;
+                        padding: calc(var(--pad) * 0.5); 
+                        text-align: left; 
+                        background-color: var(--cashmere);
+                        margin-block-start: 0;
+                        margin-block-end: 0;
+                        color: var(--links);
+                    }
+
+                    & picture { flex: 0.1; }
+                    & .social-icon { width: 32px; height: 32px; }
+                    & .info { flex: 0.8; text-align: left; }
+                }
+
+                & .booking-info.card + .booking-info.card {
+                    margin-top: var(--pad);
+                }
+
+                & .collab {
+                    text-align: center;
+                    font-size: 1.4em;
+                }
+            }
+        }
+        
+    }
+
+
+
+    /**
+     * Footer
+     */
+    #footer {
+
+        &.collapsed {
+            top: calc( var(--viewport_height) - 10vh - (2 * 48px) );
+        }
+
+        & .social_links {
+            width: 80%;
+        }            
+    }
+
+}

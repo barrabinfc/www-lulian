@@ -1,0 +1,477 @@
+/**
+ * 
+ */
+a {
+    color: var(--links);
+}
+
+body {
+    min-height: 100vh;
+    width: 100%; height: 100%; 
+    margin: 0; padding: 0;
+    color: var(--fg);
+    background-color: var(--bg);
+    font-size: 14px;
+    font-family: var(--font);
+    text-rendering: optimizeLegibility;
+
+    -webkit-perspective: var(--perspective);
+    perspective: var(--perspective);
+    perspective-origin: center center;
+
+}
+::selection {
+    background-color: var(--blue-white);
+    color: var(--black);
+}
+
+
+/**
+ * Page container
+ */
+#page-trans-wrapper, .page-container {
+    position: absolute;
+    top: 0; left: 0;
+    bottom: 0; right: 0;
+    overflow: overlay;
+}
+
+
+/**
+ * Generic Page 
+ */
+body.page {
+    & #footer {
+        position: relative;
+    }
+
+    & .page-content {
+        z-index: 0;
+        width: 100%;
+        min-height: calc( 100vh - var(--footer-height) );
+
+        margin: 0 auto;
+        padding: var(--pad-big);
+    
+        & > .page-title:first-of-type {
+            margin-top: 0;
+            width: 100%;
+            text-align: center;
+            text-transform: uppercase;
+            font-size: 8rem;
+            margin-bottom: var(--pad-big);
+            color: var(--color-primary);
+        } 
+    }
+}
+
+/*******************************************
+     Album page
+ *******************************************/
+
+/**
+ * Album page
+ * Album Theather (album container)
+ * @START_ALBUM
+ */
+.album-theater {
+    z-index: 0;
+    margin: 0 auto;
+    height: var(--viewport_height);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.album-theater #poster {
+    width: 50%;
+    height: 25%;
+    overflow: hidden;
+    position: relative;
+    background-color: transparent;
+    pointer-events: all;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    outline: none;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-tap-highlight-color: transparent;
+
+    /*
+    animation-name: focusIn;
+    */
+    animation-iteration-count: 1;
+    animation-fill-mode: both;
+    animation-play-state: paused;
+    animation-duration: var(--intro-time);
+
+    /*animation-timing-function: cubic-bezier(0.55, 0.06, 0.68, 0.19);*/
+    animation-timing-function: cubic-bezier(0.55, 0.06, 0.59, 0.83);
+
+    transform: translate3d(0,0,0) scale(1.0);
+    /*
+    transition: transform 400ms cubic-bezier(.10,1.28,.17,1.41);
+    */
+
+    & video {
+        pointer-events: none; 
+        width: 100%; 
+        height: 100%;
+        object-fit: contain;
+        position: absolute;
+    }
+
+
+    & .logo {
+        display: block;
+        color: transparent;
+        width: 100%;
+        height: 100%;
+        outline: none;
+        
+        -webkit-tap-highlight-color: rgba(0,0,0,0);
+        -webkit-tap-highlight-color: transparent;
+        
+        background-color: transparent; /*var(--bg)*/;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+
+        margin: 0;
+        opacity: 1;
+        transform: translate3d(0,0,0) scale(1.03);
+        text-indent: -9999px;
+        
+        &.interactive::before {
+            content: ' ';
+            opacity: 0;
+            position: absolute;
+            top: 0; left: 0;
+            bottom: 0; right: 0;
+            width: 100%; height: 100%;
+            background: linear-gradient(0deg, var(--blue-light) 30%, #b6fcff 70%);
+            mix-blend-mode: darken;
+            opacity: 0;
+            transition: opacity var(--logo-time) var(--easing);
+        }
+        &:hover::before { opacity: 0.9; }
+    }
+}
+
+
+/** 
+ * Background of theather,
+ * generally a video clip 
+ */
+ .album-theater #screen {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    top: 0; left: 0;
+    bottom:0; right: 0;
+    transition: opacity var(--intro-time) var(--easing);
+    transform: translate3d(0,0,0);
+    will-change: opacity;
+    pointer-events: all;
+    opacity: 0;            
+}
+.album-theater #screen > #videoclip {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/**
+ * Info screens (second page of album)
+ */
+.album-theater #info {
+    width: 100%;
+    height: 50%;
+    position: relative;
+    top: 12.5%;
+    
+    /*top: var(--viewport_height); left: 0;
+    right: 0; bottom: calc( var(--viewport_height) * 2);*/
+
+    transform: translate3d(0,0,0);
+    perspective: var(--perspective);
+
+    background-color: #dfd1b6;
+    background-size: cover;
+    background-position-x: center;
+    background-position-y: bottom;
+
+    display: grid;
+    grid-template-columns: repeat(22, 1fr);
+    grid-template-rows: repeat(12, 1fr);
+    grid-template-areas: "head head head head head head head head head head head head head head head head head head head head head head"
+". . aside aside aside aside aside aside aside . main main main main main main main main main main . ."
+". . aside aside aside aside aside aside aside . main main main main main main main main main main . ."
+". . aside aside aside aside aside aside aside . main main main main main main main main main main . ."
+". . aside aside aside aside aside aside aside . main main main main main main main main main main . ."
+". . aside aside aside aside aside aside aside . main main main main main main main main main main . ."
+". . aside aside aside aside aside aside aside . main main main main main main main main main main . ."
+". . aside aside aside aside aside aside aside . main main main main main main main main main main . ."
+". . aside aside aside aside aside aside aside . main main main main main main main main main main . ."
+". . aside aside aside aside aside aside aside . main main main main main main main main main main . ."
+". . aside aside aside aside aside aside aside . main main main main main main main main main main . ."
+"foot foot foot foot foot foot foot foot foot foot foot foot foot foot foot foot foot foot foot foot foot foot";
+    grid-gap: 16px;
+
+    display: var(--info_display);
+}
+
+.album-theater #info > #left {
+    grid-area: aside;
+    color: var(--cashmere);
+    width: 80%;
+    margin: 0 auto;
+    /*background-color: #00ff00;*/
+}
+
+.album-theater #left .cover {
+    display: flex;
+    margin: 0 auto;
+}
+.album-theater .cover > img {
+    max-width: 100%;
+    width: 100%;
+    box-shadow: 8px 12px 40px rgba(0, 0, 0, 0.3);
+    height: 100%;
+}
+
+.album-theater  .players_links {
+    display: flex;
+    justify-content: space-around;
+    width: 50%;
+    margin: 0 auto;
+    margin-top: 4em;
+    transform: scale(1.5);            
+}
+.album-theater  .players_links .player-icon {
+    background-color: var( --color-primary );
+}
+
+
+.album-theater  .buy_link {
+    padding: 8px;
+    font-size: 1.25em;
+    font-size: 1.25em;
+    margin: 0 auto;
+    width: 50%;
+    display: block;
+    text-decoration: none;
+    border-radius: 4px;
+    border: 0;
+    background-color: var(--blue-white);
+    color: var(--cashmere);            
+}
+.album-theater  .buy_link a { color: inherit; text-decoration: none; }
+
+/**
+ * Right info area
+ */
+.album-theater  #info > #right {
+    grid-area: main;
+    /*background-color: #0000ff;*/
+}
+
+.album-theater #right .title {
+    background-color: rgba(226, 226, 226, 0.55098);
+    border-radius: 4px;
+    color: var(--bg);
+    padding: var(--pad);
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom: 0;
+    box-shadow: inset 0 0 0 1px hsla(0,0%,100%,.5);
+    /* background-color: #f5f5f5; */
+    border-bottom-color: transparent; 
+}
+
+.album-theater  #right .title > h1 { 
+    margin: 0; 
+    text-transform: uppercase; 
+    font-size: 2em;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+    font-size: 36px;
+    line-height: 36px;
+    transform: translate3d(0,-4px,0);
+}
+.album-theater  #right .title > h3 { margin: 0; font-weight: normal; }
+
+.album-theater  #right .content {
+    width: 100%;
+    height: 75%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border-radius: 4px;
+    background-color: rgba(255,255,255,0.53);
+    color: var(--black);
+    font-style: normal;
+    font-size: 1.25em;
+    font-family: var(--font);
+    opacity: 0.95;
+}
+.album-theater  #right .content > iframe { height: 100%; }
+
+.album-theater  #right .content .ficha_tecnica {
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow-y: auto;
+    font-size: 1.0rem;
+    height: 100%;            
+}
+.album-theater  .ficha_tecnica > div {
+    margin: 0;
+    display: flex;
+    text-align: left;
+}
+.album-theater  .ficha_tecnica > div > label {
+    max-width: 40%;
+    width: 40%;
+    text-overflow: ellipsis;
+    margin: 0;
+    font-weight: bold;
+}
+.album-theater  .ficha_tecnica > div > p {
+    margin: 0;
+    width: 60%;
+}
+
+/*******************************************
+     @END Album page
+ *******************************************/
+
+
+/**
+ * Agenda Page 
+ */
+
+.page-content.agenda {
+
+    & .md-section {
+        position: relative;
+        width: 100%;
+        overflow: hidden;
+        counter-reset: event_number; 
+        font-size: 1.2rem;
+        
+        & ul { 
+            list-style: none;
+            margin: 0 auto;
+            padding: 0;             
+        }
+        & .event-item {
+            position: relative;
+            padding: var(--pad) var(--pad-big);
+            margin-right: 0;            
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            font-size: 1.2em;
+            text-decoration: none;
+            cursor: pointer;
+
+            & .venue {
+                width: 50%;
+            }
+            & .date {
+                margin-left: 0;
+                width: 20%;
+                text-align: center;        
+            }
+            & .citycountry {
+                width: 30%;
+                text-align: left;
+            }
+    
+            &:nth-child(even) {
+                background-color: var(--color-primary);
+            }
+            &:hover {
+                background-color: var(--fg);
+                color: var(--bg);
+            }
+
+            &.is-free::before {
+                content: ' ';
+                background-repeat: no-repeat;
+                background-image: url('/images/seta.svg');
+                background-size: 16px 16px;
+                width: 16px;
+                height: 16px;
+            }   
+
+        }
+    }
+}
+
+/**
+* Contact Page 
+*/
+.page-content.contact {
+
+    & .md-section {
+        position: relative;
+        width: 70%;
+        margin: 0 auto;
+        padding: var(--pad);
+
+        font-size: 1.4rem;
+
+        & .booking-info.card {
+            width: 100%;
+            height: auto;
+            margin: 0 auto;
+            padding: var(--pad);
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-around;
+
+            &:hover {
+                cursor: pointer;
+                background-color: var(--fg);
+                color: var(--bg);
+            }
+
+            & picture { flex: 0.1; }
+            & .social-icon { width: 64px; height: 64px; margin: 0 auto;}
+            & .email { flex: 0.2; text-align: center; }
+            & .info { flex: 0.7; text-align: left; margin-block-end: 0; margin-block-start: 0; }
+        }
+
+        & .booking-info.card + .booking-info.card {
+            margin-top: var(--pad);
+        }
+
+        & .collab {
+            text-align: center;
+        }
+    }
+}
+
+
+
+
+
+
+
+/**
+ * Cellphone landscape or tablets
+ */
+ @media (min-width: 425px) and (orientation: portrait){
+ }
+
+
+

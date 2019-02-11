@@ -1,0 +1,44 @@
+/**
+ * Footer
+ */
+#footer {
+    position: absolute;
+    width: 100%;
+    height: 48px;
+    top: calc( 100vh - 48px);    
+    background-color: transparent;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 var(--pad);
+
+    animation-iteration-count: 1;
+    animation-fill-mode: both;
+    animation-duration: var(--intro-time);
+    animation-name: slideBottom;
+    animation-play-state: paused;
+
+
+    /*animation-timing-function: cubic-bezier(0.55, 0.06, 0.68, 0.19);*/
+    animation-timing-function: cubic-bezier(0.55, 0.06, 0.59, 0.83);
+
+    &.collapsed {
+        top: calc( var(--viewport_height) - 48px );
+        transform: translate3d(0,0,0);
+    }
+
+    & .social_links {
+        display: flex;
+        width: 15%;
+        align-items: center;
+        justify-content: space-between;            
+    }
+
+    & .social-icon {
+        width: 24px;
+        height: 24px;
+        background-size: 24px 24px;
+    }
+}

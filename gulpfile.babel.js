@@ -29,7 +29,7 @@ gulp.task("css", () => (
       cssImport({ from: "./src/css/main.css" }),
       svgInline(),
       cssPreset({ stage: 0 }),
-      ]))
+    ]))
     .pipe(sourcemaps.write("."))
     .pipe(gulp.dest("./docs/css"))
     .pipe(browserSync.stream())
@@ -40,12 +40,12 @@ gulp.task("vendor-js", () => {
     .pipe(gulp.dest("./docs/js/vendor"))
 })
 
-  /** 
-   * Copy necessary assets to root
-   */
+/** 
+ * Copy necessary assets to root
+ */
 gulp.task("copy", () => {
   gulp.src("./src/static/**/*")
-      .pipe(gulp.dest("./docs"))
+    .pipe(gulp.dest("./docs"))
 })
 
 gulp.task("js", (cb) => {
